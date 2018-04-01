@@ -1,0 +1,31 @@
+#youtube-videos {
+    margin-top: 67.5px;
+    margin-bottom: 40px;
+    /* text-align: center; */
+}
+
+#youtube-videos h1 a {
+    color: rgb(224, 96, 120);
+    font-size: 30px;
+}
+
+#youtube-videos a {
+    color: rgb(224, 96, 120);
+    font-size: 15px;
+    text-decoration: none;
+}
+
+#fucking-nice-videos {
+    margin-top: 37.5px;
+}
+
+#fucking-nice-videos h1 {
+    color: rgb(224, 96, 120);
+    font-size: 30px;
+}
+
+.video-container {
+    display: inline;
+    margin-bottom: 60px;
+    margin-right: 5px;
+}
