@@ -15,7 +15,7 @@
 		<a href="./index.html"><img src="./pic/icon.png" class="icon"></a>
 		<ul>
 			<li><a href="./html/photo.html">PHOTO</a></li>
-			<li><a href="./html/video.html">VIDEO</a></li>
+			<li><a href="/video">VIDEO</a></li>
 			<li><a href="./html/beatBeans.html">GAME</a></li>
 			<li><a href="./html/jio.html">Soul Sacrifice</a></li>
 			<li><a href="./html/member.html">MEMBER</a></li>
