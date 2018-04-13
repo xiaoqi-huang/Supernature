@@ -2,11 +2,7 @@ from flask import Flask, render_template
 app = Flask(__name__)
 
 @app.route('/')
-<<<<<<< HEAD
-def hello_world():
-=======
 def home():
->>>>>>> c2af3cbbb01d26c8c9866b966f11fa8830023de9
     return render_template('index.html')
 
 @app.route('/<page_name>')
