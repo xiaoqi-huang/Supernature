@@ -10,4 +10,4 @@ def static_file(page_name):
     return render_template('{page_name}.html'.format(page_name=page_name))
 
 if __name__ == '__main__':
-   app.run(debug = True)
+    app.run(host='0.0.0.0', threaded=True, debug=True)
