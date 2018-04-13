@@ -136,7 +136,7 @@ html {
 
 .photo-container-2 {
     margin-top: 17.5px;
-    background-image: url("../../pic/Haruna_Kojima_1.jpg");
+    background-image: url("./../../pic/Haruna_Kojima_1.jpg");
     background-size: cover;
     background-position: bottom center;
     height: 700px;
@@ -145,7 +145,7 @@ html {
 
 .photo-container-3 {
     margin-top: 17.5px;
-    background-image: url("../../pic/Haruna_Kojima_2.jpg");
+    background-image: url("./../../pic/Haruna_Kojima_2.jpg");
     background-size: cover;
     background-position: bottom center;
     height: 700px;
