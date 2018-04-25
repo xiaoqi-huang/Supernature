@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html>
 	<body>
@@ -27,3 +28,16 @@
 	</body>
 
 </html>
+=======
+{% extends "layout.html" %}
+{% block body %}
+    <form action="/login" method="post">
+        <legend>登录</legend>
+        用户名:<br>
+        <input type="text" name="username"><br> 密码:
+        <br>
+        <input type="text" name="password"><br><br>
+        <input type="submit" value="Submit">
+    </form>
+{% endblock %}
+>>>>>>> b553a49f5cab85ca3ce568742bd1f1570903cac4
