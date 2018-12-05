@@ -1,0 +1,123 @@
+section, header, article, nav {
+    display: block;
+}
+
+body {
+    margin: 0px 5%;
+}
+
+header {
+    position: relative;
+}
+
+#icon {
+    position: absolute;
+    height: 100%;
+    float: left;
+}
+
+header nav {
+
+}
+
+header li {
+    display: inline;
+}
+
+header nav li a {
+    display:inline-block;
+    text-align: center;
+    padding: 17.5px 20px;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+/* *********************************
+ * Home page
+ * ********************************* */
+
+.photo-container {
+    position: relative;
+    margin-top: 10px;
+}
+
+.photo-container img {
+    width: 100%;
+}
+
+#intro {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+/* dropdown */
+
+.dropdown {
+	float: right;
+}
+
+.dropdown-btn {
+	background-color: rgba(239, 197, 205, 0);
+	color: #4A4A4A;
+    padding: 17.5px 20px;
+	border: none;
+	cursor: pointer;
+    height: 50px;
+    width: 100px;
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+    background-color: #f1f1f1;
+	width: 100px;
+	/* box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); */
+	z-index: 1;
+}
+.dropdown-content a {
+	color: black;
+	text-decoration: none;
+	display: block;
+    font-size: 11px;
+}
+.dropdown-content a:hover {
+	color: white;
+}
+
+.dropdown:hover .dropdown-content {
+	display: block;
+}
+
+/* Members */
+
+#members li {
+    display: inline;
+}
+
+#members li img {
+    width: 150px;
+}
+
+#about {
+    margin-top: 10px;
+    text-align: center;
+}
+
+#about img {
+    height: 100%;
+}
+
+article {
+    margin-bottom: 100px;
+}
+
+footer {
+    position: relative;
+    left: 50%;
+    bottom: 10px;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}

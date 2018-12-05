@@ -17,7 +17,7 @@ html {
  *
  * **************************************************/
 
-#nav {
+header nav {
     height: 50px;
     font-family: "sans-serif", sans-serif;
     font-size: 15px;
@@ -40,7 +40,7 @@ html {
     padding: 1px 0px 4px 2%;
 }
 
-#nav ul {
+header nav ul {
     top: 0;
     list-style-type: none;
     margin: 0;
@@ -48,11 +48,11 @@ html {
     overflow: hidden;
 }
 
-#nav li {
+header nav li {
      display:inline;
 }
 
-#nav li a {
+header nav li a {
     display:inline-block;
     color: #4A4A4A;
     text-align: center;
@@ -61,7 +61,7 @@ html {
     text-decoration: none;
 }
 
-#nav a:hover {
+header nav a:hover {
     color: white;
 }
 
