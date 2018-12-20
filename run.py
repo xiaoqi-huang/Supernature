@@ -7,7 +7,7 @@ app = Flask(__name__)
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/superusers'
 # db.init_app(app)
 #
-# app.secret_key = "development-key"
+# app.secret_key = 'development-key'
 
 @app.route('/')
 def index():
@@ -63,13 +63,33 @@ def static_file(page_name):
 #     session.pop('email', None)
 #     return redirect(url_for('index'))
 
-#do not have home now
-@app.route("/home", methods=["GET", "POST"])
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if (request.method == 'GET'):
+        return render_template('login.html')
+    if (request.method == 'POST'):
+        uid = request.form['uid'];
+        pwd = request.form['pwd'];
+
+        result = check_login(uid, pwd)
+
+        if result:
+            return render_template('home.html')
+        else:
+            return render_template('login.html')
+
+def check_login(uid, pwd):
+    # TODO: This method should ask the database to check login
+    # return True, if uid and pwd matches
+    # return False, otherwise
+    return (uid == '12') and (pwd == 'password')
+
+@app.route('/home', methods=['GET', 'POST'])
 def home():
   if 'email' not in session:
     return redirect(url_for('login'))
 
-  return render_template("home.html")
+  return render_template('home.html')
 
 
 if __name__ == '__main__':
