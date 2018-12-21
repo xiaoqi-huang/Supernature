@@ -3,15 +3,10 @@
 <h1>Login</h1>
 <form action="/login" method="post">
 	<fieldset>
-		<p>
-			<label for="uid">ID:</label>
-			<input type="text" id="uid" name="uid" placeholder="Your user id" required />
-		</p>
-		<p>
-			<label for="pwd">Password:</label>
-			<input type="password" id="pwd" name="pwd" placeholder="Your password" required />
-		</p>
-	<input type="submit" value="Login">
+		<input type="email" id="email" name="email" placeholder="E-mail address" required="required" />
+		<input type="password" id="pwd" name="pwd" placeholder="Password" required="required" />
+		<a href="/password/reset">Forgot your password?</a>
+		<input type="submit" value="Login">
 </fieldset>
 </form>
 {% endblock %}
