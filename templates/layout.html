@@ -5,28 +5,33 @@
 	<meta charset="utf-8" />
 	<title>超自然心理研究社</title>
 	<link href="https://fonts.googleapis.com/css?family=Lato:400,300,100,700,900" rel="stylesheet" type="text/css" media="screen" />
-	<link rel="stylesheet" type="text/css" href="./../static/styles/basic.css" media="screen" />
-	<link rel="icon" href="./images/icon.png">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/basic.css') }}" media="screen" />
+	<link rel="icon" href="{{ url_for('static', filename='images/icon.png') }}">
 </head>
 
 <body>
 	<header>
 		<a href="/index">
-			<img src="./../static/images/icon.png" id="icon" />
+			<img src="{{ url_for('static', filename='images/icon.png') }}" id="icon" />
 		</a>
 		<nav>
 			<ul>
-				<li><a href="/photo">PHOTOS</a></li>
-				<li><a href="/video">VIDEOS</a></li>
-				<li><a href="/beat-beans">GAME</a></li>
-				<li><a href="/jio">Soul Sacrifice</a></li>
-				<li><a href="/member">MEMBERS</a></li>
-				<li><a href=/about>ABOUT</a></li>
+				<li><a href="{{ url_for('index.photo') }}">PHOTOS</a></li>
+				<li><a href="{{ url_for('index.video') }}">VIDEOS</a></li>
+				<li><a href="{{ url_for('index.beat_beans') }}">GAME</a></li>
+				<li><a href="{{ url_for('index.jio') }}">Soul Sacrifice</a></li>
+				<li><a href="{{ url_for('index.member') }}">MEMBERS</a></li>
+				<li><a href="{{ url_for('index.about') }}">ABOUT</a></li>
+                {% if session['user_id'] %}
+                    <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+                {% else %}
+                    <li><a href="{{ url_for('auth.login') }}">login</a></li>
+                {% endif %}
 				<li>
 					<div class="dropdown">
 						<button class="dropdown-btn">LANGUAGE</button>
 						<div class="dropdown-content">
-							<a href="/index-jp">JAPANESE</a>
+							<a href="{{ url_for('index.index_jp') }}">JAPANESE</a>
 						</div>
 					</div>
 				</li>
