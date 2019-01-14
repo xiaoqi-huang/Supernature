@@ -1,8 +1,9 @@
 import os
 
 import auth
+import blog
 import db
-from flask import Flask
+from flask import Flask, redirect, url_for
 
 import index
 
@@ -18,11 +19,12 @@ db.init_app(app)
 
 app.register_blueprint(auth.bp)
 app.register_blueprint(index.bp)
+app.register_blueprint(blog.bp)
 
 
 @app.route('/')
-def hello_world():
-    return 'Hello World!'
+def index():
+    return redirect(url_for('index.index'))
 
 
 if __name__ == '__main__':
