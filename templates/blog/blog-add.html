@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+{% block body %}
+{% for message in get_flashed_messages() %}
+    <div class="flash">{{ message }}</div>
+{% endfor %}
+<form method="post">
+    <label for="title">Title: </label>
+    <input name="title" id="title" required>
+    <br>
+    <label for="content">Content: </label>
+    <textarea name="content" id="content" required></textarea>
+    <br>
+    <input type="submit" value="POST">
+</form>
+{% endblock %}
