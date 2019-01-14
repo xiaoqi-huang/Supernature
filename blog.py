@@ -31,7 +31,7 @@ def blog_list():
 def blog_content(class_id):
     db = get_db()
     res = db.execute('SELECT article.title, article.content, user.name, article.time FROM article, user '
-                     'WHERE article.class_id=?', (class_id, )).fetchone()
+                     'WHERE article.class_id=? AND article.author=user.id', (class_id, )).fetchone()
     if not res:
         return redirect(url_for('index.u404'))
     else:
