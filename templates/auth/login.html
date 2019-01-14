@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<p>这是登录界面</p>
+{% for message in get_flashed_messages() %}
+    <div class="flash">{{ message }}</div>
+{% endfor %}
+<form method="post">
+    <label for="mail">Mail: </label>
+    <input name="mail" id="mail" required>
+    <br>
+    <label for="password">Password: </label>
+    <input type="password" name="password" id="password" required>
+    <br>
+    <input type="submit" value="Login">
+</form>
+    <a href="{{ url_for('auth.register') }}">还没有账号？</a>
+{% endblock %}

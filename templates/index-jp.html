@@ -1,23 +1,23 @@
 {% extends "layout.html" %}
 {% block body %}
 <div class="photo-container">
-	<img src="static/images/Haruna-Kojima-1.jpg" />
+	<img src="{{ url_for('static', filename='images/Haruna-Kojima-1.jpg') }}" />
 	<!-- <img src="https://imgs.nmplus.hk/wp-content/uploads/2015/04/01_resize.jpg" /> -->
 	<div id="intro">
 		<h1 id="jp">超自然研究結社</h1>
 		<h1 id="en">Supernatural Psychology Association</h1>
-		<!-- <h2>Supernatural Psychology Association, SPAと呼ばれ，人の心にSPAを与える結社</h2>
+        <h2>Supernatural Psychology Association, SPAと呼ばれ，人の心にSPAを与える結社</h2>
 		<h2>みんなに良い相手を紹介し、たまには色々変なビデオを更新します</h2>
 		<h2>面白い漫画や、ゲームとKyomaの写真もあります</h2>
 		<h2>ごめん、もう嘘を作り続けません</h2>
 		<h2>小嶋陽菜本当に美人だね</h2>
-		<h2>上のリンクをクリック、私のユーチューブチャンネルを見てね〜</h2> -->
+		<h2>上のリンクをクリック、私のユーチューブチャンネルを見てね〜</h2>
 	</div>
 </div>
 <div class="photo-container">
-	<img src="static/images/Haruna-Kojima-1.jpg" />
+	<img src="{{ url_for('static', filename='images/Haruna-Kojima-1.jpg') }}" />
 </div>
 <div class="photo-container">
-	<img src="static/images/Haruna-Kojima-2.jpg" />
+	<img src="{{ url_for('static', filename='images/Haruna-Kojima-1.jpg') }}" />
 </div>
 {% endblock %}

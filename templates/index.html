@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block body %}
 <div class="photo-container">
-	<img src="static/images/Haruna-Kojima-1.jpg" />
+	<img src="{{ url_for('static', filename='images/Haruna-Kojima-1.jpg') }}" />
 	<!-- <img src="https://imgs.nmplus.hk/wp-content/uploads/2015/04/01_resize.jpg" /> -->
 	<div id="intro">
 		<h1 id="ch">超自然心理研究社</h1>
@@ -9,9 +9,9 @@
 	</div>
 </div>
 <div class="photo-container">
-	<img src="static/images/Haruna-Kojima-1.jpg" />
+	<img src="{{ url_for('static', filename='images/Haruna-Kojima-1.jpg') }}" />
 </div>
 <div class="photo-container">
-	<img src="static/images/Haruna-Kojima-2.jpg" />
+	<img src="{{ url_for('static', filename='images/Haruna-Kojima-2.jpg') }}" />
 </div>
 {% endblock %}

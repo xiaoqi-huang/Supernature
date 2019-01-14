@@ -1,0 +1,13 @@
+DROP TABLE IF EXISTS user;
+
+CREATE TABLE user (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  password VARCHAR(32) NOT NULL,
+  name VARCHAR(16) NOT NULL,
+  mail VARCHAR(32) NOT NULL UNIQUE,
+  introduce TEXT NOT NULL DEFAULT '欢迎关注youtube频道：Kristy Zhou',
+  isActive CHAR(1) NOT NULL DEFAULT '0',
+  gender INTEGER NOT NULL DEFAULT 0,
+  face VARCHAR(64),
+  isAdmin CHAR(1) NOT NULL default '0'
+);
