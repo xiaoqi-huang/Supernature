@@ -1,9 +1,5 @@
 {% extends "layout.html" %}
 {% block body %}
-<p>这是登录界面</p>
-{% for message in get_flashed_messages() %}
-    <div class="flash">{{ message }}</div>
-{% endfor %}
 <!-- <form method="post">
     <label for="mail">Mail: </label>
     <input name="mail" id="mail" required>
@@ -14,7 +10,10 @@
     <input type="submit" value="Login">
 </form> -->
 <div class="text-center">
-    <form class="form-signin">
+    {% for message in get_flashed_messages() %}
+        <div class="flash">{{ message }}</div>
+    {% endfor %}
+    <form class="form-signin" method="post">
       <!-- <a href="/index">
           <img class="mb-4" src="{{ url_for('static', filename='images/icon.png') }}" width="72" height="72" />
       </a> -->
