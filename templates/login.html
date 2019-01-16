@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block body %}
+<h1>Login</h1>
+<form action="/login" method="post">
+	<fieldset>
+		<input type="email" id="email" name="email" placeholder="E-mail address" required="required" />
+		<input type="password" id="pwd" name="pwd" placeholder="Password" required="required" />
+		<a href="/password/reset">Forgot your password?</a>
+		<input type="submit" value="Login">
+</fieldset>
+</form>
+{% endblock %}
