@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for, request, session, flash
+import markdown
 
 from db import get_db
 
@@ -32,10 +33,13 @@ def blog_content(class_id):
     db = get_db()
     res = db.execute('SELECT article.title, article.content, user.name, article.time FROM article, user '
                      'WHERE article.class_id=? AND article.author=user.id', (class_id, )).fetchone()
+
+    _ = {'title':res['title'], 'content':markdown.markdown(res['content']), 'time':res['time'], 'name':res['name']}
+
     if not res:
         return redirect(url_for('index.u404'))
     else:
-        return render_template('blog/blog-content.html', blog=res)
+        return render_template('blog/blog-content.html', blog=_)
 
 
 @bp.route('/add', methods=('GET', 'POST'))
