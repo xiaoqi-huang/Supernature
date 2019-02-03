@@ -1,3 +1,7 @@
+img{
+    max-width: 100%;
+}
+
 .form-signin {
   width: 100%;
   max-width: 330px;
@@ -123,6 +127,7 @@ h5 {
     max-width: 935px;
     width: 100%;
 }
+
 
 .profile-pic-container {
     margin: 60px;
