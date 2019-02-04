@@ -1,0 +1,7 @@
+#blog-list {
+    list-style-type: none;
+}
+
+.even-row {
+    background-color: 'rgb(244, 227, 230)';
+}

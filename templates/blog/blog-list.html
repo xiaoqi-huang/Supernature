@@ -3,10 +3,14 @@
     {% if show_add_link %}
         <a href="{{ url_for('blog.blog_add') }}">写一篇吧？</a>
     {% endif %}
-    <ul>
+    <ul id="blog-list">
         {% for blog in blog_list %}
-            <li>{{ blog['title'] }}-{{ blog['author'] }}-{{ blog['time'] }}-
-                <a href="{{ url_for('blog.blog_content', class_id=blog['class_id']) }}">点我!</a></li>
+            <li class="blog">
+                <span><a href="{{ url_for('blog.blog_content', class_id=blog['class_id']) }}">{{ blog['title'] }}</a></span>
+                <span>{{ blog['author'] }}</span>
+                <span>{{ blog['time'] }}</span>
+            </li>
         {% endfor %}
     </ul>
+    <script type=text/javascript src="{{url_for('static', filename='js/blog-list.js') }}"></script>
 {% endblock %}
