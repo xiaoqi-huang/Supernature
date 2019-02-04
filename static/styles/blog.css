@@ -1,7 +1,42 @@
 #blog-list {
     list-style-type: none;
+    padding-left: 0px;
+}
+
+#blog-list li {
+    padding-left: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .even-row {
-    background-color: 'rgb(244, 227, 230)';
+    background-color: rgb(250, 240, 240);
+}
+
+#blog-list li span {
+    display: inline-block;
+    overflow: hidden;
+}
+
+.blog-title {
+    width: 80%;
+}
+
+.blog-author {
+    width: 10%;
+}
+
+.blog-time {
+    float: right;
+    padding-right: 15px;
+}
+
+span a {
+    color: black;
+}
+
+span a:hover {
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
 }
