@@ -33,11 +33,11 @@ header nav {
     text-align: center;
 }
 
-.icon {
+#icon {
     float: left;
     height: 45px;
     width: 45px;
-    padding: 1px 0px 4px 2%;
+    padding: 1em 0px 4px 1em;;
 }
 
 header nav ul {
@@ -75,6 +75,7 @@ header nav a:hover {
 
 .dropdown {
 	float: right;
+    margin-right: 3em;
 }
 
 .dropdown-btn {

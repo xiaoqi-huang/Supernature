@@ -3,21 +3,25 @@ section, header, article, nav {
 }
 
 body {
-    margin: 0px 5%;
+    margin: 0 5%;
 }
 
 header {
     position: relative;
+    padding-left: 1em;
+    padding-right: 1em;
 }
 
 #icon {
     position: absolute;
     height: 100%;
     float: left;
+    display: inline-block;
 }
 
-header nav {
-
+header nav ul {
+    padding-left: 0;
+    text-align: center;
 }
 
 header li {
@@ -38,7 +42,10 @@ header nav li a {
 
 .photo-container {
     position: relative;
-    margin-top: 10px;
+}
+
+.photo-container + .photo-container {
+    margin-top: 1em;
 }
 
 .photo-container img {
@@ -111,6 +118,7 @@ header nav li a {
 }
 
 article {
+    margin-top: 1em;
     margin-bottom: 100px;
 }
 
