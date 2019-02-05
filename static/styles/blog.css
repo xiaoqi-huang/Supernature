@@ -19,7 +19,7 @@
 }
 
 .blog-title {
-    width: 80%;
+    width: 70%;
 }
 
 .blog-author {
@@ -29,6 +29,7 @@
 .blog-time {
     float: right;
     padding-right: 15px;
+    width: 10%;
 }
 
 span a {
