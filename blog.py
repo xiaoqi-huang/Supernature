@@ -130,17 +130,16 @@ def blog_edit(aid):
         return redirect(url_for('blog.blog_list'))
 
 
-
 def get_comments(aid):
     try:
         db = get_db()
-        query = '''SELECT comment.id AS cid, name, content, createdAt
+        query = '''SELECT comment.id AS cid, user.id AS uid, name, content, createdAt
                      FROM comment JOIN user ON (comment.author = user.id)
                     WHERE refArticle = ?'''
 
         comments = []
         for row in db.execute(query, (aid, )).fetchall():
-            comments.append({'cid': row[0], 'username': row[1], 'content': row[2], 'time': row[3]});
+            comments.append({'cid': row[0], 'uid': row[1], 'username': row[2], 'content': row[3], 'time': row[4], 'replies': get_replies(row[0])});
 
         return comments if len(comments) > 0 else None
     except:
@@ -160,5 +159,36 @@ def add_comment(aid):
         content = request.form['content']
         query = '''INSERT INTO comment (author, content, refArticle) VALUES (?, ?, ?)'''
         db.execute(query, (uid, content, aid))
+        db.commit()
+        return redirect(url_for('blog.blog_content', aid=aid))
+
+
+def get_replies(cid):
+    try:
+        db = get_db()
+        query = '''SELECT reply.id AS rid, user.id AS uid, name, content, createdAt
+                     FROM reply JOIN user ON (reply.author = user.id)
+                    WHERE reply.refComment = ?'''
+
+        replies = []
+        for row in db.execute(query, (cid, )).fetchall():
+            replies.append({'rid': row[0], 'uid': row[1], 'username': row[2], 'content': row[3], 'time': row[4]})
+
+        return replies if len(replies) > 0 else None
+    except:
+        return None
+
+
+@bp.route('/add-reply/<int:aid>/<int:cid>/<int:to_uid>', methods=('POST', ))
+def add_reply(aid, cid, to_uid):
+    # Users should login before adding comments
+    uid = session.get('user_id', None)
+    if not uid:
+        return redirect(url_for('auth.login'))
+    else:
+        db = get_db()
+        content = request.form['content']
+        query = '''INSERT INTO reply (author, content, refComment, refUser) VALUES (?, ?, ?, ?)'''
+        db.execute(query, (uid, content, cid, to_uid))
         db.commit()
         return redirect(url_for('blog.blog_content', aid=aid))

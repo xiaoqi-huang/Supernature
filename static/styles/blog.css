@@ -2,7 +2,7 @@
 
 #blog-list {
     list-style-type: none;
-    padding-left: 0px;
+    padding-left: 0;
 }
 
 #blog-list li {
@@ -95,14 +95,23 @@ form div + div {
     background-color: white;
 }
 
+
 /* Comments */
+
+#comment-section {
+    margin-top: 3em;
+}
+
+#comment-form {
+    margin-bottom: 3em;
+}
 
 .comment {
     min-height: 2em;
 }
 
 .comment + .comment {
-
+    margin-top: 1em;
     border-top: 2px solid rgb(220, 220, 220);
 }
 
@@ -122,4 +131,24 @@ form div + div {
 .comment-time {
     float: right;
     width: 10%;
+}
+
+/* Replies */
+
+/*.reply-form {*/
+    /*height: 5em;*/
+/*}*/
+
+/*.reply-form {*/
+    /*padding-top: 1em;*/
+    /*padding-bottom: 1em;*/
+/*}*/
+
+.replies {
+    margin-left: 5%;
+    margin-right: 1em;
+    margin-top: 1em;
+    margin-button: 1em;
+    border-left: 3px solid rgb(239, 197, 205);
+    padding-left: 2%;
 }
