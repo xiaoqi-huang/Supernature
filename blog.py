@@ -153,8 +153,7 @@ def add_comment(aid):
     # Users should login before adding comments
     uid = session.get('user_id', None)
     if not uid:
-        error = 'Please login before writing comments'
-        flash(error)
+        return redirect(url_for('auth.login'))
     else:
         db = get_db()
         content = request.form['content']
