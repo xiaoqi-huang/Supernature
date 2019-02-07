@@ -17,10 +17,3 @@ addLoadEvent(stripeList);
 /* *************************
  * Comment
  * ************************* */
-
-const commentBtn = document.querySelector('#comment-btn');
-
-commentBtn.addEventListener('click', () => {
-    const content = document.querySeletor('#comment-input');
-
-})
