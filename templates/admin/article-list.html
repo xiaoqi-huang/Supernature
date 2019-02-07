@@ -1,0 +1,10 @@
+{% extends 'layout.html' %}
+{% block body %}
+    {% for item in result %}
+        {% if not item['isActive'] %}
+        <p>{{ item['title'] }} | (当前隐藏) | <a href="{{ url_for('admin.article_show', index=item['id']) }}">显示</a></p>
+        {% else %}
+        <p>{{ item['title'] }} | (当前显示) | <a href="{{ url_for('admin.article_hide', index=item['id']) }}">隐藏</a></p>
+        {% endif %}
+    {% endfor %}
+{% endblock %}
