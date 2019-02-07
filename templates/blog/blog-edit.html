@@ -1,15 +1,17 @@
 {% extends 'layout.html' %}
 {% block body %}
-
-<form method="post">
-    <div>
-        <input id="title" type="text" name="title" placeholder="标题" required value="{{ blog['title'] }}">
-    </div>
-    <div>
-        <textarea id="content" type="text" name="content" required>{{ blog['content'] }}</textarea>
-    </div>
-    <div id="submit-button">
-        <input type="submit" value="发表">
-    </div>
-</form>
+    {% for message in get_flashed_messages() %}
+        <div class="flash">{{ message }}</div>
+    {% endfor %}
+    <form method="post">
+        <div>
+            <input id="title" type="text" name="title" placeholder="标题" required value="{{ blog['title'] }}">
+        </div>
+        <div>
+            <textarea id="content" type="text" name="content" required>{{ blog['content'] }}</textarea>
+        </div>
+        <div id="submit-button">
+            <input type="submit" value="发表">
+        </div>
+    </form>
 {% endblock %}
