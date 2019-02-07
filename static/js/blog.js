@@ -1,4 +1,4 @@
-const stripeList = function() {
+const stripeList = () => {
     const blogs = document.querySelector('#blog-list').querySelectorAll('li');
     console.log(blogs);
     let even = false;
@@ -12,3 +12,15 @@ const stripeList = function() {
 }
 
 addLoadEvent(stripeList);
+
+
+/* *************************
+ * Comment
+ * ************************* */
+
+const commentBtn = document.querySelector('#comment-btn');
+
+commentBtn.addEventListener('click', () => {
+    const content = document.querySeletor('#comment-input');
+
+})

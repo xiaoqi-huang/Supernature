@@ -12,6 +12,6 @@
             </li>
         {% endfor %}
     </ul>
-    <script type=text/javascript src="{{url_for('static', filename='js/main.js') }}"></script>
-    <script type=text/javascript src="{{url_for('static', filename='js/blog-list.js') }}"></script>
+    <script type=text/javascript src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script type=text/javascript src="{{ url_for('static', filename='js/blog.js') }}"></script>
 {% endblock %}

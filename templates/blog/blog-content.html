@@ -3,8 +3,28 @@
     {% if  show_edit_link %}
         <a href="{{ url_for('blog.blog_edit', aid=blog['class_id']) }}">重新编辑博客内容</a>
     {% endif %}
+
     <h1>{{ blog['title'] }}</h1>
     {{ blog['content']|safe}}
     <p>{{ blog['time'] }}</p>
     <p>{{ blog['name'] }}</p>
+
+    <div id="comment-section">
+        <form method="post" action="{{ url_for('blog.add_comment', aid=blog['class_id']) }}">
+            <input id="comment-input" type="text" name="content" placeholder="说点什么" required>
+            <button type="submit">评论</button>
+        </form>
+
+        {% if not comments %}
+            <p>暂无评论</p>
+        {% else %}
+            {% for comment in comments %}
+                <div class="comment">
+                    <span class="comment-author">{{ comment['username'] }}：</span>
+                    <span class="comment-content">{{ comment['content'] }}</span>
+                    <span class="comment-time">{{ comment['time'] }}</span>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
 {% endblock %}

@@ -94,3 +94,32 @@ form div + div {
     color: rgb(239, 197, 205);
     background-color: white;
 }
+
+/* Comments */
+
+.comment {
+    min-height: 2em;
+}
+
+.comment + .comment {
+
+    border-top: 2px solid rgb(220, 220, 220);
+}
+
+.comment span {
+    display: inline-block;
+}
+
+.comment-author {
+    float: top;
+    width: 10%;
+}
+
+.comment-content {
+    width: 70%;
+}
+
+.comment-time {
+    float: right;
+    width: 10%;
+}

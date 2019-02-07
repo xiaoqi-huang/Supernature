@@ -48,7 +48,7 @@ def blog_content(aid):
     if not res:
         return redirect(url_for('index.u404'))
     else:
-        return render_template('blog/blog-content.html', blog=_, show_edit_link=show_edit_link)
+        return render_template('blog/blog-content.html', blog=_, show_edit_link=show_edit_link, comments=get_comments(aid))
 
 
 @bp.route('/add', methods=('GET', 'POST'))
@@ -117,3 +117,35 @@ def blog_edit(aid):
     flash(error)
 
 
+def get_comments(aid):
+    try:
+        db = get_db()
+        query = '''SELECT comment.id AS cid, name, content, createdAt
+                     FROM comment JOIN user ON (comment.author = user.id)
+                    WHERE refArticle = ?'''
+
+        comments = []
+        for row in db.execute(query, (aid, )).fetchall():
+            comments.append({'cid': row[0], 'username': row[1], 'content': row[2], 'time': row[3]});
+
+        return comments if len(comments) > 0 else None
+    except:
+        return None
+
+
+@bp.route('/add-comment/<int:aid>', methods=('POST', ))
+def add_comment(aid):
+    error = None
+
+    # Users should login before adding comments
+    uid = session.get('user_id', None)
+    if not uid:
+        error = 'Please login before writing comments'
+        flash(error)
+    else:
+        db = get_db()
+        content = request.form['content']
+        query = '''INSERT INTO comment (author, content, refArticle) VALUES (?, ?, ?)'''
+        db.execute(query, (uid, content, aid))
+        db.commit()
+        return redirect(url_for('blog.blog_content', aid=aid))
