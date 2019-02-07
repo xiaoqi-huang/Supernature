@@ -85,18 +85,20 @@ def blog_edit(aid):
     user_id = session.get('user_id', None)
     if not user_id:
         error = 'Not login'
-    # TODO: check whether the blog exists
-    # if not :
-    #    error = 'No such article'
     if error:
+        flash(error)
         return redirect(url_for('auth.login'))
-    flash(error)
 
     db = get_db()
-    author = db.execute('SELECT article.author FROM article WHERE id=?', (aid,)).fetchone()
-    if author['author'] != user_id:
+    check = db.execute('SELECT id, author FROM article WHERE id=?', (aid,)).fetchone()
+    if not check:
+        error = 'No such article'
+    elif check['author'] != user_id:
         error = 'Not author'
-    flash(error)
+
+    if error:
+        flash(error)
+        return redirect(url_for('blog.blog_list'))
 
     if request.method == 'GET':
         res = db.execute('SELECT article.title, article.content, user.name, user.id FROM article, user '
@@ -108,12 +110,24 @@ def blog_edit(aid):
     else:
         title = request.form['title']
         content = request.form['content']
-        if not title or not content:
-            error = 'No content and title'
+        blog = None
+        if not title and not content:
+            error = 'No title and article'
+            blog = {'title': '', 'content': ''}
+        elif not title:
+            error = 'No title'
+            blog = {'title': '', 'content': content}
+        elif not content:
+            error = 'No Content'
+            blog = {'title': title, 'content': ''}
+        if not content or not title:
+            flash(error)
+            return render_template('blog/blog-edit.html', blog=blog)
+
         now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         db.execute('UPDATE article SET title=?, content=?, updatedAt=? WHERE id=?', (title, content, now, aid))
         db.commit()
         return redirect(url_for('blog.blog_list'))
-    flash(error)
+
 
 

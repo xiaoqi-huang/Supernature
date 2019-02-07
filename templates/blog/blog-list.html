@@ -1,5 +1,8 @@
 {% extends 'layout.html' %}
 {% block body %}
+    {% for message in get_flashed_messages() %}
+        <div class="flash">{{ message }}</div>
+    {% endfor %}
     {% if show_add_link %}
         <a href="{{ url_for('blog.blog_add') }}">写一篇吧？</a>
     {% endif %}
