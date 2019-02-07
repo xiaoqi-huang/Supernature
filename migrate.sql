@@ -1,0 +1,43 @@
+CREATE TABLE user (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    password VARCHAR(32) NOT NULL,
+    name VARCHAR(16) NOT NULL,
+    mail VARCHAR(32) NOT NULL UNIQUE,
+    introduce TEXT NOT NULL DEFAULT '欢迎关注youtube频道：Kristy Zhou',
+    avatar VARCHAR(64),
+    isActive CHAR(1) NOT NULL DEFAULT '0',
+    isAdmin CHAR(1) NOT NULL DEFAULT '0'
+);
+
+CREATE TABLE article (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title VARCHAR(64) NOT NULL,
+    content TEXT NOT NULL,
+    author INTEGER NOT NULL,
+    createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    isActive CHAR(1) NOT NULL DEFAULT '0',
+    FOREIGN KEY(author) REFERENCES user(id)
+);
+
+CREATE TABLE comment (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    content TEXT NOT NULL,
+    author INTEGER NOT NULL,
+    createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    refArticle INTEGER NOT NULL,
+    FOREIGN KEY(author) REFERENCES user(id),
+    FOREIGN KEY(refArticle) REFERENCES article(id)
+);
+
+CREATE TABLE reply (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    content TEXT NOT NULL,
+    author INTEGER NOT NULL,
+    createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    refComment INTEGER NOT NULL,
+    refUser INTEGER NOT NULL,
+    FOREIGN KEY(author) REFERENCES user(id),
+    FOREIGN KEY(refComment) REFERENCES comment(id),
+    FOREIGN KEY(refUser) REFERENCES user(id)
+);
