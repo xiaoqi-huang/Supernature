@@ -12,7 +12,7 @@ bp = Blueprint('blog', __name__, url_prefix='/blog')
 def blog_list():
     to_list = []
     db = get_db()
-    res = db.execute('SELECT name, class_id, title, time FROM article, user '
+    res = db.execute('SELECT name, id, title, time FROM article, user '
                      'WHERE user.id=article.author ORDER BY time DESC').fetchall()
     show_add_link = True
     user_id = session.get('user_id', None)
@@ -25,16 +25,16 @@ def blog_list():
 
     for row in res:
         to_list.append({'title': row['title'], 'author': row['name'],
-                        'time': row['time'], 'class_id': row['class_id']})
+                        'time': row['time'], 'class_id': row['id']})
                         
     return render_template('blog/blog-list.html', blog_list=to_list, show_add_link=show_add_link)
 
 
-@bp.route('/<int:class_id>', methods=('GET', ))
-def blog_content(class_id):
+@bp.route('/<int:id>', methods=('GET', ))
+def blog_content(id):
     db = get_db()
     res = db.execute('SELECT article.title, article.content, user.name, user.id, article.time FROM article, user '
-                     'WHERE article.class_id=? AND article.author=user.id', (class_id, )).fetchone()
+                     'WHERE article.id=? AND article.author=user.id', (id, )).fetchone()
     show_edit_link = True
     user_id = session.get('user_id', None)
     if not user_id:
@@ -43,7 +43,7 @@ def blog_content(class_id):
         if user_id != res['id']:
             show_edit_link = False
 
-    _ = {'title':res['title'], 'content':markdown.markdown(res['content']), 'time':res['time'], 'name':res['name'], 'class_id':class_id}
+    _ = {'title':res['title'], 'content':markdown.markdown(res['content']), 'time':res['time'], 'name':res['name'], 'class_id':id}
 
     if not res:
         return redirect(url_for('index.u404'))
@@ -68,10 +68,8 @@ def blog_add():
             if user['isAdmin'] == '0':
                 error = 'Not admin'
             else:
-                db.execute('INSERT INTO class(id) VALUES(NULL)')
-                class_id = db.execute('SELECT MAX(id) FROM class').fetchone()['MAX(id)']
-                db.execute('INSERT INTO article(class_id, title, content, author) VALUES(?, ?, ?, ?)',
-                           (class_id, title, content, user_id))
+                db.execute('INSERT INTO article(title, content, author) VALUES(?, ?, ?)',
+                           (title, content, user_id))
                 db.commit()
 
         if not error:
@@ -81,14 +79,15 @@ def blog_add():
     return render_template('blog/blog-add.html')
 
 
-@bp.route('/edit/<int:class_id>', methods=('GET', 'POST'))
-def blog_edit(class_id):
+@bp.route('/edit/<int:id>', methods=('GET', 'POST'))
+def blog_edit(aid):
     error = None
     user_id = session.get('user_id', None)
     if not user_id:
         error = 'Not login'
-    if not class_id:
-        error = 'No such article'
+    # TODO: check whether the blog exists
+    # if not :
+    #    error = 'No such article'
     if error:
         return redirect(url_for('auth.login'))
     flash(error)
