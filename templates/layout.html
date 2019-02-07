@@ -25,6 +25,7 @@
 				<li><a href="{{ url_for('index.jio') }}">Soul Sacrifice</a></li>
 				<li><a href="{{ url_for('index.member') }}">MEMBERS</a></li>
 				<li><a href="{{ url_for('index.about') }}">ABOUT</a></li>
+                <li><a href="{{ url_for('admin.admin_index') }}">ADMIN</a></li>
                 {% if session['user_id'] %}
                     <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
                 {% else %}

@@ -2,6 +2,7 @@ import os
 
 import auth
 import blog
+import admin
 import db
 from flask import Flask, redirect, url_for
 
@@ -20,6 +21,7 @@ db.init_app(app)
 app.register_blueprint(auth.bp)
 app.register_blueprint(index.bp)
 app.register_blueprint(blog.bp)
+app.register_blueprint(admin.bp)
 
 
 @app.route('/')
