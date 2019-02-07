@@ -12,8 +12,8 @@ bp = Blueprint('blog', __name__, url_prefix='/blog')
 def blog_list():
     to_list = []
     db = get_db()
-    res = db.execute('SELECT name, id, title, time FROM article, user '
-                     'WHERE user.id=article.author ORDER BY time DESC').fetchall()
+    res = db.execute('SELECT name, article.id AS id, title, createdAt FROM article, user '
+                     'WHERE user.id=article.author ORDER BY createdAt DESC').fetchall()
     show_add_link = True
     user_id = session.get('user_id', None)
     if not user_id:
@@ -25,16 +25,16 @@ def blog_list():
 
     for row in res:
         to_list.append({'title': row['title'], 'author': row['name'],
-                        'time': row['time'], 'class_id': row['id']})
+                        'time': row['createdAt'], 'class_id': row['id']})
                         
     return render_template('blog/blog-list.html', blog_list=to_list, show_add_link=show_add_link)
 
 
-@bp.route('/<int:id>', methods=('GET', ))
-def blog_content(id):
+@bp.route('/<int:aid>', methods=('GET', ))
+def blog_content(aid):
     db = get_db()
-    res = db.execute('SELECT article.title, article.content, user.name, user.id, article.time FROM article, user '
-                     'WHERE article.id=? AND article.author=user.id', (id, )).fetchone()
+    res = db.execute('SELECT article.title, article.content, user.name, user.id, article.createdAt FROM article, user '
+                     'WHERE article.id=? AND article.author=user.id', (aid, )).fetchone()
     show_edit_link = True
     user_id = session.get('user_id', None)
     if not user_id:
@@ -43,7 +43,7 @@ def blog_content(id):
         if user_id != res['id']:
             show_edit_link = False
 
-    _ = {'title':res['title'], 'content':markdown.markdown(res['content']), 'time':res['time'], 'name':res['name'], 'class_id':id}
+    _ = {'title':res['title'], 'content':markdown.markdown(res['content']), 'time':res['createdAt'], 'name':res['name'], 'class_id':aid}
 
     if not res:
         return redirect(url_for('index.u404'))
@@ -79,7 +79,7 @@ def blog_add():
     return render_template('blog/blog-add.html')
 
 
-@bp.route('/edit/<int:id>', methods=('GET', 'POST'))
+@bp.route('/edit/<int:aid>', methods=('GET', 'POST'))
 def blog_edit(aid):
     error = None
     user_id = session.get('user_id', None)
@@ -93,14 +93,14 @@ def blog_edit(aid):
     flash(error)
 
     db = get_db()
-    author = db.execute('SELECT article.author FROM article WHERE class_id=?', (class_id,)).fetchone()
+    author = db.execute('SELECT article.author FROM article WHERE id=?', (aid,)).fetchone()
     if author['author'] != user_id:
         error = 'Not author'
     flash(error)
 
     if request.method == 'GET':
         res = db.execute('SELECT article.title, article.content, user.name, user.id FROM article, user '
-                         'WHERE article.class_id=? AND article.author=user.id', (class_id,)).fetchone()
+                         'WHERE article.id=? AND article.author=user.id', (aid,)).fetchone()
         if not res:
             return redirect(url_for('index.u404'))
         else:
@@ -111,7 +111,7 @@ def blog_edit(aid):
         if not title or not content:
             error = 'No content and title'
         now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        db.execute('UPDATE article SET title=?, content=?, time=? WHERE class_id=?', (title, content, now, class_id))
+        db.execute('UPDATE article SET title=?, content=?, updatedAt=? WHERE id=?', (title, content, now, aid))
         db.commit()
         return redirect(url_for('blog.blog_list'))
     flash(error)

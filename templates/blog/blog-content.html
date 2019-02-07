@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 {% block body %}
     {% if  show_edit_link %}
-        <a href="{{ url_for('blog.blog_edit', class_id=blog['class_id']) }}">重新编辑博客内容</a>
+        <a href="{{ url_for('blog.blog_edit', aid=blog['class_id']) }}">重新编辑博客内容</a>
     {% endif %}
     <h1>{{ blog['title'] }}</h1>
     {{ blog['content']|safe}}
