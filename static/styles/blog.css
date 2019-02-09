@@ -21,7 +21,7 @@
 }
 
 .blog-title {
-    width: 70%;
+    width: 65%;
 }
 
 .blog-author {
@@ -31,7 +31,6 @@
 .blog-time {
     float: right;
     padding-right: 15px;
-    width: 10%;
 }
 
 span a {
@@ -125,12 +124,11 @@ form div + div {
 }
 
 .comment-content {
-    width: 70%;
+    width: 60%;
 }
 
 .comment-time {
     float: right;
-    width: 10%;
 }
 
 /* Replies */

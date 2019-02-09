@@ -1,6 +1,9 @@
 const stripeList = () => {
-    const blogs = document.querySelector('#blog-list').querySelectorAll('li');
-    console.log(blogs);
+    const list = document.querySelector('#blog-list');
+    if (!list) return;
+
+    const blogs = list.querySelectorAll('li');
+
     let even = false;
     blogs.forEach(function(blog) {
         if (even) {
