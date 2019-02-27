@@ -19,14 +19,14 @@ def blog_list():
     if not user_id:
         show_add_link = False
     else:
-        user = db.execute('SELECT isAdmin FROM user WHERE id=?', (user_id, )).fetchone()
-        if user['isAdmin'] == '0':
+        user = db.execute('SELECT isActive FROM user WHERE id=?', (user_id, )).fetchone()
+        if user['isActive'] == '0':
             show_add_link = False
 
     for row in res:
         to_list.append({'title': row['title'], 'author': row['name'],
                         'time': row['createdAt'], 'class_id': row['id']})
-                        
+
     return render_template('blog/blog-list.html', blog_list=to_list, show_add_link=show_add_link)
 
 
@@ -64,8 +64,8 @@ def blog_add():
             error = 'No content'
         else:
             db = get_db()
-            user = db.execute('SELECT * FROM user WHERE id=?', (user_id, )).fetchone()
-            if user['isAdmin'] == '0':
+            user = db.execute('SELECT isActive FROM user WHERE id=?', (user_id, )).fetchone()
+            if user['isActive'] == '0':
                 error = 'Not admin'
             else:
                 db.execute('INSERT INTO article(title, content, author) VALUES(?, ?, ?)',
@@ -156,10 +156,15 @@ def add_comment(aid):
         return redirect(url_for('auth.login'))
     else:
         db = get_db()
-        content = request.form['content']
-        query = '''INSERT INTO comment (author, content, refArticle) VALUES (?, ?, ?)'''
-        db.execute(query, (uid, content, aid))
-        db.commit()
+        # Only active users can comment
+        user = db.execute('''SELECT isActive FROM user WHERE id=?''', (uid,)).fetchone();
+        if user['isActive'] == '1':
+            content = request.form['content']
+            query = '''INSERT INTO comment (author, content, refArticle) VALUES (?, ?, ?)'''
+            db.execute(query, (uid, content, aid))
+            db.commit()
+        else:
+            flash('Activate your account before adding comments!')
         return redirect(url_for('blog.blog_content', aid=aid))
 
 
@@ -187,8 +192,13 @@ def add_reply(aid, cid, to_uid):
         return redirect(url_for('auth.login'))
     else:
         db = get_db()
-        content = request.form['content']
-        query = '''INSERT INTO reply (author, content, refComment, refUser) VALUES (?, ?, ?, ?)'''
-        db.execute(query, (uid, content, cid, to_uid))
-        db.commit()
+        # Only active users can reply
+        user = db.execute('''SELECT isActive FROM user WHERE id=?''', (uid,)).fetchone();
+        if user['isActive'] == '1':
+            content = request.form['content']
+            query = '''INSERT INTO reply (author, content, refComment, refUser) VALUES (?, ?, ?, ?)'''
+            db.execute(query, (uid, content, cid, to_uid))
+            db.commit()
+        else:
+            flash('Activate your account before make a reply!')
         return redirect(url_for('blog.blog_content', aid=aid))

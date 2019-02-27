@@ -10,6 +10,9 @@
     <p>{{ blog['name'] }}</p>
 
     <div id="comment-section">
+        {% for message in get_flashed_messages() %}
+            <div class="flash">{{ message }}</div>
+        {% endfor %}
         <form id="comment-form" method="post" action="{{ url_for('blog.add_comment', aid=blog['class_id']) }}">
             <input id="comment-input" type="text" name="content" placeholder="说点什么" required>
             <button type="submit">评论</button>
