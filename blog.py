@@ -118,6 +118,8 @@ def blog_edit(aid):
     else:
         title = request.form['title']
         content = request.form['content']
+        if not validate(content):
+            return redirect(url_for('blog.blog_list'))
         blog = None
         if not title and not content:
             error = 'No title and article'
@@ -169,7 +171,7 @@ def add_comment(aid):
         if user['isActive'] == '1':
             content = request.form['content']
             if not validate(content):
-                redirect(url_for('blog.list'))
+                return redirect(url_for('blog.blog_list'))
             query = '''INSERT INTO comment (author, content, refArticle) VALUES (?, ?, ?)'''
             db.execute(query, (uid, content, aid))
             db.commit()
