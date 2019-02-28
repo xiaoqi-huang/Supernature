@@ -12,7 +12,8 @@ def validate(text):
     backlist = ['drop', 'insert', 'update', 'delete']
     for word in backlist:
         if word in text:
-            return render_template('blog/blog-add.html')
+            return False
+    return True
 
 @bp.route('/list', methods=('GET', ))
 def blog_list():
