@@ -58,6 +58,10 @@ def blog_add():
         user_id = session.get('user_id', None)
         title = request.form['title']
         content = request.form['content']
+        backlist = ['drop', 'insert', 'update', 'delete']
+        for word in backlist:
+            if (word in content) or (word in title):
+                return render_template('blog/blog-add.html')
         if not user_id:
             error = 'Not login'
         elif not title or not content:
