@@ -7,6 +7,12 @@ from db import get_db
 
 bp = Blueprint('blog', __name__, url_prefix='/blog')
 
+def validate(text):
+    text = text.lower()
+    backlist = ['drop', 'insert', 'update', 'delete']
+    for word in backlist:
+        if word in text:
+            return render_template('blog/blog-add.html')
 
 @bp.route('/list', methods=('GET', ))
 def blog_list():
@@ -58,10 +64,8 @@ def blog_add():
         user_id = session.get('user_id', None)
         title = request.form['title']
         content = request.form['content']
-        backlist = ['drop', 'insert', 'update', 'delete']
-        for word in backlist:
-            if (word in content) or (word in title):
-                return render_template('blog/blog-add.html')
+        if not validate(title) or not validate(content) :
+            return render_template('blog/blog-add.html')
         if not user_id:
             error = 'Not login'
         elif not title or not content:
@@ -164,6 +168,8 @@ def add_comment(aid):
         user = db.execute('''SELECT isActive FROM user WHERE id=?''', (uid,)).fetchone();
         if user['isActive'] == '1':
             content = request.form['content']
+            if not validate(content):
+                redirect(url_for('blog.list'))
             query = '''INSERT INTO comment (author, content, refArticle) VALUES (?, ?, ?)'''
             db.execute(query, (uid, content, aid))
             db.commit()
@@ -200,6 +206,8 @@ def add_reply(aid, cid, to_uid):
         user = db.execute('''SELECT isActive FROM user WHERE id=?''', (uid,)).fetchone();
         if user['isActive'] == '1':
             content = request.form['content']
+            if not validate(content):
+                redirect(url_for('blog.list'))
             query = '''INSERT INTO reply (author, content, refComment, refUser) VALUES (?, ?, ?, ?)'''
             db.execute(query, (uid, content, cid, to_uid))
             db.commit()
