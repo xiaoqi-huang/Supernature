@@ -10,7 +10,7 @@ import index
 
 app = Flask(__name__, instance_relative_config=True)
 app.config.from_mapping(
-    SECRET_KEY='DEV',
+    SECRET_KEY='qswl-a12bf61a-219c-4303-ba4a-3e17fa2cbfe2',
     DATABASE=os.path.join(app.instance_path, 'data.db')
 )
 if not os.path.exists(app.instance_path):
