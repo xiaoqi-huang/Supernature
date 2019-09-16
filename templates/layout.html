@@ -4,15 +4,27 @@
 <head>
 	<meta charset="utf-8" />
 	<title>超自然心理研究社</title>
-	<link href="https://fonts.googleapis.com/css?family=Lato:400,300,100,700,900" rel="stylesheet" type="text/css" media="screen" />
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" href="{{ url_for('static', filename='images/icon.png') }}">
+	<link href='http://fonts.googleapis.com/css?family=Oleo+Script' rel='stylesheet' type='text/css'>
+	<!-- <link href='https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0-beta.2/cosmo/bootstrap.min.css' rel='stylesheet'> -->
+
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/basic.css') }}" media="screen" />
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/provided.css') }}" media="screen" />
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/blog.css') }}" media="screen" />
-	<link rel="icon" href="{{ url_for('static', filename='images/icon.png') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/dashboard.css') }}" media="screen" />
+	<link href='https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0-beta.2/cosmo/bootstrap.min.css' rel='stylesheet'>
+	{% block externalCss %}
+    {% endblock %}
 </head>
 
 <body>
+	<app-root></app-root>
+	<script src="https://bootswatch.com/_vendor/jquery/dist/jquery.min.js"></script>
+    <script src="https://bootswatch.com/_vendor/popper.js/dist/umd/popper.min.js"></script>
+    <script src="https://bootswatch.com/_vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+
 	<header>
 		<a href="/index">
 			<img src="{{ url_for('static', filename='images/icon.png') }}" id="icon" />
@@ -27,6 +39,7 @@
 				<li><a href="{{ url_for('index.about') }}">ABOUT</a></li>
                 <li><a href="{{ url_for('admin.admin_index') }}">ADMIN</a></li>
                 {% if session['user_id'] %}
+					<li><a href="{{ url_for('auth.profile') }}">PROFILE</a></li>
                     <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
                 {% else %}
                     <li><a href="{{ url_for('auth.login') }}">login</a></li>

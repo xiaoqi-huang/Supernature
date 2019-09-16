@@ -42,5 +42,3 @@ def jio():
 @bp.route('/index-jp', methods=('GET', ))
 def index_jp():
     return render_template('index-jp.html')
-
-

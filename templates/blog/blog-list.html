@@ -1,4 +1,7 @@
 {% extends 'layout.html' %}
+{% block externalCss %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/blog.css') }}" media="screen" />
+{% endblock %}
 {% block body %}
     {% for message in get_flashed_messages() %}
         <div class="flash">{{ message }}</div>
@@ -6,6 +9,7 @@
     {% if show_add_link %}
         <a href="{{ url_for('blog.blog_add') }}">写一篇吧？</a>
     {% endif %}
+    <div style="margin-left: 3%; margin-right: 3%">
     <ul id="blog-list">
         {% for blog in blog_list %}
             <li>
@@ -15,6 +19,7 @@
             </li>
         {% endfor %}
     </ul>
+    </div>
     <script type=text/javascript src="{{ url_for('static', filename='js/main.js') }}"></script>
     <script type=text/javascript src="{{ url_for('static', filename='js/blog.js') }}"></script>
 {% endblock %}

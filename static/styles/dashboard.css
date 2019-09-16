@@ -1,0 +1,191 @@
+.card {
+   display: inline-table;
+   width: 40%;
+   height: 100%;
+   margin-top: 5px;
+   margin-left: 50px;
+   margin-right: 50px;
+   margin-bottom: 6px;
+   -moz-border-radius: 10px;
+   -webkit-border-radius: 10px;
+   border-radius: 10px; /* future proofing */
+ }
+
+.card-body-pic {
+    display: table-cell;
+    width: 30%;
+    vertical-align: top;
+    /*border: 1px solid red;*/
+    margin-right: 20px;
+}
+
+.card-pic {
+    height: 10vh;
+    width: 100%;
+    object-fit: cover;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px; /* future proofing */
+ }
+
+.card-body-desc {
+    display: table-cell;
+    width: 60%;
+    vertical-align: top;
+    position: relative;
+   /*border: 1px solid orange;*/
+ }
+
+.card-body-desc h4 {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-weight: 900;
+ }
+
+.card-body-desc p {
+    color: black;
+    margin-bottom: 8px;
+    margin-left: 10px;
+ }
+
+.card-body-desc .hotelName {
+    font-weight: 900;
+}
+.full-width {
+  height: auto;
+  text-align: center;
+  vertical-align: middle;
+  /*border: 1px solid red;*/
+}
+
+.profile-info h3 {
+  padding-bottom: 7px;
+}
+
+.passfc {
+  margin: 0 auto;
+  width: 80%;
+}
+
+.formp {
+  margin-left: 50px;
+}
+
+.profile-info {
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+.profile-info button {
+  font-size: 11px;
+}
+
+.containerp {
+  display: table;
+    width: 85%;
+    /*border: 1px solid red;*/
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.pp-choose {
+  /*margin-left: 45px;*/
+  margin: 0 auto;
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+.modal-body button{
+  display: block;
+    vertical-align: middle;
+    margin: 0 auto;
+    margin-bottom: 5px;
+    margin-top: 10px;
+}
+
+.row-profile-picture {
+  vertical-align: middle;
+}
+
+.vah {
+  margin-left: 20px;
+}
+
+.vah strong {
+    color: black;
+}
+
+.vah p {
+    color: black;
+}
+
+.gallery {
+    display: flex;
+    /*flex-wrap: wrap;*/
+    margin: -1rem -1rem;
+    padding-bottom: 2.5rem;
+    padding-top: 1rem;
+}
+
+.gallery-item {
+    position: relative;
+    flex: 1 0 22rem;
+    margin: 1rem;
+    color: #fff;
+    cursor: pointer;
+}
+
+
+.gallery-item-info li {
+    display: inline-block;
+    font-size: 1.7rem;
+    font-weight: 600;
+}
+
+
+.gallery-item-type {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}
+
+.gallery-image {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.row-profile-picture img {
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  object-fit: cover;
+}
+
+.bioContainer {
+  width: 40%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.alert {
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@supports (display: grid) {
+
+  .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+      grid-gap: 2rem;
+  }
+
+  .gallery-item,
+  .gallery {
+      width: auto;
+      margin: 0;
+  }
+}
