@@ -81,17 +81,17 @@ def profile(uid):
     # check
     if session['user_id'] is None:
         return "premisson deny"
-    elif uid != session['user_id']:
-        return "premisson deny"
+    # elif uid != session['user_id']:
+    #     return "premisson deny"
     else:
         print("Login already")
 
     db = get_db()
     user_id = session['user_id']
-    u = db.execute('SELECT * FROM user WHERE id=?', (user_id, )).fetchone()
+    u = db.execute('SELECT * FROM user WHERE id=?', (uid, )).fetchone()
     blog_list = []
     blogs = db.execute('SELECT article.title, article.content, article.id, user.name, article.createdAt FROM article, user '
-                     'WHERE article.author=? AND user.id=? ORDER BY createdAt DESC', (user_id, user_id)).fetchall()
+                     'WHERE article.author=? AND user.id=? ORDER BY createdAt DESC', (uid, uid)).fetchall()
     for row in blogs:
         if len(row['content']) > 300:
             content = row['content']

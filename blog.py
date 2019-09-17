@@ -19,7 +19,7 @@ def validate(text):
 def blog_list():
     to_list = []
     db = get_db()
-    res = db.execute('SELECT name, article.id AS id, title, createdAt FROM article, user '
+    res = db.execute('SELECT name, article.id AS id, author, title, createdAt FROM article, user '
                      'WHERE user.id=article.author ORDER BY createdAt DESC').fetchall()
     show_add_link = True
     user_id = session.get('user_id', None)
@@ -32,7 +32,7 @@ def blog_list():
 
     for row in res:
         to_list.append({'title': row['title'], 'author': row['name'],
-                        'time': row['createdAt'], 'class_id': row['id']})
+                        'time': row['createdAt'], 'class_id': row['id'], 'aid': row['author'] })
 
     return render_template('blog/blog-list.html', blog_list=to_list, show_add_link=show_add_link)
 
