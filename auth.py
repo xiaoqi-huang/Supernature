@@ -1,4 +1,5 @@
 import os
+import markdown
 from os import path
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask import Blueprint, flash, g, redirect, render_template, request, session, url_for
@@ -93,10 +94,10 @@ def profile():
     for row in blogs:
         if len(row['content']) > 300:
             content = row['content']
-            blog_list.append({'title': row['title'], 'aid': row['id'], 'content': content[:299] + "...", 'author': row['name'],
+            blog_list.append({'title': row['title'], 'aid': row['id'], 'content': markdown.markdown(content[:299]) + "...", 'author': row['name'],
                             'time': row['createdAt']})
         else:
-            blog_list.append({'title': row['title'], 'aid': row['id'], 'content': row['content'], 'author': row['name'],
+            blog_list.append({'title': row['title'], 'aid': row['id'], 'content': markdown.markdown(row['content']), 'author': row['name'],
                             'time': row['createdAt']})
     # testing
     print(blog_list)

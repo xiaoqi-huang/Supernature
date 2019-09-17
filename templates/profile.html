@@ -40,7 +40,7 @@
 				<div class="card-body">
 					<h3 class="card-title">{{ blog['title'] }}</h3>
 					<h6 class="card-subtitle mb-2 text-muted">{{ blog['author'] }}</h6>
-					<p class="card-text">{{ blog['content' ]}}</p>
+					<p class="card-text">{{ blog['content']|safe }}</p>
 					<a href="{{ url_for('blog.blog_content', aid=blog['aid']) }}" class="card-link">view more</a>
 				</div>
 			</div>
