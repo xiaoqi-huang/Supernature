@@ -87,7 +87,6 @@ def profile():
     db = get_db()
     user_id = session['user_id']
     u = db.execute('SELECT * FROM user WHERE id=?', (user_id, )).fetchone()
-    print(u['avatar'])
     blog_list = []
     blogs = db.execute('SELECT article.title, article.content, article.id, user.name, article.createdAt FROM article, user '
                      'WHERE article.author=? AND user.id=? ORDER BY createdAt DESC', (user_id, user_id)).fetchall()
@@ -99,8 +98,6 @@ def profile():
         else:
             blog_list.append({'title': row['title'], 'aid': row['id'], 'content': markdown.markdown(row['content']), 'author': row['name'],
                             'time': row['createdAt']})
-    # testing
-    print(blog_list)
     if request.method == 'POST':
         # change bio
         if 'bio' in request.form:
