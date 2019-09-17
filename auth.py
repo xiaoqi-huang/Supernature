@@ -112,6 +112,7 @@ def profile(uid):
                 db.execute('UPDATE user SET introduce=? WHERE id=?', (new_bio, session['user_id']))
                 # u['introduce'] = new_bio
                 db.commit()
+                return redirect(url_for('auth.profile', uid=session['user_id']))
 
         # change user name
         elif 'userName' in request.form:
@@ -124,6 +125,7 @@ def profile(uid):
                 db.execute('UPDATE user SET name=? WHERE id=?', (new_name, session['user_id']))
                 # u['name'] = new_name
                 db.commit()
+                return redirect(url_for('auth.profile', uid=session['user_id']))
 
         # change password
         elif 'oldPass' in request.form:
