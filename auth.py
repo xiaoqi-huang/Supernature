@@ -84,8 +84,22 @@ def profile():
         print("Login already")
 
     db = get_db()
-    u = db.execute('SELECT * FROM user WHERE id=?', (session['user_id'], )).fetchone()
+    user_id = session['user_id']
+    u = db.execute('SELECT * FROM user WHERE id=?', (user_id, )).fetchone()
     print(u['avatar'])
+    blog_list = []
+    blogs = db.execute('SELECT article.title, article.content, article.id, user.name, article.createdAt FROM article, user '
+                     'WHERE article.author=? AND user.id=? ORDER BY createdAt DESC', (user_id, user_id)).fetchall()
+    for row in blogs:
+        if len(row['content']) > 300:
+            content = row['content']
+            blog_list.append({'title': row['title'], 'aid': row['id'], 'content': content[:299] + "...", 'author': row['name'],
+                            'time': row['createdAt']})
+        else:
+            blog_list.append({'title': row['title'], 'aid': row['id'], 'content': row['content'], 'author': row['name'],
+                            'time': row['createdAt']})
+    # testing
+    print(blog_list)
     if request.method == 'POST':
         # change bio
         if 'bio' in request.form:
@@ -156,5 +170,5 @@ def profile():
             if error is not None:
                 flash(error)
                 return redirect(url_for('auth.profile'))
-        return render_template('profile.html', user=u)
-    return render_template('profile.html', user=u)
+        return render_template('profile.html', user=u, blog_list=blog_list)
+    return render_template('profile.html', user=u, blog_list=blog_list)
