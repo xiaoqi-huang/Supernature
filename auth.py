@@ -74,12 +74,14 @@ def logout():
 
 
 # user's dashboard
-@bp.route('/profile', methods=['POST', 'GET'])
-def profile():
+@bp.route('/<int:uid>/profile', methods=['POST', 'GET'])
+def profile(uid):
     form = ''
     error = None
     # check
     if session['user_id'] is None:
+        return "premisson deny"
+    elif uid != session['user_id']:
         return "premisson deny"
     else:
         print("Login already")
@@ -164,9 +166,9 @@ def profile():
                     db.commit()
                     # save it to profile pic directory
                     new_profile.save(os.path.join(current_app.config['UPLOAD_PROFILE_FOLDER'], filename))
-                    return redirect(url_for('auth.profile'))
+                    return redirect(url_for('auth.profile', uid=session['user_id']))
             if error is not None:
                 flash(error)
-                return redirect(url_for('auth.profile'))
+                return redirect(url_for('auth.profile', uid=session['user_id']))
         return render_template('profile.html', user=u, blog_list=blog_list)
     return render_template('profile.html', user=u, blog_list=blog_list)

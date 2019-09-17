@@ -53,7 +53,7 @@
 				</li> -->
 				{% if session['user_id'] %}
 					<li>
-						<a href="{{ url_for('auth.profile') }}">
+						<a href="{{ url_for('auth.profile', uid=session['user_id']) }}">
 							<img style="display: flex; position: absolute; right: 15px; top: 13px;" src="../../static/images/avatar.png" width="30" height="30"> </img>
 						</a>
 					</li>
