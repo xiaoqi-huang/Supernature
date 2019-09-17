@@ -39,19 +39,25 @@
 				<li><a href="{{ url_for('index.about') }}">ABOUT</a></li>
                 <li><a href="{{ url_for('admin.admin_index') }}">ADMIN</a></li>
                 {% if session['user_id'] %}
-					<li><a href="{{ url_for('auth.profile') }}">PROFILE</a></li>
                     <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
                 {% else %}
                     <li><a href="{{ url_for('auth.login') }}">login</a></li>
                 {% endif %}
-				<li>
+				<!-- <li>
 					<div class="dropdown">
 						<button class="dropdown-btn">LANGUAGE</button>
 						<div class="dropdown-content">
 							<a href="{{ url_for('index.index_jp') }}">JAPANESE</a>
 						</div>
 					</div>
-				</li>
+				</li> -->
+				{% if session['user_id'] %}
+					<li>
+						<a href="{{ url_for('auth.profile') }}">
+							<img style="display: flex; position: absolute; right: 15px; top: 13px;" src="../../static/images/avatar.png" width="30" height="30"> </img>
+						</a>
+					</li>
+				{% endif %}
 			</ul>
 		</nav>
 	</header>
