@@ -131,19 +131,24 @@ footer {
     text-align: center;
 }
 
-Style Attribute {
-}
-
-nav ul {
-    width: 800px;
-    display: block;
-    margin-top: 0px;
-    margin-right: auto;
-}
-
 #container {
-    margin: 100px auto 50px 0px;
+    margin: 0px auto;
     width: 800px;
+}
+
+#blog-title {
+    margin-top: 100px;
+    margin-bottom: 30px;
+}
+
+#container h1 {
+    margin: 0px auto 5px 0px;
+    font-size: 40px;
+}
+
+#edit-link {
+    display: block;
+    color: pink;
 }
 
 #comment-input {
