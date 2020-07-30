@@ -130,3 +130,23 @@ footer {
     transform: translate(-50%, -50%);
     text-align: center;
 }
+
+Style Attribute {
+}
+
+nav ul {
+    width: 800px;
+    display: block;
+    margin-top: 0px;
+    margin-right: auto;
+}
+
+#container {
+    margin: 100px auto 50px 0px;
+    width: 800px;
+}
+
+#comment-input {
+    width: 80%;
+    margin-right: 2%;
+}
