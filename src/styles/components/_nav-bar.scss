@@ -1,0 +1,31 @@
+nav {
+  background-color: $splatoon-purple;
+
+  font-family: monospace;
+  font-size: 15px;
+
+  padding: 20px;
+}
+
+nav .nav-title {
+  color: white;
+
+  text-transform: uppercase;
+}
+
+nav a {
+  color: white;
+
+  padding-bottom: 0;
+  margin-right: 20px;
+
+  text-decoration: none;
+}
+
+nav .active-nav {
+  border-bottom: 3px solid $splatoon-green;
+}
+
+nav .nav-login {
+  float: right;
+}

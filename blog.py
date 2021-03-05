@@ -17,10 +17,29 @@ def validate(text):
 
 @bp.route('/list', methods=('GET', ))
 def blog_list():
-    to_list = []
+
+    sort = 0
+    page = 0
+    sortBy = 'updatedAt' if sort == 0 else 'createdAt'
+    offset = 20 * page
+    query = '''SELECT article.id AS aid, title, createdAt, updatedAt, user.id AS uid, user.name AS author
+               FROM article, user
+               WHERE article.author=user.id
+               ORDER BY %s DESC
+               LIMIT %d, %d''' % (sortBy, page * 10, (page + 1) * 10)
+
     db = get_db()
-    res = db.execute('SELECT name, article.id AS id, author, title, createdAt FROM article, user '
-                     'WHERE user.id=article.author ORDER BY createdAt DESC').fetchall()
+    res = db.execute(query).fetchall()
+
+    to_list = []
+    for row in res:
+        to_list.append({'aid': row['aid'],
+                        'title': row['title'],
+                        'create_time': row['createdAt'],
+                        'update_time': row['updatedAt'],
+                        'uid': row['uid'],
+                        'author': row['author'] })
+
     show_add_link = True
     user_id = session.get('user_id', None)
     if not user_id:
@@ -30,9 +49,6 @@ def blog_list():
         if user['isActive'] == '0':
             show_add_link = False
 
-    for row in res:
-        to_list.append({'title': row['title'], 'author': row['name'],
-                        'time': row['createdAt'], 'class_id': row['id'], 'aid': row['author'] })
 
     return render_template('blog/blog-list.html', blog_list=to_list, show_add_link=show_add_link)
 

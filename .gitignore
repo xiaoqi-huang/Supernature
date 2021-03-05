@@ -1,7 +1,8 @@
 *.pyc
 *.sqlite
 .idea/
+*.DS_Store
 venv/
-*/.DS_Store
-.DS_Store
 instance/
+node_modules/
+ver1.0.0/
