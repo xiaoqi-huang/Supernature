@@ -19,8 +19,8 @@ def get_blog_list(sort='updatedAt', page=0):
     for row in res:
         data.append({'aid': row['aid'],
                      'title': row['title'],
-                     'create_time': row['createdAt'].isoformat(),
-                     'update_time': row['updatedAt'].isoformat(),
+                     'createAt': row['createdAt'].isoformat(),
+                     'updateAt': row['updatedAt'].isoformat(),
                      'uid': row['uid'],
                      'author': row['author'] })
 

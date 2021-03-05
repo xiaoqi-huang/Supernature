@@ -1,0 +1,78 @@
+@import '../base/settings';
+
+#blog-list-page {
+  color: white;
+  background-color: #1a1a42;
+}
+
+#blog-list-filter {
+  padding: 30px 25% 30px 25%;
+}
+
+
+// Search input
+
+#search-filter {
+  float: left;
+}
+#search-filter span {
+  margin-right: 5px;
+}
+
+#search-filter input {
+  background-color: #1a1a42;
+  border: 1px solid $splatoon-green;
+}
+
+#blog-list-filter input:focus {
+  background-color: $splatoon-green;
+}
+
+
+#sort-filter {
+  margin-left: 15px;
+}
+
+#sort-label {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+
+// Page selector
+
+#page-selector {
+  font-size: $s-size;
+  display: inline-block;
+  float: right;
+  margin-right: 0;
+}
+
+#page-selector button {
+  background-color: $splatoon-green;
+  border: 0;
+  border-radius: $s-size / 3;
+}
+
+.page-label {
+  margin-left: $s-size;
+  margin-right: $s-size;
+}
+
+// Bottom page selector
+
+#bottom-page-selector {
+
+  font-size: $s-size;
+
+  padding: $m-size 25% $xl-size 25%;
+
+  text-align: center;
+}
+
+#bottom-page-selector button {
+  color: #1a1a42;
+  background-color: $splatoon-green;
+  border: 0;
+  border-radius: $s-size / 3;
+}

@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import HomePage from './components/HomePage';
-import BlogPage from './components/BlogPage';
+import BlogListPage from './components/BlogListPage';
+// import BlogPage from './components/BlogPage';
 import NotFoundPage from './components/NotFoundPage';
 import './styles/styles.scss';
 // import { ThemeProvider } from '@material-ui/styles';
@@ -21,7 +22,7 @@ class App extends React.Component {
                 <Switch>
                     <Route path="/" component={HomePage} exact={true} />
                     <Route path="/home" component={HomePage} />
-                    <Route path="/blog" component={BlogPage} />
+                    <Route path="/blog" component={BlogListPage} />
                     {/*<Route path="/blog/:id" component={BlogPage} />*/}
                     {/*<Route path="/members" component={MembersPage} />*/}
                     <Route component={NotFoundPage} />
