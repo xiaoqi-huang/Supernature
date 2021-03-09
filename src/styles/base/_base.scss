@@ -1,7 +1,26 @@
 html {
-  font-family: monospace;
+  font-family: 'PT Mono', 'Hiragino Kaku Gothic Pro', serif;
+  font-weight: lighter
+}
+
+
+h1 {
+  font-size: $xl-size;
+}
+
+h2 {
+  font-size: $m-size;
+}
+
+h3 {
+  font-size: ($s-size + $m-size) / 2;
+}
+
+p {
+  font-size: $s-size;
 }
 
 a {
+
   text-decoration: none;
 }

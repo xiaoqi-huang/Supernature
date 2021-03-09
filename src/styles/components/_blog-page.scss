@@ -1,0 +1,54 @@
+#article {
+
+  width: 50%;
+  margin: $xl-size auto $xl-size auto;
+}
+
+//#article h1 {
+#article-title {
+  color: $grey;
+  background-color: $splatoon-green;
+
+  font-size: $m-size;
+  font-weight: bold;
+
+  display: inline-block;
+  padding: $s-size $m-size $s-size $m-size;
+}
+
+#article h2, #article h3 {
+  margin-top: $m-size;
+  margin-bottom: $s-size;
+  padding-left: $s-size;
+  border-left: .5rem solid $splatoon-green;
+}
+
+#article-author {
+  margin-bottom: $l-size;
+  padding-left: $m-size;
+}
+
+#article-author a {
+  color: $grey;
+}
+
+#article-content {
+  margin-bottom: $xl-size;
+  padding-left: $m-size;
+
+  line-height: normal;
+  letter-spacing: 0.1em;
+}
+
+#article-content img {
+  max-width: 100%;
+}
+
+#article-update-time {
+  padding-left: $m-size;
+}
+
+#article-create-time {
+  margin-bottom: $xl-size;
+  padding-left: $m-size;
+}

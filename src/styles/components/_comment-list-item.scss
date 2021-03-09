@@ -1,0 +1,44 @@
+.comment-list-item {
+
+  font-size: $s-size;
+
+  border-left: $xxs-size solid lighten($splatoon-green, 20);
+  border-radius: $xxs-size;
+  margin-bottom: $s-size;
+  padding: $xs-size $s-size 0 $s-size;
+}
+
+.comment-list-item a {
+  color: $splatoon-green;
+}
+
+.comment-list-item .create-time {
+
+  color: $grey;
+  font-size: $xs-size;
+
+  display: inline-block;
+
+  margin-top: $s-size;
+  margin-bottom: 0;
+}
+
+.comment-list-item button {
+
+  background-color: transparent;
+  color: $splatoon-green;
+  font-size: $xs-size;
+
+  display: inline-block;
+  float: right;
+
+  border: none;
+  margin-top: $s-size;
+  margin-left: $s-size;
+  padding: 0;
+}
+
+.comment-list-item:hover {
+  background-color: lighten($grey, 80);
+  border-left: $xxs-size solid $splatoon-green;
+}

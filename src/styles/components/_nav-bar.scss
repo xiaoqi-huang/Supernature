@@ -1,31 +1,48 @@
 nav {
-  background-color: $splatoon-purple;
-
-  font-family: monospace;
-  font-size: 15px;
-
-  padding: 20px;
-}
-
-nav .nav-title {
-  color: white;
-
+  font-family: "PT Mono";
+  font-size: $s-size;
+  font-weight: 200;
   text-transform: uppercase;
 }
 
+nav ul {
+  background-color: $grey;
+
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+nav li {
+  background-color: $grey;
+  display: inline;
+  float: left;
+}
+
+nav #nav-title {
+
+}
+
+nav #nav-login {
+  float: right;
+}
+
 nav a {
-  color: white;
+  color: $light-grey;
 
-  padding-bottom: 0;
-  margin-right: 20px;
-
+  display: block;
+  padding: 1rem;
+  text-align: center;
   text-decoration: none;
 }
 
-nav .active-nav {
-  border-bottom: 3px solid $splatoon-green;
+nav a:hover {
+  color: white;
+  box-shadow: 0px -3px 0px $splatoon-green inset;
 }
 
-nav .nav-login {
-  float: right;
+nav .active-nav {
+  color: white;
+  box-shadow: 0px -3px 0px $splatoon-green inset;
 }

@@ -2,7 +2,7 @@
 
 #blog-list-page {
   color: white;
-  background-color: #1a1a42;
+  background-color: $grey;
 }
 
 #blog-list-filter {
@@ -20,7 +20,7 @@
 }
 
 #search-filter input {
-  background-color: #1a1a42;
+  background-color: $grey;
   border: 1px solid $splatoon-green;
 }
 
@@ -71,7 +71,7 @@
 }
 
 #bottom-page-selector button {
-  color: #1a1a42;
+  color: $grey;
   background-color: $splatoon-green;
   border: 0;
   border-radius: $s-size / 3;

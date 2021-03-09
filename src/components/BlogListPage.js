@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import BlogList from './BlogList';
 import { getBlogList } from "../actions/blog";
 
@@ -9,67 +8,9 @@ export default class BlogListPage extends React.Component {
         text: '',
         sortBy: 'updatedAt',
         page: 0,
-        blogList: null,
+        blogList: [],
     };
 
-    onTextChange = (e) => {
-        this.setState(() => ({
-            text: e.target.value,
-            page: 0
-        }));
-    };
-
-    onSortChange = (e) => {
-
-        this.setState(() => ({
-            sortBy: e.target.value,
-            page: 0
-        }));
-
-        this.updateBlog();
-    };
-
-    loadPrevPage = () => {
-
-        if (this.state.page < 1) return;
-
-        this.setState(() => ({
-            page: this.state.page - 1
-        }));
-
-        this.updateBlog();
-    };
-
-    loadNextPage = () => {
-
-        this.setState(() => ({
-            page: this.state.page + 1
-        }));
-
-        this.updateBlog();
-    };
-
-    loadPrevPageScollToTop = () => {
-
-        if (this.state.page < 1) return;
-
-        this.setState(() => ({
-            page: this.state.page - 1
-        }));
-
-        this.updateBlog();
-        this.scrollToTop();
-    };
-
-    loadNextPageScollToTop = () => {
-
-        this.setState(() => ({
-            page: this.state.page + 1
-        }));
-
-        this.updateBlog();
-        this.scrollToTop();
-    };
 
     updateBlog = () => {
         getBlogList(this.state.sortBy, this.state.page).then((blogList) => {
@@ -86,12 +27,48 @@ export default class BlogListPage extends React.Component {
         });
     };
 
-    render() {
+    onTextChange = (e) => {
+        this.setState(() => ({
+            text: e.target.value,
+            page: 0
+        }));
+    };
 
-        if (this.state.blogList == null) {
+    onSortChange = (e) => {
+
+        this.setState(() => ({
+            sortBy: e.target.value,
+            page: 0
+        }), () => {
             this.updateBlog();
-        }
+        });
+    };
 
+    loadPrevPage = () => {
+
+        if (this.state.page < 1) return;
+
+        this.setState((prevState) => ({
+            page: prevState.page - 1
+        }), () => {
+            this.updateBlog();
+        });
+    };
+
+    loadNextPage = () => {
+
+        this.setState((prevState) => ({
+            page: prevState.page + 1
+        }), () => {
+            this.updateBlog();
+        });
+    };
+
+    componentDidMount() {
+        this.updateBlog();
+    }
+
+    render() {
         return (
             <div id="blog-list-page">
                 <div id="blog-list-filter">
@@ -122,12 +99,12 @@ export default class BlogListPage extends React.Component {
                     </div>
                 </div>
 
-                {this.state.blogList != null && <BlogList blogList={this.state.blogList} />}
+                {this.state.blogList && <BlogList blogList={this.state.blogList} />}
 
                 <div id="bottom-page-selector">
-                    <button onClick={this.loadPrevPageScollToTop}>Prev</button>
+                    <button onClick={() => { this.loadPrevPage(); this.scrollToTop(); }}>Prev</button>
                     <span className="page-label">Page {this.state.page + 1}</span>
-                    <button onClick={this.loadNextPageScollToTop}>Next</button>
+                    <button onClick={() => { this.loadNextPage(); this.scrollToTop(); }}>Next</button>
                 </div>
             </div>
         );

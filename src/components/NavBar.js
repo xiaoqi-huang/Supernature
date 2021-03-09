@@ -20,11 +20,13 @@ export default class NavBar extends React.Component {
         return (
             <nav>
                 {/*<img src="../images/favicon.png" />*/}
-                <NavLink to="/home" className="nav-title">Supernatural Psychology Association</NavLink>
-                <NavLink to="/home" activeClassName="active-nav" exact={true}>Home</NavLink>
-                <NavLink to="/blog" activeClassName="active-nav" exact={true}>Blog</NavLink>
-                <NavLink to="/members" activeClassName="active-nav" exact={true}>Members</NavLink>
-                <NavLink to="/login" className="nav-login">Login</NavLink>
+                <ul>
+                    <li><NavLink to="/home" id="nav-title">Supernatural Psychology Association</NavLink></li>
+                    <li><NavLink to="/home" activeClassName="active-nav" exact={true}>Home</NavLink></li>
+                    <li><NavLink to="/blog" activeClassName="active-nav">Blog</NavLink></li>
+                    <li><NavLink to="/members" activeClassName="active-nav" exact={true}>Members</NavLink></li>
+                    <li id="nav-login"><NavLink to="/login" className="nav-login">Login</NavLink></li>
+                </ul>
             </nav>
         );
     }
