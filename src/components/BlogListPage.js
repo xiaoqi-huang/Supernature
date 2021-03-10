@@ -1,14 +1,17 @@
 import React from 'react';
 import BlogList from './BlogList';
 import { getBlogList } from "../actions/blog";
+import { getToken } from "../actions/localStorage";
+
 
 export default class BlogListPage extends React.Component {
 
     state = {
+        addBlog: !getToken('uid'),
         text: '',
         sortBy: 'updatedAt',
         page: 0,
-        blogList: [],
+        blogList: []
     };
 
 
@@ -91,6 +94,8 @@ export default class BlogListPage extends React.Component {
                             <option value="createdAt">Create Date</option>
                         </select>
                     </span>
+
+                    <a id="add-blog-link" href="/blog/add">+ BLOG</a>
 
                     <div id="page-selector">
                         <button onClick={this.loadPrevPage}>Prev</button>

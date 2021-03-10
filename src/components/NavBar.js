@@ -12,10 +12,21 @@ import { NavLink } from 'react-router-dom';
 // import MailIcon from '@material-ui/icons/Mail';
 // import NotificationsIcon from '@material-ui/icons/Notifications';
 // import MoreIcon from '@material-ui/icons/MoreVert';
-
-
+import store from '../reducers/userReducer';
 
 export default class NavBar extends React.Component {
+
+    signedIn = false;
+    uid = null;
+    username = null;
+
+    componentDidMount() {
+        const userState = store.getState();
+        this.signedIn = userState.signedIn;
+        this.uid = userState.uid;
+        this.username = userState.username;
+    }
+
     render() {
         return (
             <nav>
@@ -25,14 +36,21 @@ export default class NavBar extends React.Component {
                     <li><NavLink to="/home" activeClassName="active-nav" exact={true}>Home</NavLink></li>
                     <li><NavLink to="/blog" activeClassName="active-nav">Blog</NavLink></li>
                     <li><NavLink to="/members" activeClassName="active-nav" exact={true}>Members</NavLink></li>
-                    <li id="nav-login"><NavLink to="/login" className="nav-login">Login</NavLink></li>
+                    {this.signedIn &&
+                    <li id="nav-user">
+                        <NavLink to={`/user/${this.uid}`} activeClassName="active-nav">{this.username}</NavLink>
+                    </li>
+                    }
+                    {!this.signedIn &&
+                    <li id="nav-sign-in">
+                        <NavLink to="/signin" activeClassName="active-nav">Sign in</NavLink>
+                    </li>
+                    }
                 </ul>
             </nav>
         );
     }
 }
-
-
 
 // const useStyles = makeStyles((theme) => ({
 //     grow: {

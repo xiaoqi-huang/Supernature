@@ -1,5 +1,4 @@
 nav {
-  font-family: "PT Mono";
   font-size: $s-size;
   font-weight: 200;
   text-transform: uppercase;
@@ -24,7 +23,11 @@ nav #nav-title {
 
 }
 
-nav #nav-login {
+nav #nav-user {
+  float: right;
+}
+
+nav #nav-sign-in {
   float: right;
 }
 

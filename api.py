@@ -1,5 +1,6 @@
-from flask import Blueprint, jsonify, redirect, request, url_for
+from flask import Blueprint, jsonify, redirect, request, session, url_for
 import markdown
+from werkzeug.security import check_password_hash, generate_password_hash
 
 from db import get_db
 
@@ -62,7 +63,7 @@ def get_blog(aid):
 #     return None
 
 
-@bp.route('blog/comments/<int:aid>', methods=('GET',))
+@bp.route('/blog/comments/<int:aid>', methods=('GET',))
 def get_comments(aid):
 
     query = '''SELECT comment.id AS cid, comment.content AS content, comment.createdAt AS createdAt, user.id AS uid, user.name AS author
@@ -84,7 +85,7 @@ def get_comments(aid):
     return jsonify(data)
 
 
-@bp.route('blog/replies/<int:cid>', methods=('GET',))
+@bp.route('/blog/replies/<int:cid>', methods=('GET',))
 def get_replies(cid):
 
     query = '''SELECT reply.id AS rid, content, createdAt, user.id AS uid, user.name AS author
@@ -104,3 +105,88 @@ def get_replies(cid):
                      'author': row['author']})
 
     return jsonify(data)
+
+
+@bp.route('/blog/add', methods=('GET', 'POST'))
+def add_blog():
+
+    print(session['user_id'])
+    if request.method == 'POST':
+        error = None
+        uid = session.get('user_id', None)
+        title = request.form['title']
+        content = request.form['content']
+        if not uid:
+            error = 'Not login'
+        elif not title or not content:
+            error = 'No content'
+        else:
+            db = get_db()
+            user = db.execute('SELECT isActive FROM user WHERE id=?', (uid,)).fetchone()
+            if user['isActive'] == '0':
+                error = 'Account not active'
+            else:
+                cursor = db.cursor()
+                cursor.execute('INSERT INTO article (title, content, author) VALUES (?, ?, ?)',
+                           (title, content, uid))
+                aid = cursor.lastrowid
+                print(aid)
+                db.commit()
+
+        if not error:
+            response = jsonify({ 'aid': aid })
+            # response.headers.add('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, x-auth')
+            return response
+        else:
+            response = jsonify({ 'error': error })
+            # response.headers.add('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, x-auth')
+            return response
+
+
+@bp.route('/auth/check-user-status', methods=('GET',))
+def check_user_status():
+
+    uid = session.get('user_id', None)
+
+    if uid:
+        db = get_db()
+        user = db.execute('SELECT name FROM user WHERE id=?', (uid,)).fetchone()
+        username = user['name']
+        response = { 'signed_in': true,
+                     'uid': uid,
+                     'username': username }
+    else:
+        response = { 'signed_in': false }
+
+    return response
+
+
+@bp.route('/auth/sign-in', methods=('GET', 'POST'))
+def signin():
+
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+        query = '''SELECT *
+                   FROM user
+                   WHERE mail=?'''
+
+        db = get_db()
+        user = db.execute(query, (email,)).fetchone()
+
+        error = None
+        if user is None:
+            error = 'No such user exists.'
+        elif not check_password_hash(user['password'], password):
+            error = 'Incorrect password.'
+
+        if error is None:
+            session.clear()
+            session['user_id'] = user['id']
+
+            response = jsonify({ 'uid': user['id'], 'username': user['name'] })
+            return response
+
+        else:
+            response =  jsonify({ 'error': error })
+            return response

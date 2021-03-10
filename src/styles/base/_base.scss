@@ -1,11 +1,11 @@
 html {
   font-family: 'PT Mono', 'Hiragino Kaku Gothic Pro', serif;
-  font-weight: lighter
+  font-weight: lighter;
+  height: 100%;
 }
 
-
 h1 {
-  font-size: $xl-size;
+  font-size: $l-size;
 }
 
 h2 {
@@ -20,7 +20,20 @@ p {
   font-size: $s-size;
 }
 
-a {
+span {
+  font-size: $s-size;
+}
 
+a {
+  //font-size: $s-size;
   text-decoration: none;
+}
+
+#app {
+  height: 100vh;
+}
+
+hr {
+  border: 0;
+  border-bottom: 1px dashed $grey;
 }
