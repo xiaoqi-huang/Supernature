@@ -8,19 +8,15 @@ export default class CommentForm extends React.Component {
         comment: null
     };
 
-    onSubmit = (e) => {
+    handleSubmit = (e) => {
         e.preventDefault();
     };
 
     render() {
         return (
-          <form id="comment-form" onSubmit={this.onSubmit}>
-              <input
-                  type="text"
-                  placeholder="Write your comment"
-                  autoFocus
-              />
-              <button>Comment</button>
+          <form id="comment-form" onSubmit={this.handleSubmit}>
+              <input type="text" name="content" placeholder="Write your comment" />
+              <button type="submit">Comment</button>
           </form>
         );
     }

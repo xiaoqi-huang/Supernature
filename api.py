@@ -9,11 +9,19 @@ from db import get_db
 
 bp = Blueprint('api', __name__, url_prefix='/api')
 
+################################################################################
+# Blog APIs
+# 1. get_blog_list
+# 2. get_blog
+# 3. get_raw_blog
+# 4. add_blog
+# 5. edit_blog
+################################################################################
+
 @bp.route('/blog/list/<sort>/<int:page>', methods=('GET',))
 def get_blog_list(sort='updatedAt', page=0):
 
     uid = session.get('user_id', None)
-    print('get_blog_list', uid)
 
     query = '''SELECT article.id AS aid, title, createdAt, updatedAt, user.id AS uid, user.name AS author
                FROM article, user
@@ -88,50 +96,6 @@ def get_raw_blog(aid):
         return jsonify(data)
 
 
-@bp.route('/blog/comments/<int:aid>', methods=('GET',))
-def get_comments(aid):
-
-    query = '''SELECT comment.id AS cid, comment.content AS content, comment.createdAt AS createdAt, user.id AS uid, user.name AS author
-               FROM   comment, user
-               WHERE  comment.author=user.id AND comment.refArticle=%d
-               ORDER BY comment.createdAt ASC''' % (aid,)
-
-    db = get_db()
-    res = db.execute(query).fetchall()
-
-    data = []
-    for row in res:
-        data.append({'cid': row['cid'],
-                     'content': row['content'],
-                     'createAt': row['createdAt'].isoformat(),
-                     'uid': row['uid'],
-                     'author': row['author']})
-
-    return jsonify(data)
-
-
-@bp.route('/blog/replies/<int:cid>', methods=('GET',))
-def get_replies(cid):
-
-    query = '''SELECT reply.id AS rid, content, createdAt, user.id AS uid, user.name AS author
-               FROM   reply, user
-               WHERE  reply.author=user.id AND reply.refComment=%d
-               ORDER BY reply.createdAt ASC''' % (cid,)
-
-    db = get_db()
-    res = db.execute(query).fetchall()
-
-    data = []
-    for row in res:
-        data.append({'rid': row['rid'],
-                     'content': row['content'],
-                     'createAt': row['createdAt'].isoformat(),
-                     'uid': row['uid'],
-                     'author': row['author']})
-
-    return jsonify(data)
-
-
 @bp.route('/blog/add', methods=('POST',))
 def add_blog():
 
@@ -140,7 +104,7 @@ def add_blog():
     title = request.form['title']
     content = request.form['content']
     if not uid:
-        error = 'Not login'
+        error = 'NOT_SIGNED_IN'
     elif not title or not content:
         error = 'No content'
     else:
@@ -178,7 +142,7 @@ def edit_blog(aid):
     db = get_db()
     article = db.execute('SELECT id, author FROM article WHERE id=?', (aid,)).fetchone()
     if not article:
-        error = 'Cannot find this article'
+        error = 'ARTICLE_NOT_FOUND'
     elif article['author'] != uid:
         error = 'Not the author of this article'
     if error:
@@ -195,6 +159,128 @@ def edit_blog(aid):
 
     return { 'success': True}
 
+
+################################################################################
+# Comment APIs
+# 1. get_comments
+# 2. add_comment
+################################################################################
+
+@bp.route('/blog/comments/<int:aid>', methods=('GET',))
+def get_comments(aid):
+
+    query = '''SELECT comment.id AS cid, comment.content AS content, comment.createdAt AS createdAt, user.id AS uid, user.name AS author
+               FROM   comment, user
+               WHERE  comment.author=user.id AND comment.refArticle=%d
+               ORDER BY comment.createdAt ASC''' % (aid,)
+
+    db = get_db()
+    res = db.execute(query).fetchall()
+
+    data = []
+    for row in res:
+        data.append({'cid': row['cid'],
+                     'content': row['content'],
+                     'createAt': row['createdAt'].isoformat(),
+                     'uid': row['uid'],
+                     'author': row['author']})
+
+    return jsonify(data)
+
+
+@bp.route('/blog/comment/add/<int:aid>', methods=('POST',))
+def add_comment(aid):
+
+    error = None
+
+    uid = session.get('user_id', None)
+    if not uid:
+        error = 'NOT_SIGNED_IN'
+        return { 'error': error }
+
+    content = request.form['content']
+    if not content:
+        error = 'EMPTY_CONTENT'
+        return { 'error': error }
+
+    db = get_db()
+
+    article = db.execute('SELECT * FROM article WHERE id=?', (aid,)).fetchone()
+    if not article:
+        error = 'ARTICLE_NOT_FOUND'
+        return { 'error': error }
+
+    query = '''INSERT INTO comment (content, author, refArticle)
+               VALUES (?, ?, ?)'''
+    db.execute(query, (content, uid, aid))
+    db.commit()
+
+    return { 'success': True }
+
+
+################################################################################
+# Reply APIs
+# 1. get_replies
+# 2. add_reply (TODO)
+################################################################################
+
+@bp.route('/blog/replies/<int:cid>', methods=('GET',))
+def get_replies(cid):
+
+    query = '''SELECT reply.id AS rid, content, createdAt, user.id AS uid, user.name AS author
+               FROM   reply, user
+               WHERE  reply.author=user.id AND reply.refComment=%d
+               ORDER BY reply.createdAt ASC''' % (cid,)
+
+    db = get_db()
+    res = db.execute(query).fetchall()
+
+    data = []
+    for row in res:
+        data.append({'rid': row['rid'],
+                     'content': row['content'],
+                     'createAt': row['createdAt'].isoformat(),
+                     'uid': row['uid'],
+                     'author': row['author']})
+
+    return jsonify(data)
+
+@bp.route('/blog/reply/add/<int:aid>', methods=('POST',))
+def add_reply(cid):
+
+    error = None
+
+    uid = session.get('user_id', None)
+    if not uid:
+        error = 'NOT_SIGNED_IN'
+        return { 'error': error }
+
+    content = request.form['content']
+    if not content:
+        error = 'EMPTY_CONTENT'
+        return { 'error': error }
+
+    db = get_db()
+
+    comment = db.execute('SELECT * FROM comment WHERE id=?', (cid,)).fetchone()
+    if not comment:
+        error = 'COMMENT_NOT_FOUND'
+        return { 'error': error }
+
+    query = '''INSERT INTO reply (content, author, refComment)
+               VALUES (?, ?, ?)'''
+    db.execute(query, (content, uid, cid))
+    db.commit()
+
+    return { 'success': True }
+
+
+################################################################################
+# Authentication APIs
+# 1. check_user_status
+# 2. sign_in
+# 3. sign_out
+################################################################################
 
 @bp.route('/auth/check-user-status', methods=('GET',))
 @cross_origin(supports_credentials=True)
