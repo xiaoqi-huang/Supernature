@@ -1,7 +1,12 @@
 import React from 'react';
 import { addBlog } from "../api/blog";
 
+
 export default class AddBlogPage extends React.Component {
+
+    state = {
+        error: null
+    };
 
     handleCancel = () => {
         this.props.history.push('/blog');
@@ -13,13 +18,21 @@ export default class AddBlogPage extends React.Component {
 
         const formData = new FormData(e.target);
         addBlog(formData).then((data) => {
-            this.props.history.push(`/blog/${data['aid']}`);
-        })
+            if (data.success) {
+                this.props.history.push(`/blog/${data['aid']}`);
+            }
+            if (data.error) {
+                this.setState(() => ({
+                    error: data.error
+                }));
+            }
+        });
     };
 
     render() {
         return (
           <form id="add-blog-form" onSubmit={this.handleSubmit}>
+              {this.state.error && <p>{this.state.error}</p>}
               <input id="title-field" type="text" name="title" placeholder="Title" required />
               <textarea id="content-field" name="content" placeholder="Content" required />
               <div id="add-blog-form__btn-container">

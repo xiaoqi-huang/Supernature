@@ -26,7 +26,7 @@ const authSignIn = (formData) => {
 
 const authSignOut = () => {
 
-    const promise = fetch('http://localhost:5000/api/auth/sign-out', { method: 'POST' });
+    const promise = fetch('http://localhost:5000/api/auth/sign-out');
 
     return promise.then((response) => (
         response.json()
@@ -35,4 +35,18 @@ const authSignOut = () => {
     });
 };
 
-export { authCheckUserStatus, authSignIn, authSignOut }
+const authSignUp = (formData) => {
+
+    const promise = fetch('http://localhost:5000/api/auth/sign-up', {
+        method: 'POST',
+        body: formData
+    });
+
+    return promise.then((response) => (
+        response.json()
+    )).then((data) => {
+        return data;
+    });
+};
+
+export { authCheckUserStatus, authSignIn, authSignOut, authSignUp }

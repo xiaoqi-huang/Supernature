@@ -100,32 +100,33 @@ def get_raw_blog(aid):
 def add_blog():
 
     error = None
+
     uid = session.get('user_id', None)
     title = request.form['title']
     content = request.form['content']
+
     if not uid:
         error = 'NOT_SIGNED_IN'
-    elif not title or not content:
-        error = 'No content'
-    else:
-        db = get_db()
-        user = db.execute('SELECT isActive FROM user WHERE id=?', (uid,)).fetchone()
-        if user['isActive'] == '0':
-            error = 'Account not active'
-        else:
-            cursor = db.cursor()
-            cursor.execute('INSERT INTO article (title, content, author) VALUES (?, ?, ?)',
-                       (title, content, uid))
-            aid = cursor.lastrowid
-            print(aid)
-            db.commit()
+    elif not title:
+        error = 'TITLE_REQUIRED'
+    elif not content:
+        error = 'CONTENT_REQUIRED'
+    if error:
+        return { 'error': error }
 
-    if not error:
-        response = jsonify({ 'aid': aid })
-        return response
-    else:
-        response = jsonify({ 'error': error })
-        return response
+    db = get_db()
+    user = db.execute('SELECT isActive FROM user WHERE id=?', (uid,)).fetchone()
+    if user['isActive'] == '0':
+        error = 'NOT_ACTIVE'
+        return { 'error': error }
+
+    cursor = db.cursor()
+    cursor.execute('INSERT INTO article (title, content, author) VALUES (?, ?, ?)',
+               (title, content, uid))
+    aid = cursor.lastrowid
+    db.commit()
+
+    return { 'success': True, 'aid': aid }
 
 
 @bp.route('/blog/edit/<int:aid>', methods=('POST',))
@@ -245,7 +246,7 @@ def get_replies(cid):
 
     return jsonify(data)
 
-@bp.route('/blog/reply/add/<int:aid>', methods=('POST',))
+@bp.route('/blog/reply/add/<int:cid>', methods=('POST',))
 def add_reply(cid):
 
     error = None
@@ -267,9 +268,9 @@ def add_reply(cid):
         error = 'COMMENT_NOT_FOUND'
         return { 'error': error }
 
-    query = '''INSERT INTO reply (content, author, refComment)
-               VALUES (?, ?, ?)'''
-    db.execute(query, (content, uid, cid))
+    query = '''INSERT INTO reply (content, author, refComment, refUser)
+               VALUES (?, ?, ?, ?)'''
+    db.execute(query, (content, uid, cid, uid))
     db.commit()
 
     return { 'success': True }
@@ -306,23 +307,18 @@ def check_user_status():
 @cross_origin(supports_credentials=True)
 def sign_in():
 
-    print('signing in')
-
     email = request.form['email']
     password = request.form['password']
-    print(email, password)
     query = 'SELECT * FROM user WHERE mail=?'
 
     db = get_db()
     user = db.execute(query, (email,)).fetchone()
-    print('USER', user)
 
     error = None
     if user is None:
         error = 'No such user exists.'
     elif not check_password_hash(user['password'], password):
         error = 'Incorrect password.'
-    print('ERROR', error)
 
     if error is None:
         session.clear()
@@ -339,4 +335,40 @@ def sign_in():
 @cross_origin(supports_credentials=True)
 def sign_out():
     session.clear()
-    return 'signed out'
+    return { 'success': True }
+
+
+@bp.route('/auth/sign-up', methods=('POST',))
+@cross_origin(supports_credentials=True)
+def sign_up():
+
+    error = None
+
+    username = request.form['username']
+    email = request.form['email']
+    password1 = request.form['password1']
+    password2 = request.form['password2']
+
+    if not username:
+        error = 'USERNAME_REQUIRED'
+    elif not email:
+        error = 'EMAIL_REQUIRED'
+    elif not password1 or not password2:
+        error = 'PASSWORD_REQUIRED'
+    elif password1 != password2:
+        error = 'INCONSISTENT_PASSWORDS'
+    if error:
+        return { 'error': error}
+
+    db = get_db()
+    user = db.execute('SELECT * FROM user WHERE mail=?', (email,)).fetchone()
+    if user:
+        error = 'EXISTING_EMAIL'
+        return { 'error': error }
+
+    query = '''INSERT INTO user(name, mail, password)
+               VALUES (?, ?, ?)'''
+    db.execute(query, (username, email, generate_password_hash(password1)))
+    db.commit()
+
+    return { 'success': True }

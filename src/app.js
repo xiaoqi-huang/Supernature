@@ -13,6 +13,7 @@ import BlogPage from './components/BlogPage';
 import AddBlogPage from "./components/AddBlogPage";
 import EditBlogPage from "./components/EditBlogPage";
 import SignInPage from "./components/SignInPage";
+import SignUpPage from "./components/SignUpPage";
 import UserPage from "./components/UserPage";
 import NotFoundPage from './components/NotFoundPage';
 
@@ -20,6 +21,8 @@ import { authCheckUserStatus } from "./api/auth";
 
 import 'normalize.css/normalize.css';
 import './styles/styles.scss';
+
+
 // import { ThemeProvider } from '@material-ui/styles';
 // import CssBaseline from '@material-ui/core/CssBaseline';
 // import { theme } from './styles/Theme';
@@ -46,8 +49,9 @@ const App = () => (
             <Route exact path="/blog/add" component={AddBlogPage} />
             <Route exact path="/blog/edit/:id([0-9]+)" component={EditBlogPage} />
             {/*<Route path="/members" component={MembersPage} />*/}
-            <Route path="/sign-in" component={SignInPage} />
             <Route path="/user/:id" component={UserPage} />
+            <Route path="/sign-in" component={SignInPage} />
+            <Route path="/sign-up" component={SignUpPage} />
             <Route component={NotFoundPage} />
         </Switch>
     </BrowserRouter>

@@ -49,7 +49,7 @@ class BlogPage extends React.Component {
               <div id="article-content" dangerouslySetInnerHTML={{__html: this.state.content}} />
               <div id="article-update-time">Updated at {this.state.updateAt}</div>
               <div id="article-create-time">Created at {this.state.createAt}</div>
-              <CommentForm />
+              <CommentForm aid={this.state.aid} />
               <CommentList comments={this.state.comments} />
           </div>
         );

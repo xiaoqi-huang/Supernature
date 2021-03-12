@@ -1,12 +1,33 @@
 import React from 'react';
+import BlogList from './BlogList';
+import {connect} from "react-redux";
 
+class UserPage extends React.Component {
 
-const UserPage = (props) => {
-    return (
-        <div>
-            User: {props.match.params.id}
-        </div>
-    );
-};
+    state = {
+        uid: null,
+        username: null,
+        intro: null,
+        blogList: []
+    };
 
-export default UserPage;
+    componentDidMount() {
+        
+    }
+
+    render() {
+        return (
+            <div>
+                <div>{this.state.username}</div>
+                <div>{this.state.intro}</div>
+                <BlogList blogs={this.state.blogList} />
+            </div>
+        );
+    }
+}
+
+const mapStateToProps = (state) => ({
+    user: state.user
+});
+
+export default connect(mapStateToProps)(UserPage);

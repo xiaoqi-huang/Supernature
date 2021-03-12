@@ -1,0 +1,103 @@
+#sign-up-form-container {
+    background-color: darken($grey, 10);
+    height: 100%;
+
+    padding-top: 20vh;
+}
+
+#sign-up-form {
+    background-color: $grey;
+
+    width: 15%;
+    height: 40vh;
+
+    margin-left: auto;
+    margin-right: auto;
+    padding: 3%;
+
+    text-align: center;
+}
+
+#sign-up-form__title {
+    color: white;
+    font-size: $m-size;
+    text-transform: uppercase;
+    text-align: left;
+    margin-bottom: 10%;
+}
+
+#sign-up-form__title span {
+    display: block;
+}
+
+#sign-up-form__title span::first-letter {
+    color: $splatoon-green;
+}
+
+#sign-up-form__subtitle {
+    text-align: left;
+}
+
+#sign-up-form p {
+    color: white;
+    font-size: $s-size;
+    text-transform: uppercase;
+}
+
+#sign-up-form input {
+
+    background-color: lighten($grey, 10);
+
+    color: white;
+    font-size: $s-size;
+    width: 90%;
+
+    border: none;
+    border-radius: $xxs-size;
+    padding: 5% 5% 5% 5%;
+    margin-bottom: $s-size;
+    display: block;
+}
+
+#sign-up-form input:focus {
+    background-color: lighten($grey, 20);
+    outline: none;
+}
+
+input#password.invalid {
+    box-shadow: 0 0 0 2px salmon;
+}
+
+#sign-up-form button {
+
+    background-color: $splatoon-green;
+
+    color: white;
+    font-size: $s-size;
+    text-transform: uppercase;
+    width: 100%;
+
+    border: none;
+    border-radius: $xxs-size;
+    padding: 5% 5% 5% 5%;
+    margin-top: $m-size;
+    margin-bottom: $m-size;
+    display: block;
+}
+
+#sign-up-form button:disabled {
+    background-color: darken($grey, 5);
+    color: lighten($grey, 5);
+}
+
+#sign-in-container {
+    color: lighten($grey, 15);
+    font-size: $xxs-size;
+    text-align: center;
+}
+
+#sign-in-container a {
+    color: white;
+    font-size: $xxs-size;
+    margin-left: $xs-size;
+}

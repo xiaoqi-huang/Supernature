@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
+import {signout} from "../actions/user";
+import {authSignOut} from "../api/auth";
 // import { makeStyles } from '@material-ui/core/styles';
 // import AppBar from '@material-ui/core/AppBar';
 // import Toolbar from '@material-ui/core/Toolbar';
@@ -15,26 +17,40 @@ import { NavLink } from 'react-router-dom';
 // import MoreIcon from '@material-ui/icons/MoreVert';
 
 
-const NavBar = (props) => (
-    <nav>
-        <ul>
-            <li><NavLink to="/home" id="nav-title">Supernatural Psychology Association</NavLink></li>
-            <li><NavLink to="/home" activeClassName="active-nav" exact={true}>Home</NavLink></li>
-            <li><NavLink to="/blog" activeClassName="active-nav">Blog</NavLink></li>
-            <li><NavLink to="/members" activeClassName="active-nav" exact={true}>Members</NavLink></li>
-            {props.user.signedIn &&
-            <li id="nav-user">
-                <NavLink to={`/user/${props.user.uid}`} activeClassName="active-nav">{props.user.username}</NavLink>
-            </li>
+class NavBar extends React.Component {
+
+    handleSignOut = () => {
+        authSignOut().then((data) => {
+            if (data.success) {
+                this.props.dispatch(signout());
             }
-            {!props.user.signedIn &&
-            <li id="nav-sign-in">
-                <NavLink to="/sign-in" activeClassName="active-nav">Sign in</NavLink>
-            </li>
-            }
-        </ul>
-    </nav>
-);
+        });
+    };
+
+    render = () => (
+        <nav>
+            <ul>
+                <li><NavLink to="/home" id="nav-title">Supernatural Psychology Association</NavLink></li>
+                <li><NavLink to="/home" activeClassName="active-nav" exact={true}>Home</NavLink></li>
+                <li><NavLink to="/blog" activeClassName="active-nav">Blog</NavLink></li>
+                <li><NavLink to="/members" activeClassName="active-nav" exact={true}>Members</NavLink></li>
+                {this.props.user.signedIn &&
+                <div id="dropdown">
+                    <button id="dropdown-btn">{this.props.user.username}</button>
+                    <div id="dropdown-content">
+                        <Link to={`/user/${this.props.user.uid}`} activeClassName="active-nav">Profile</Link>
+                        <Link onClick={this.handleSignOut} to="#">Sign out</Link>
+                    </div>
+                </div>}
+                {!this.props.user.signedIn &&
+                <li id="nav-sign-in">
+                    <NavLink to="/sign-in" activeClassName="active-nav">Sign in</NavLink>
+                </li>
+                }
+            </ul>
+        </nav>
+    );
+}
 
 const mapStateToProps = (state) => ({
     user: state.user
