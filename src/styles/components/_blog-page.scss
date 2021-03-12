@@ -1,7 +1,10 @@
 #article {
-
   width: 50%;
-  margin: $xl-size auto $xl-size auto;
+
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: $xl-size;
+  padding-bottom: $l-size;
 }
 
 #article h1 {

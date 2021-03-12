@@ -1,26 +1,43 @@
 import React from 'react';
 import BlogList from './BlogList';
 import {connect} from "react-redux";
+import {getUserInfo} from "../api/user";
 
 class UserPage extends React.Component {
 
     state = {
-        uid: null,
+        uid: Number(this.props.match.params.id),
         username: null,
         intro: null,
         blogList: []
     };
 
     componentDidMount() {
-        
+        getUserInfo(this.state.uid).then((data) => {
+            if (data.error) {
+                this.setState(() => ({
+                    error: data.error
+                }));
+            } else {
+                this.setState(() => ({
+                    username: data.username,
+                    intro: data.intro,
+                    blogList: data.blog_list
+                }));
+            }
+        });
     }
 
     render() {
         return (
-            <div>
-                <div>{this.state.username}</div>
-                <div>{this.state.intro}</div>
-                <BlogList blogs={this.state.blogList} />
+            <div id="user-page">
+                {this.state.error && <p>{this.state.error}</p>}
+                <div id='user-info'>
+                    <div id='user-info__username'>{this.state.username}</div>
+                    <div id='user-info__intro'>{this.state.intro}</div>
+                    {(this.props.user.uid === this.state.uid) && <a href="#" id="user-info__edit">Edit profile</a>}
+                </div>
+                <BlogList blogList={this.state.blogList} />
             </div>
         );
     }

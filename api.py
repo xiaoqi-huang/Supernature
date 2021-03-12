@@ -277,6 +277,47 @@ def add_reply(cid):
 
 
 ################################################################################
+# User APIs
+# 1. get_user_info
+# 2. update_user_info (TODO)
+################################################################################
+
+@bp.route('/user/<int:uid>', methods=('GET',))
+def get_user_info(uid):
+
+    error = None
+
+    db = get_db()
+    user = db.execute('SELECT * FROM user WHERE id=?', (uid,)).fetchone()
+    if not user:
+        error = 'USER_NOT_EXIST'
+        return { 'error': error }
+
+    query = '''SELECT article.id AS aid, title, createdAt, updatedAt, user.id AS uid, user.name AS author
+               FROM article, user
+               WHERE article.author=user.id AND article.author=?
+               ORDER BY createdAt DESC'''
+    res = db.execute(query, (uid,)).fetchall()
+
+    blog_list = []
+    for row in res:
+        blog_list.append({'aid': row['aid'],
+                      'title': row['title'],
+                      'createAt': row['createdAt'].isoformat(),
+                      'updateAt': row['updatedAt'].isoformat(),
+                      'uid': row['uid'],
+                      'author': row['author']})
+
+    return {
+        'uid': uid,
+        'username': user['name'],
+        'intro': user['introduce'],
+        'avatar': user['avatar'],
+        'blog_list': blog_list
+    }
+
+
+################################################################################
 # Authentication APIs
 # 1. check_user_status
 # 2. sign_in
@@ -288,7 +329,6 @@ def add_reply(cid):
 def check_user_status():
 
     uid = session.get('user_id', None)
-    print('check', uid)
 
     if uid:
         db = get_db()
