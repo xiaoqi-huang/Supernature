@@ -1,13 +1,17 @@
-const getBlog = (id) => {
-
-    const promise = fetch(`http://127.0.0.1:5000/api/blog/${id}`);
-
-    return promise.then((response) => (
-        response.json()
-    )).then((data) => {
-        console.log(promise);
-        return data;
-    });
+const checkUserStatus = () => {
+    return {
+        type: 'CHECK_USER_STATUS'
+    };
 };
 
-export { getBlog }
+const signin = (uid, username) => ({
+    type: 'SIGN_IN',
+    uid,
+    username
+});
+
+const signout = () => ({
+    type: 'SIGN_OUT'
+});
+
+export { checkUserStatus, signin, signout }

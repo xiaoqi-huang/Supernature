@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 // import { makeStyles } from '@material-ui/core/styles';
 // import AppBar from '@material-ui/core/AppBar';
@@ -12,45 +13,34 @@ import { NavLink } from 'react-router-dom';
 // import MailIcon from '@material-ui/icons/Mail';
 // import NotificationsIcon from '@material-ui/icons/Notifications';
 // import MoreIcon from '@material-ui/icons/MoreVert';
-import store from '../reducers/userReducer';
 
-export default class NavBar extends React.Component {
 
-    signedIn = false;
-    uid = null;
-    username = null;
+const NavBar = (props) => (
+    <nav>
+        <ul>
+            <li><NavLink to="/home" id="nav-title">Supernatural Psychology Association</NavLink></li>
+            <li><NavLink to="/home" activeClassName="active-nav" exact={true}>Home</NavLink></li>
+            <li><NavLink to="/blog" activeClassName="active-nav">Blog</NavLink></li>
+            <li><NavLink to="/members" activeClassName="active-nav" exact={true}>Members</NavLink></li>
+            {props.user.signedIn &&
+            <li id="nav-user">
+                <NavLink to={`/user/${props.user.uid}`} activeClassName="active-nav">{props.user.username}</NavLink>
+            </li>
+            }
+            {!props.user.signedIn &&
+            <li id="nav-sign-in">
+                <NavLink to="/sign-in" activeClassName="active-nav">Sign in</NavLink>
+            </li>
+            }
+        </ul>
+    </nav>
+);
 
-    componentDidMount() {
-        const userState = store.getState();
-        this.signedIn = userState.signedIn;
-        this.uid = userState.uid;
-        this.username = userState.username;
-    }
+const mapStateToProps = (state) => ({
+    user: state.user
+});
 
-    render() {
-        return (
-            <nav>
-                {/*<img src="../images/favicon.png" />*/}
-                <ul>
-                    <li><NavLink to="/home" id="nav-title">Supernatural Psychology Association</NavLink></li>
-                    <li><NavLink to="/home" activeClassName="active-nav" exact={true}>Home</NavLink></li>
-                    <li><NavLink to="/blog" activeClassName="active-nav">Blog</NavLink></li>
-                    <li><NavLink to="/members" activeClassName="active-nav" exact={true}>Members</NavLink></li>
-                    {this.signedIn &&
-                    <li id="nav-user">
-                        <NavLink to={`/user/${this.uid}`} activeClassName="active-nav">{this.username}</NavLink>
-                    </li>
-                    }
-                    {!this.signedIn &&
-                    <li id="nav-sign-in">
-                        <NavLink to="/signin" activeClassName="active-nav">Sign in</NavLink>
-                    </li>
-                    }
-                </ul>
-            </nav>
-        );
-    }
-}
+export default connect(mapStateToProps)(NavBar);
 
 // const useStyles = makeStyles((theme) => ({
 //     grow: {

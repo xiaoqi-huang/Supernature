@@ -1,13 +1,14 @@
 import React from 'react';
 import BlogList from './BlogList';
-import { getBlogList } from "../actions/blog";
-import { getToken } from "../actions/localStorage";
+import { getBlogList } from "../api/blog";
+import { Link } from 'react-router-dom';
+import { connect } from "react-redux";
+import {sortByUpdateTime} from "../actions/filters";
 
-
-export default class BlogListPage extends React.Component {
+class BlogListPage extends React.Component {
 
     state = {
-        addBlog: !getToken('uid'),
+        addBlog: false,
         text: '',
         sortBy: 'updatedAt',
         page: 0,
@@ -38,6 +39,12 @@ export default class BlogListPage extends React.Component {
     };
 
     onSortChange = (e) => {
+
+        // if (e.target.value === 'updatedAt') {
+        //     this.props.dispatch(sortByUpdateTime);
+        // } else {
+        //
+        // }
 
         this.setState(() => ({
             sortBy: e.target.value,
@@ -95,7 +102,7 @@ export default class BlogListPage extends React.Component {
                         </select>
                     </span>
 
-                    <a id="add-blog-link" href="/blog/add">+ BLOG</a>
+                    {this.props.user.signedIn && <Link id="add-blog-link" to="/blog/add">+ BLOG</Link>}
 
                     <div id="page-selector">
                         <button onClick={this.loadPrevPage}>Prev</button>
@@ -115,3 +122,10 @@ export default class BlogListPage extends React.Component {
         );
     }
 }
+
+const mapStateToProps = (state) => ({
+    user: state.user,
+    filters: state.filters
+});
+
+export default connect(mapStateToProps)(BlogListPage);

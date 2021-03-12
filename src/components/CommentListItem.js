@@ -1,7 +1,7 @@
 import React from 'react';
 import ReplyList from './ReplyList';
 import ReplyForm from './ReplyForm';
-import { getReplyList } from "../actions/blog";
+import { getReplyList } from "../api/blog";
 
 export default class CommentListItem extends React.Component {
 

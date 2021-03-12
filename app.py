@@ -1,9 +1,8 @@
 import os
 from os import path
-from flask import Flask, redirect, url_for, send_from_directory, render_template
+from flask import Flask, redirect, url_for, send_from_directory, render_template, session
 import flask_login
 from flask_cors import CORS
-from flask_session import Session
 
 import auth
 import admin
@@ -36,7 +35,6 @@ db.init_app(app)
 # login_manager = flask_login.LoginManager()
 # login_manager.init_app(app)
 
-# Session(app)
 CORS(app, supports_credentials=True, resources={r'/api/*': {'origins': '*'}})
 
 # app.register_blueprint(auth.bp)
@@ -45,11 +43,18 @@ CORS(app, supports_credentials=True, resources={r'/api/*': {'origins': '*'}})
 # app.register_blueprint(admin.bp)
 app.register_blueprint(api.bp)
 
-@app.route('/', defaults={'path': ''})
-@app.route('/<path:path>')
-def serve(path):
-    # return send_from_directory(app.static_folder, 'index.html')
-    return path
+@app.route('/login')
+def login():
+    session['user_id'] = 0
+    return 'success'
+
+@app.route('/status')
+def status():
+    return 'USER %d' % session.get('user_id')
+
+@app.route('/')
+def index():
+    return send_from_directory(app.static_folder, 'index.html')
 
 @app.errorhandler(404)
 def not_found(e):

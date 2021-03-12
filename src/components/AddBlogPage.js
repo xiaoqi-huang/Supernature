@@ -1,5 +1,5 @@
 import React from 'react';
-import { addBlog } from "../actions/blog";
+import { addBlog } from "../api/blog";
 
 export default class AddBlogPage extends React.Component {
 

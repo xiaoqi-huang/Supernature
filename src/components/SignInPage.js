@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
-import { signIn } from '../actions/auth';
-import { setToken } from "../actions/localStorage";
+import React from 'react';
+import { authSignIn } from '../api/auth';
+import {connect} from "react-redux";
+import {checkUserStatus, signin} from "../actions/user";
 
-export default class SignInPage extends React.Component {
+
+class SignInPage extends React.Component {
 
     state = {
         emailEntered: false,
@@ -26,9 +28,8 @@ export default class SignInPage extends React.Component {
         e.preventDefault();
 
         const formData = new FormData(e.target);
-        signIn(formData).then((data) => {
-            setToken('uid', data['uid']);
-            setToken('username', data['username']);
+        authSignIn(formData).then((data) => {
+            this.props.dispatch(signin(data.uid, data.username));
             this.props.history.push('/');
         })
     };
@@ -42,7 +43,7 @@ export default class SignInPage extends React.Component {
                         <span>psychology</span>
                         <span>association</span>
                     </div>
-                    <div id="sign-in-form__subtitle"><p>Sign in with a spa account</p></div>
+                    <div id="sign-in-form__subtitle"><p>Sign in with an spa account</p></div>
                     <input
                         id="email"
                         type="email"
@@ -73,3 +74,9 @@ export default class SignInPage extends React.Component {
         );
     }
 }
+
+const mapStateToProps = (state) => ({
+    user: state.user
+});
+
+export default connect(mapStateToProps)(SignInPage);

@@ -1,9 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import CommentForm from './CommentForm';
-import { getBlog, getCommentList } from '../actions/blog';
+import { getBlog, getCommentList } from '../api/blog';
 import CommentList from "./CommentList";
+import {connect} from "react-redux";
 
-export default class BlogPage extends React.Component {
+class BlogPage extends React.Component {
 
     state = {
         aid: this.props.match.params.id,
@@ -39,8 +41,11 @@ export default class BlogPage extends React.Component {
     render() {
         return (
           <div id="article">
-              <span id="article-title">{this.state.title}</span>
-              <div id="article-author"><a href={`/user/${this.state.uid}`}>{this.state.author}</a></div>
+              <div id="article-title">
+                  <h1>{this.state.title}</h1>
+                  {this.props.user.signedIn && (this.props.user.uid === this.state.uid) && <Link id="article-edit-link" to={`/blog/edit/${this.state.aid}`}>Edit</Link>}
+                  <Link id="article-author" to={`/user/${this.state.uid}`}>{this.state.author}</Link>
+              </div>
               <div id="article-content" dangerouslySetInnerHTML={{__html: this.state.content}} />
               <div id="article-update-time">Updated at {this.state.updateAt}</div>
               <div id="article-create-time">Created at {this.state.createAt}</div>
@@ -50,3 +55,9 @@ export default class BlogPage extends React.Component {
         );
     }
 }
+
+const mapStateToProps = (state) => ({
+    user: state.user
+});
+
+export default connect(mapStateToProps)(BlogPage);
