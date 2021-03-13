@@ -41,6 +41,19 @@ hr {
   outline: none;
 }
 
+::-webkit-scrollbar {
+  width: $xxs-size;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: $splatoon-green;
+  border-radius: $xxs-size;
+}
+
 .msg {
   color: $splatoon-green;
   font-size: $s-size;

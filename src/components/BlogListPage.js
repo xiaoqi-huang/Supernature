@@ -81,42 +81,44 @@ class BlogListPage extends React.Component {
     render() {
         return (
             <div id="blog-list-page">
-                <div id="blog-list-filter">
-                    <span id="search-filter">
-                        <span>Search:</span>
-                        <input
-                            type="text"
-                            value={this.state.text}
-                            onChange={this.onTextChange}
-                        />
-                    </span>
+                <div>
+                    <div id="blog-list-filter">
+                        <span id="search-filter">
+                            <span>Search:</span>
+                            <input
+                                type="text"
+                                value={this.state.text}
+                                onChange={this.onTextChange}
+                            />
+                        </span>
 
-                    <span id="sort-filter">
-                        <span id="sort-label">Sort By:</span>
-                        <select
-                            value={this.state.sortBy}
-                            onChange={this.onSortChange}
-                        >
-                            <option value="updatedAt">Edit Date</option>
-                            <option value="createdAt">Create Date</option>
-                        </select>
-                    </span>
+                        <span id="sort-filter">
+                            <span id="sort-label">Sort By:</span>
+                            <select
+                                value={this.state.sortBy}
+                                onChange={this.onSortChange}
+                            >
+                                <option value="updatedAt">Edit Date</option>
+                                <option value="createdAt">Create Date</option>
+                            </select>
+                        </span>
 
-                    {this.props.user.signedIn && <Link id="add-blog-link" to="/blog/add">+ BLOG</Link>}
+                        {this.props.user.signedIn && <Link id="add-blog-link" to="/blog/add">+ BLOG</Link>}
 
-                    <div id="page-selector">
-                        <button onClick={this.loadPrevPage}>Prev</button>
-                        <span className="page-label">Page {this.state.page + 1}</span>
-                        <button onClick={this.loadNextPage}>Next</button>
+                        <div id="page-selector">
+                            <button onClick={this.loadPrevPage}>Prev</button>
+                            <span className="page-label">Page {this.state.page + 1}</span>
+                            <button onClick={this.loadNextPage}>Next</button>
+                        </div>
                     </div>
-                </div>
 
-                {this.state.blogList && <BlogList blogList={this.state.blogList} />}
+                    {this.state.blogList && <BlogList blogList={this.state.blogList} />}
 
-                <div id="bottom-page-selector">
-                    <button onClick={() => { this.loadPrevPage(); this.scrollToTop(); }}>Prev</button>
-                    <span className="page-label">Page {this.state.page + 1}</span>
-                    <button onClick={() => { this.loadNextPage(); this.scrollToTop(); }}>Next</button>
+                    <div id="bottom-page-selector">
+                        <button onClick={() => { this.loadPrevPage(); this.scrollToTop(); }}>Prev</button>
+                        <span className="page-label">Page {this.state.page + 1}</span>
+                        <button onClick={() => { this.loadNextPage(); this.scrollToTop(); }}>Next</button>
+                    </div>
                 </div>
             </div>
         );
