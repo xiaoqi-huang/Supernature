@@ -1,9 +1,6 @@
-import port from './settings';
-
-
 const authCheckUserStatus = () => {
 
-    const promise = fetch(`http://localhost:${port}/api/auth/check-user-status`);
+    const promise = fetch('http://localhost:80/api/auth/check-user-status');
 
     return promise.then((response) => (
         response.json()
@@ -15,7 +12,7 @@ const authCheckUserStatus = () => {
 const authSignIn = (formData) => {
 
     console.log(formData);
-    const promise = fetch(`http://localhost:${port}/api/auth/sign-in`, {
+    const promise = fetch('http://localhost:80/api/auth/sign-in', {
         method: 'POST',
         body: formData
     });
@@ -29,7 +26,7 @@ const authSignIn = (formData) => {
 
 const authSignOut = () => {
 
-    const promise = fetch(`http://localhost:${port}/api/auth/sign-out`);
+    const promise = fetch('http://localhost:80/api/auth/sign-out');
 
     return promise.then((response) => (
         response.json()
@@ -40,7 +37,7 @@ const authSignOut = () => {
 
 const authSignUp = (formData) => {
 
-    const promise = fetch(`http://localhost:${port}/api/auth/sign-up`, {
+    const promise = fetch('http://localhost:80/api/auth/sign-up', {
         method: 'POST',
         body: formData
     });
@@ -54,7 +51,7 @@ const authSignUp = (formData) => {
 
 const apiUpdatePassword = (formData) => {
 
-    const promise = fetch(`http://localhost:${port}/api/auth/update-password`, {
+    const promise = fetch('http://localhost:80/api/auth/update-password', {
         method: 'POST',
         body: formData
     });

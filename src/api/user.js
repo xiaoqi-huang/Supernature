@@ -1,9 +1,6 @@
-import port from './settings';
-
-
 const getUserInfo = (uid) => {
 
-    const promise = fetch(`http://localhost:${port}/api/user/${uid}`);
+    const promise = fetch(`http://localhost:80/api/user/${uid}`);
 
     return promise.then((response) => (
         response.json()
@@ -14,7 +11,7 @@ const getUserInfo = (uid) => {
 
 const getCurrUserInfo = () => {
 
-    const promise = fetch(`http://localhost:${port}/api/user/current`);
+    const promise = fetch('http://localhost:80/api/user/current');
 
     return promise.then((response) => (
         response.json()
@@ -26,7 +23,7 @@ const getCurrUserInfo = () => {
 const updateUserInfo = (formData) => {
 
 
-    const promise = fetch(`http://localhost:${port}/api/user/update-info`, {
+    const promise = fetch('http://localhost:80/api/user/update-info', {
         method: 'POST',
         body: formData
     });
