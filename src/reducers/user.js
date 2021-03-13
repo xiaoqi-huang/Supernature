@@ -1,9 +1,11 @@
 import {authCheckUserStatus} from "../api/auth";
 
 const defaultUser = {
+    signedIn: false,
     uid: null,
     username: null,
-    signedIn: false
+    intro: null,
+    email: null
 };
 
 export default (state = defaultUser, action) => {
@@ -29,9 +31,11 @@ export default (state = defaultUser, action) => {
             return tmp;
         case 'SIGN_IN':
             return {
+                signedIn: true,
                 uid: action.uid,
                 username: action.username,
-                signedIn: true
+                intro: action.intro,
+                email: action.email
             };
         case 'SIGN_OUT':
             return {

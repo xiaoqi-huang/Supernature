@@ -2,6 +2,7 @@ import React from 'react';
 import BlogList from './BlogList';
 import {connect} from "react-redux";
 import {getUserInfo} from "../api/user";
+import {getBlogListByUser} from "../api/blog";
 
 class UserPage extends React.Component {
 
@@ -9,10 +10,12 @@ class UserPage extends React.Component {
         uid: Number(this.props.match.params.id),
         username: null,
         intro: null,
+        email: null,
         blogList: []
     };
 
     componentDidMount() {
+
         getUserInfo(this.state.uid).then((data) => {
             if (data.error) {
                 this.setState(() => ({
@@ -22,6 +25,18 @@ class UserPage extends React.Component {
                 this.setState(() => ({
                     username: data.username,
                     intro: data.intro,
+                    email: data.email
+                }));
+            }
+        });
+
+        getBlogListByUser(this.state.uid).then((data) => {
+            if (data.error) {
+                this.setState(() => ({
+                    error: data.error
+                }));
+            } else {
+                this.setState(() => ({
                     blogList: data.blog_list
                 }));
             }

@@ -1,7 +1,6 @@
 html {
   font-family: 'PT Mono', 'Hiragino Kaku Gothic Pro', serif;
   font-weight: lighter;
-  height: 100%;
 }
 
 h1 {
@@ -36,4 +35,10 @@ a {
 hr {
   border: 0;
   border-bottom: 1px dashed $grey;
+}
+
+.msg {
+  color: $splatoon-green;
+  font-size: $s-size;
+  text-transform: uppercase;
 }

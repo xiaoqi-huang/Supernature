@@ -1,0 +1,155 @@
+#account-page {
+  background-color: darken($grey, 15);
+
+  color: white;
+
+  min-height: 100%;
+  padding-top: $xl-size;
+  padding-bottom: $xl-size;
+}
+
+#account-page-container {
+
+  background-color: $grey;
+
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: $xl-size $l-size;
+
+  display: flex;
+}
+
+#side-bar {
+
+  width: 20%;
+
+  padding-right: 5%;
+  top: 0;
+  display: inline-block;
+}
+
+#side-bar button {
+
+  background-color: transparent;
+
+  color: $light-grey;
+  font-size: $s-size;
+  text-transform: uppercase;
+  text-align: left;
+
+  width: 100%;
+  border: none;
+  padding: $s-size 0 $s-size $s-size;
+
+  display: block;
+}
+
+#side-bar button.active {
+
+  background-color: lighten($grey, 15);
+
+  color: white;
+
+  box-shadow: -3px 0 0 $splatoon-green;
+}
+
+#view {
+  width: 75%;
+  display: inline-block;
+  right: 0;
+}
+
+#view .title {
+  font-size: $m-size;
+  text-transform: uppercase;
+  margin-bottom: $s-size;
+}
+
+#view input + .title {
+  margin-top: $l-size;
+}
+
+#view .description {
+  color: $light-grey;
+  font-size: $s-size;
+
+  margin-bottom: $l-size;
+}
+
+
+#view input {
+
+  background-color: darken($grey, 10);
+
+  color: $light-grey;
+  font-size: $s-size;
+
+  width: 90%;
+  border: none;
+  border-radius: $xxs-size;
+
+  margin-bottom: $s-size;
+  padding: 2.5% 5%;
+  display: block;
+}
+
+#view input:focus {
+
+  background-color: darken($grey, 5);
+
+  color: white;
+
+  outline: none;
+}
+
+#view .button-container {
+  text-align: right;
+
+  width: 100%;
+  margin-top: $xl-size;
+}
+
+#view button {
+  color: white;
+  font-size: $s-size;
+  text-transform: uppercase;
+
+  width: 30%;
+  border: none;
+  border-radius: $xxs-size;
+
+  padding: $s-size;
+}
+
+#view button + button {
+  margin-left: 5%;
+}
+
+#view .discard-btn {
+  background-color: lighten($grey, 15);
+}
+
+#view .discard-btn:hover {
+  background-color: $light-grey;
+  color: $grey;
+}
+
+#view .discard-btn:disabled {
+  background-color: darken($grey, 5);
+  color: $grey;
+}
+
+#view .submit-btn {
+  background-color: $splatoon-green;
+}
+
+#view .submit-btn:hover {
+  background-color: white;
+  color: $splatoon-green;
+}
+
+#view .submit-btn:disabled {
+  background-color: darken($splatoon-green, 40);
+  color: $grey;
+}

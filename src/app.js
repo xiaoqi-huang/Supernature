@@ -21,6 +21,7 @@ import { authCheckUserStatus } from "./api/auth";
 
 import 'normalize.css/normalize.css';
 import './styles/styles.scss';
+import AccountPage from "./components/AccountPage";
 
 
 // import { ThemeProvider } from '@material-ui/styles';
@@ -50,6 +51,7 @@ const App = () => (
             <Route exact path="/blog/edit/:id([0-9]+)" component={EditBlogPage} />
             {/*<Route path="/members" component={MembersPage} />*/}
             <Route path="/user/:id" component={UserPage} />
+            <Route path="/account" component={AccountPage} />
             <Route path="/sign-in" component={SignInPage} />
             <Route path="/sign-up" component={SignUpPage} />
             <Route component={NotFoundPage} />

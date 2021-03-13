@@ -3,6 +3,7 @@ import markdown
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_cors import CORS, cross_origin
 import datetime
+import re
 
 from db import get_db
 
@@ -20,8 +21,6 @@ bp = Blueprint('api', __name__, url_prefix='/api')
 
 @bp.route('/blog/list/<sort>/<int:page>', methods=('GET',))
 def get_blog_list(sort='updatedAt', page=0):
-
-    uid = session.get('user_id', None)
 
     query = '''SELECT article.id AS aid, title, createdAt, updatedAt, user.id AS uid, user.name AS author
                FROM article, user
@@ -42,6 +41,28 @@ def get_blog_list(sort='updatedAt', page=0):
                      'author': row['author']})
 
     return jsonify(data)
+
+@bp.route('/blog/list/<int:uid>', methods=('GET',))
+def get_blog_list_by_user(uid):
+
+    query = '''SELECT article.id AS aid, title, createdAt, updatedAt, user.id AS uid, user.name AS author
+               FROM article, user
+               WHERE article.author=user.id AND article.author=?
+               ORDER BY createdAt DESC'''
+
+    db = get_db()
+    res = db.execute(query, (uid,)).fetchall()
+
+    blog_list = []
+    for row in res:
+        blog_list.append({'aid': row['aid'],
+                          'title': row['title'],
+                          'createAt': row['createdAt'].isoformat(),
+                          'updateAt': row['updatedAt'].isoformat(),
+                          'uid': row['uid'],
+                          'author': row['author']})
+
+    return { 'blog_list': blog_list }
 
 
 @bp.route('/blog/<int:aid>', methods=('GET',))
@@ -135,7 +156,7 @@ def edit_blog(aid):
 
     error = None
     uid = session.get('user_id', None)
-    print('edit', uid)
+
     if not uid:
         error = 'NOT_SIGNED_IN'
         return { 'error': error }
@@ -278,9 +299,35 @@ def add_reply(cid):
 
 ################################################################################
 # User APIs
-# 1. get_user_info
-# 2. update_user_info (TODO)
+# 1. get_curr_user_info
+# 2. get_user_info
+# 3. update_user_info (TODO)
 ################################################################################
+
+@bp.route('/user/current', methods=('GET',))
+def get_curr_user_info():
+
+    error = None
+
+    uid = session.get('user_id', None)
+    if not uid:
+        error = 'NOT_SIGNED_IN'
+        return { 'error': error }
+
+    db = get_db()
+    user = db.execute('SELECT * FROM user WHERE id=?', (uid,)).fetchone()
+    if not user:
+        error = 'USER_NOT_EXIST'
+        return { 'error': error }
+    else:
+        return {
+            'uid': uid,
+            'username': user['name'],
+            'intro': user['introduce'],
+            'email': user['mail'],
+            'avatar': user['avatar']
+        }
+
 
 @bp.route('/user/<int:uid>', methods=('GET',))
 def get_user_info(uid):
@@ -292,29 +339,45 @@ def get_user_info(uid):
     if not user:
         error = 'USER_NOT_EXIST'
         return { 'error': error }
+    else:
+        return {
+            'uid': uid,
+            'username': user['name'],
+            'intro': user['introduce'],
+            'avatar': user['avatar']
+        }
 
-    query = '''SELECT article.id AS aid, title, createdAt, updatedAt, user.id AS uid, user.name AS author
-               FROM article, user
-               WHERE article.author=user.id AND article.author=?
-               ORDER BY createdAt DESC'''
-    res = db.execute(query, (uid,)).fetchall()
 
-    blog_list = []
-    for row in res:
-        blog_list.append({'aid': row['aid'],
-                      'title': row['title'],
-                      'createAt': row['createdAt'].isoformat(),
-                      'updateAt': row['updatedAt'].isoformat(),
-                      'uid': row['uid'],
-                      'author': row['author']})
+@bp.route('/user/update-info', methods=('POST',))
+def update_user_info():
 
-    return {
-        'uid': uid,
-        'username': user['name'],
-        'intro': user['introduce'],
-        'avatar': user['avatar'],
-        'blog_list': blog_list
-    }
+    error = None
+
+    uid = session.get('user_id', None)
+    if not uid:
+        error = 'NOT_SIGNED_IN'
+        return { 'error': error }
+
+    username = request.form['username']
+    intro = request.form['intro']
+    email = request.form['email']
+    if not username:
+        error = 'USERNAME_REQUIRED'
+    elif not email:
+        error = 'EMAIL_REQUIRED'
+    elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
+        error = 'INVALIDE_EMAIL_ADDRESS'
+    if error:
+        return { 'error': error }
+
+    query = '''UPDATE user
+               SET    name=?, introduce=?, mail=?
+               WHERE  id=?'''
+    db = get_db()
+    db.execute(query, (username, intro, email, uid))
+    db.commit()
+
+    return { 'success': True }
 
 
 ################################################################################
@@ -333,14 +396,11 @@ def check_user_status():
     if uid:
         db = get_db()
         user = db.execute('SELECT name FROM user WHERE id=?', (uid,)).fetchone()
-        username = user['name']
-        response = { 'signed_in': True,
-                     'uid': uid,
-                     'username': username }
+        return { 'signed_in': True,
+                 'uid': uid,
+                 'username': user['name'] }
     else:
-        response = { 'signed_in': False }
-
-    return response
+        return { 'signed_in': False }
 
 
 @bp.route('/auth/sign-in', methods=('POST',))
@@ -406,9 +466,42 @@ def sign_up():
         error = 'EXISTING_EMAIL'
         return { 'error': error }
 
-    query = '''INSERT INTO user(name, mail, password)
+    query = '''INSERT INTO user (name, mail, password)
                VALUES (?, ?, ?)'''
     db.execute(query, (username, email, generate_password_hash(password1)))
+    db.commit()
+
+    return { 'success': True }
+
+@bp.route('/auth/update-password', methods=('POST',))
+@cross_origin(supports_credentials=True)
+def update_password():
+
+    error = None
+
+    uid = session.get('user_id', None)
+    if not uid:
+        error = 'NOT_SIGNED_IN'
+        return { 'error': error }
+
+    curr_pwd = request.form['currPassword']
+    new_pwd_1 = request.form['newPassword1']
+    new_pwd_2 = request.form['newPassword2']
+    if (not curr_pwd) or (not new_pwd_1) or (not new_pwd_2):
+        error = 'PASSWORD_REQUIRED'
+    elif new_pwd_1 != new_pwd_2:
+        error = 'INCONSISTENT_PASSWORDS'
+    if error:
+        return { 'error': error }
+
+    db = get_db()
+    user = db.execute('SELECT password FROM user WHERE id=?', (uid,)).fetchone()
+    if not check_password_hash(user['password'], curr_pwd):
+        error = 'INCORRECT_CURR_PWD'
+        return { 'error': error }
+
+    hash = generate_password_hash(new_pwd_1)
+    db.execute('UPDATE user SET password=? WHERE id=?', (hash, uid))
     db.commit()
 
     return { 'success': True }

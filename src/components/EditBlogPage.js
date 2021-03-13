@@ -27,7 +27,8 @@ class EditBlogPage extends React.Component {
         }));
     };
 
-    handleCancel = () => {
+    handleCancel = (e) => {
+        e.preventDefault();
         this.props.history.push('/blog');
     };
 

@@ -8,7 +8,8 @@ export default class AddBlogPage extends React.Component {
         error: null
     };
 
-    handleCancel = () => {
+    handleCancel = (e) => {
+        e.preventDefault();
         this.props.history.push('/blog');
     };
 

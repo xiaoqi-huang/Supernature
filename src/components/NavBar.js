@@ -38,8 +38,8 @@ class NavBar extends React.Component {
                 <div id="dropdown">
                     <button id="dropdown-btn">{this.props.user.username}</button>
                     <div id="dropdown-content">
-                        <Link to={`/user/${this.props.user.uid}`} activeClassName="active-nav">Profile</Link>
-                        <Link onClick={this.handleSignOut} to="#">Sign out</Link>
+                        <Link to="/account">Account</Link>
+                        <Link to="#" onClick={this.handleSignOut}>Sign out</Link>
                     </div>
                 </div>}
                 {!this.props.user.signedIn &&

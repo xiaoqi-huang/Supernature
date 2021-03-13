@@ -1,6 +1,20 @@
+import port from './settings';
+
+
 const getBlogList = (sort, page) => {
 
-    const promise = fetch(`http://localhost:5000/api/blog/list/${sort}/${page}`);
+    const promise = fetch(`http://localhost:${port}/api/blog/list/${sort}/${page}`);
+
+    return promise.then((response) => (
+        response.json()
+    )).then((data) => {
+        return data;
+    });
+};
+
+const getBlogListByUser = (uid) => {
+
+    const promise = fetch(`http://localhost:${port}/api/blog/list/${uid}`);
 
     return promise.then((response) => (
         response.json()
@@ -11,7 +25,7 @@ const getBlogList = (sort, page) => {
 
 const getBlog = (aid) => {
 
-    const promise = fetch(`http://localhost:5000/api/blog/${aid}`);
+    const promise = fetch(`http://localhost:${port}/api/blog/${aid}`);
 
     return promise.then((response) => (
         response.json()
@@ -22,7 +36,7 @@ const getBlog = (aid) => {
 
 const getRawBlog = (aid) => {
 
-    const promise = fetch(`http://localhost:5000/api/blog/raw/${aid}`);
+    const promise = fetch(`http://localhost:${port}/api/blog/raw/${aid}`);
 
     return promise.then((response) => (
         response.json()
@@ -33,7 +47,7 @@ const getRawBlog = (aid) => {
 
 const addBlog = (formData) => {
 
-    const promise = fetch('http://localhost:5000/api/blog/add', {
+    const promise = fetch(`http://localhost:${port}/api/blog/add`, {
         method: 'POST',
         credentials: 'include',
         body: formData
@@ -48,7 +62,7 @@ const addBlog = (formData) => {
 
 const editBlog = (aid, formData) => {
 
-    const promise = fetch(`http://localhost:5000/api/blog/edit/${aid}`, {
+    const promise = fetch(`http://localhost:${port}/api/blog/edit/${aid}`, {
         method: 'POST',
         credentials: 'include',
         body: formData
@@ -63,7 +77,7 @@ const editBlog = (aid, formData) => {
 
 const getCommentList = (aid) => {
 
-    const promise = fetch(`http://localhost:5000/api/blog/comments/${aid}`);
+    const promise = fetch(`http://localhost:${port}/api/blog/comments/${aid}`);
 
     return promise.then((response) => (
         response.json()
@@ -74,7 +88,7 @@ const getCommentList = (aid) => {
 
 const addComment = (aid, formData) => {
 
-    const promise = fetch(`http://localhost:5000/api/blog/comment/add/${aid}`, {
+    const promise = fetch(`http://localhost:${port}/api/blog/comment/add/${aid}`, {
         method: 'POST',
         body: formData
     });
@@ -88,7 +102,7 @@ const addComment = (aid, formData) => {
 
 const getReplyList = (cid) => {
 
-    const promise = fetch(`http://localhost:5000/api/blog/replies/${cid}`);
+    const promise = fetch(`http://localhost:${port}/api/blog/replies/${cid}`);
 
     return promise.then((response) => (
         response.json()
@@ -99,7 +113,7 @@ const getReplyList = (cid) => {
 
 const addReply = (cid, formData) => {
 
-    const promise = fetch(`http://localhost:5000/api/blog/reply/add/${cid}`, {
+    const promise = fetch(`http://localhost:${port}/api/blog/reply/add/${cid}`, {
         method: 'POST',
         body: formData
     });
@@ -111,4 +125,4 @@ const addReply = (cid, formData) => {
     });
 };
 
-export { getBlogList, getBlog, getRawBlog, addBlog, editBlog, getCommentList, addComment, getReplyList, addReply };
+export { getBlogList, getBlogListByUser, getBlog, getRawBlog, addBlog, editBlog, getCommentList, addComment, getReplyList, addReply };

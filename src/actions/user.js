@@ -1,17 +1,13 @@
-const checkUserStatus = () => {
-    return {
-        type: 'CHECK_USER_STATUS'
-    };
-};
-
-const signin = (uid, username) => ({
+const signin = (uid, username, intro, email) => ({
     type: 'SIGN_IN',
     uid,
-    username
+    username,
+    intro,
+    email
 });
 
 const signout = () => ({
     type: 'SIGN_OUT'
 });
 
-export { checkUserStatus, signin, signout }
+export { signin, signout }

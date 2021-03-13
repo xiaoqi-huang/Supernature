@@ -84,7 +84,7 @@ export default class SignUpPage extends React.Component {
                         id="password"
                         type="password"
                         name="password2"
-                        placeholder="Re-enter your password"
+                        placeholder="Retype your password"
                         onChange={this.handlePwd2Change}
                         className={this.state.pwd2 && (this.state.pwd1 !== this.state.pwd2) ? "invalid" : "valid"}
                         required
