@@ -1,0 +1,32 @@
+#view #blog-list {
+  width: 100%;
+}
+
+#view .blog-list-item {
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid lighten($splatoon-green, 20);
+
+  padding: 0;
+}
+
+#view .blog-list-item-title {
+  background-color: transparent;
+  padding: 0;
+}
+
+#view .blog-list-item-title h3 {
+  color: white;
+}
+
+#view .blog-list-item-info {
+  padding: 0 0 $s-size;
+}
+
+#view .blog-list-item-info .author {
+  display: none;
+}
+
+#view .blog-list-item-info p {
+  color: $light-grey;
+}

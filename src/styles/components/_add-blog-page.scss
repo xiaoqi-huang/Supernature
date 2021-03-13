@@ -1,0 +1,86 @@
+#add-blog-form {
+  background-color: lighten($light-grey, 15);
+
+  width: 50%;
+  height: 70vh;
+
+  border-radius: $s-size;
+  margin: $xl-size auto $xl-size auto;
+  padding: $l-size $m-size $l-size $m-size;
+
+  text-align: center;
+}
+
+#title-field {
+  font-size: $m-size;
+
+  display: block;
+
+  width: 95%;
+  height: 5%;
+  border: none;
+  margin-bottom: $m-size;
+  padding: 2.5%;
+}
+
+#title-field:focus {
+  outline: none;
+  box-shadow: 0 0 1px 1px $splatoon-green;
+}
+
+#content-field {
+
+  font-size: $s-size;
+
+  width: 95%;
+  height: 65%;
+  display: block;
+  border: none;
+  margin-bottom: $m-size;
+  padding: 2.5%;
+}
+
+#content-field:focus {
+  outline: none;
+  box-shadow: 0 0 1px 1px $splatoon-green;
+}
+
+#add-blog-form__btn-container {
+  width: 100%;
+  margin: 0 auto 0 auto;
+
+  text-align: right;
+}
+
+#add-blog-form button {
+  font-size: $s-size;
+
+  border-radius: $m-size;
+  padding: $s-size $l-size $s-size $l-size;
+}
+
+#add-blog-form .cancel-btn {
+  background-color: $light-grey;
+  color: white;
+
+  border: none;
+
+  margin-right: $s-size;
+}
+
+#add-blog-form .cancel-btn:hover {
+  background-color: white;
+  color: $light-grey;
+}
+
+#add-blog-form .submit-btn {
+  background-color: $splatoon-green;
+  color: $grey;
+
+  border: none;
+}
+
+#add-blog-form .submit-btn:hover {
+  background-color: white;
+  color: $splatoon-green;
+}

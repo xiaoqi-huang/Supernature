@@ -1,30 +1,57 @@
-# 前端TODO
- - [x] 编辑博客页面美丽改造
- - [x] 博客list页面美丽改造
- - [x] 评论显示
- - [ ] 登录按钮位置很奇怪
- - [ ] 注册页面美丽改造
- - [ ] 用户中心页面(暂时显示头像、个人介绍、姓名、邮箱、性别、修改密码、是否为权限用户)
- - [x] 管理员页面，查看当前所有用户， 且可修改其权限
- - [ ] language跳转有问题
- - [x] 显示博客内容时应返回初次发表时间和最后修改时间
- - [ ] 自适应显示
+# Supernatural Psychology Association
+
+## Frontend TODO
+
+### React components
+
+- [x] BlogPage (CommentList, Comment, ReplyList, Reply)
+- [x] AddBlogPage
+- [x] EditBlogPage
+- [ ] MembersPage
+- [x] UserDashboard
+- [x] SignUpPage
+- [x] SignInPage
+- [x] 404 Page
+
+### Other
+
+- [x] 登录按钮位置很奇怪
+- [x] 注册页面美丽改造
+- [ ] 用户中心页面(暂时显示头像、个人介绍、姓名、邮箱、修改密码、是否为权限用户)
+- [x] 管理员页面，查看当前所有用户， 且可修改其权限
+- [ ] 自适应显示
    
-# 后端TODO
- - [x] 登录注册后台
- - [x] 显示markdown
- - [ ] 进一步markdown转换
- - [ ] 博客list页面分页
- - [ ] 邮箱验证
- - [x] 管理员修改权限功能
- - [ ] member管理功能
- - [ ] 修改博客功能
- - [x] 评论博客功能
- - [ ] 上传图片、视频功能
- - [x] 显示博客内容时应返回初次发表时间和最后修改时间
- 
- # 一些想法
- - [ ] 看了几个日本的占卜网站，美工还不错，能不能抄过来？
- - [ ] 有基于js的网页gba模拟器，有源码，只能pc端用，能不能抄过来改成手机端也可玩？
- - [ ] 加个数独游戏
+
+## APIs
+
+#### Blog
+
+- [x] add_blog
+- [x] edit_blog(aid)
+- [x] get_comments(aid)
+- [x] get_reply(cid)
+
+#### User
+
+- [x] sign_up
+- [x] sign_in
+- [x] sign_out
+- [x] get_user_info(uid)
+- [x] edit_user_info
+
+#### Admin
+
+- [ ] get_all_blog
+- [ ] toggle_blog(aid)
+- [ ] get_all_users
+- [ ] toggle_user(uid)
+
+## Other
+
+- [ ] 进一步markdown转换
+- [ ] 邮箱验证
+- [ ] member管理功能
+- [ ] 上传图片、视频功能
+- [ ] Hide blog
+
  

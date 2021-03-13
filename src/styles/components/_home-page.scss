@@ -1,0 +1,55 @@
+@import '../base/settings';
+
+
+.fullscreen {
+
+  color: white;
+
+  width:100%;
+  height: 100%;
+
+  background-image: url('../../public/images/13-sentinels-aegis-rim.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  background-attachment: fixed;
+
+  overflow:hidden;
+}
+
+#home-container {
+
+  height: 100%;
+
+  margin: 20% 0 20% 0;
+  padding: $s-size;
+}
+
+.home-title {
+
+  width: 50%;
+  font-size: $xxl-size;
+
+  text-align: left;
+}
+
+.home-button-container {
+
+  height: 50%;
+  width: 50%;
+
+  text-align: center;
+}
+
+.home-button-container a {
+
+  background-color: $splatoon-yellow;
+
+  border: none;
+  color: $splatoon-purple;
+  padding: 15px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: $s-size;
+}

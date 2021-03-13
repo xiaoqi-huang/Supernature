@@ -1,0 +1,49 @@
+@import '../base/settings';
+
+.blog-list-item {
+  width: 100%;
+  border: 1px solid $splatoon-green;
+  border-radius: 5px;
+
+  margin-bottom: $m-size;
+}
+
+.blog-list-item a {
+  color: white;
+}
+
+.blog-list-item-title {
+  color: $grey;
+  background-color: $splatoon-green;
+  margin-top: 0;
+  padding-top: $s-size;
+  padding-left: $s-size;
+}
+
+.blog-list-item-title h3 {
+  color: $grey;
+
+  margin-top: 0;
+  margin-bottom: 0;
+
+  padding-bottom: 0.25 * $s-size;
+}
+
+.blog-list-item-info {
+  padding-left: $s-size;
+}
+
+.blog-list-item-info p {
+
+  font-size: 0.5 * $s-size;
+
+  margin: 2px 0 2px 0;
+}
+
+.blog-list-item-info .author {
+
+  font-size: $s-size;
+
+  margin-top: 0.25 * $s-size;
+  margin-bottom: $s-size;
+}

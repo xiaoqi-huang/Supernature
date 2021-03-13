@@ -1,0 +1,12 @@
+.reply-list-item {
+
+  font-size: $s-size;
+  border-left: $xxs-size solid $light-grey;
+  border-radius: $xxs-size;
+  margin-top: $s-size;
+  padding: 0 $s-size 0 $s-size;
+}
+
+.reply-list-item .create-time {
+  font-size: $xs-size;
+}

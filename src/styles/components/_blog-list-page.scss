@@ -1,0 +1,103 @@
+@import '../base/settings';
+
+#blog-list-page {
+  color: white;
+  background-color: $grey;
+}
+
+#blog-list-filter {
+  font-size: $s-size;
+  padding: 30px 25% 30px 25%;
+}
+
+
+// Search input
+
+#search-filter {
+  float: left;
+}
+
+#search-filter span {
+  margin-right: $xxs-size;
+}
+
+#search-filter input {
+  background-color: $grey;
+  color: $light-grey;
+
+  height: $s-size;
+  border: 1px solid $splatoon-green;
+}
+
+#blog-list-filter input:focus {
+  background-color: $splatoon-green;
+  color: $grey;
+}
+
+
+// Sort filter
+
+#sort-filter {
+  margin-left: $m-size;
+}
+
+#sort-label {
+  margin-right: $xxs-size;
+}
+
+#sort-filter select {
+  //background-color: $splatoon-green;
+  border: none;
+}
+
+
+// Add blog link
+
+#add-blog-link {
+
+  color: $splatoon-green;
+
+  font-size: $s-size;
+
+  margin-left: $m-size;
+}
+
+
+// Page selector
+
+#page-selector {
+  font-size: $s-size;
+  display: inline-block;
+  float: right;
+  margin-right: 0;
+}
+
+#page-selector button {
+  background-color: $splatoon-green;
+
+  border: 0;
+  border-radius: $xxs-size;
+}
+
+.page-label {
+  margin-left: $s-size;
+  margin-right: $s-size;
+}
+
+// Bottom page selector
+
+#bottom-page-selector {
+
+  font-size: $s-size;
+
+  padding: $m-size 25% $xl-size 25%;
+
+  text-align: center;
+}
+
+#bottom-page-selector button {
+  color: $grey;
+  background-color: $splatoon-green;
+  border: 0;
+  border-radius: $s-size / 3;
+}

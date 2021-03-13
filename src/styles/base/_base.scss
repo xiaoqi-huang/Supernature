@@ -1,0 +1,44 @@
+html {
+  font-family: 'PT Mono', 'Hiragino Kaku Gothic Pro', serif;
+  font-weight: lighter;
+}
+
+h1 {
+  font-size: $l-size;
+}
+
+h2 {
+  font-size: $m-size;
+}
+
+h3 {
+  font-size: ($s-size + $m-size) / 2;
+}
+
+p {
+  font-size: $s-size;
+}
+
+//span {
+//  font-size: $s-size;
+//}
+
+a {
+  //font-size: $s-size;
+  text-decoration: none;
+}
+
+#app {
+  height: 100vh;
+}
+
+hr {
+  border: 0;
+  border-bottom: 1px dashed $grey;
+}
+
+.msg {
+  color: $splatoon-green;
+  font-size: $s-size;
+  text-transform: uppercase;
+}
