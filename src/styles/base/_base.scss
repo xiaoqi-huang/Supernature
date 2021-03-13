@@ -37,6 +37,10 @@ hr {
   border-bottom: 1px dashed $grey;
 }
 
+#side-bar button {
+  outline: none;
+}
+
 .msg {
   color: $splatoon-green;
   font-size: $s-size;

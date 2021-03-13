@@ -3,9 +3,17 @@
 
   color: white;
 
-  min-height: 100%;
+  width: 100%;
+  margin-top: $overlap;
   padding-top: $xl-size;
   padding-bottom: $xl-size;
+
+  position: fixed;
+  top: 0;
+  bottom:0;
+  overflow-y:scroll;
+  overflow-x:hidden;
+  z-index: -1;
 }
 
 #account-page-container {

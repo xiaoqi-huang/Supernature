@@ -2,6 +2,10 @@ nav {
   font-size: $s-size;
   font-weight: 200;
   text-transform: uppercase;
+
+  width: 100%;
+  position: fixed;
+  top: 0;
 }
 
 nav ul {
@@ -10,6 +14,7 @@ nav ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
+
   overflow: hidden;
 }
 
@@ -56,6 +61,7 @@ nav #nav-sign-in {
   padding: 1rem;
   font-family: inherit;
   margin: 0;
+  display: inline-block;
 }
 
 #dropdown-content {
@@ -64,13 +70,13 @@ nav #nav-sign-in {
   background-color: $grey;
   min-width: $xl-size;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 21;
+  z-index: 1;
   left:auto;
   right:0;
 }
 
 #dropdown-content a {
-  font-size: $xs-size;
+  font-size: 0.5rem;
   float: none;
   color: $light-grey;
   padding: $s-size;

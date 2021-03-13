@@ -1,4 +1,11 @@
+#blog-form-page {
+  margin-top: $overlap;
+  position: fixed;
+  width: 100%;
+}
+
 #add-blog-form {
+
   background-color: lighten($light-grey, 15);
 
   width: 50%;
@@ -33,7 +40,10 @@
   font-size: $s-size;
 
   width: 95%;
+  max-width: 95%;
   height: 65%;
+  max-height: 65%;
+
   display: block;
   border: none;
   margin-bottom: $m-size;

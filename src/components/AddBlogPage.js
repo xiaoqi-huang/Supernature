@@ -32,15 +32,17 @@ export default class AddBlogPage extends React.Component {
 
     render() {
         return (
-          <form id="add-blog-form" onSubmit={this.handleSubmit}>
-              {this.state.error && <p>{this.state.error}</p>}
-              <input id="title-field" type="text" name="title" placeholder="Title" required />
-              <textarea id="content-field" name="content" placeholder="Content" required />
-              <div id="add-blog-form__btn-container">
-                  <button className="cancel-btn" onClick={this.handleCancel}>CANCEL</button>
-                  <button className="submit-btn" type="submit">SUBMIT</button>
-              </div>
-          </form>
+            <div id="blog-form-page">
+                <form id="add-blog-form" onSubmit={this.handleSubmit}>
+                    {this.state.error && <p>{this.state.error}</p>}
+                    <input id="title-field" type="text" name="title" placeholder="Title" required />
+                    <textarea id="content-field" name="content" placeholder="Content" required />
+                    <div id="add-blog-form__btn-container">
+                        <button className="cancel-btn" onClick={this.handleCancel}>CANCEL</button>
+                        <button className="submit-btn" type="submit">SUBMIT</button>
+                    </div>
+                </form>
+            </div>
         );
     }
 }

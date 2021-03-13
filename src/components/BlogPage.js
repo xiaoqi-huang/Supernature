@@ -40,18 +40,20 @@ class BlogPage extends React.Component {
 
     render() {
         return (
-          <div id="article">
-              <div id="article-title">
-                  <h1>{this.state.title}</h1>
-                  {this.props.user.signedIn && (this.props.user.uid === this.state.uid) && <Link id="article-edit-link" to={`/blog/edit/${this.state.aid}`}>Edit</Link>}
-                  <Link id="article-author" to={`/user/${this.state.uid}`}>{this.state.author}</Link>
-              </div>
-              <div id="article-content" dangerouslySetInnerHTML={{__html: this.state.content}} />
-              <div id="article-update-time">Updated at {this.state.updateAt}</div>
-              <div id="article-create-time">Created at {this.state.createAt}</div>
-              <CommentForm aid={this.state.aid} />
-              <CommentList comments={this.state.comments} />
-          </div>
+            <div id="blog-page">
+                <div id="article">
+                    <div id="article-title">
+                        <h1>{this.state.title}</h1>
+                        {this.props.user.signedIn && (this.props.user.uid === this.state.uid) && <Link id="article-edit-link" to={`/blog/edit/${this.state.aid}`}>Edit</Link>}
+                        <Link id="article-author" to={`/user/${this.state.uid}`}>{this.state.author}</Link>
+                    </div>
+                    <div id="article-content" dangerouslySetInnerHTML={{__html: this.state.content}} />
+                    <div id="article-update-time">Updated at {this.state.updateAt}</div>
+                    <div id="article-create-time">Created at {this.state.createAt}</div>
+                    <CommentForm aid={this.state.aid} />
+                    <CommentList comments={this.state.comments} />
+                </div>
+            </div>
         );
     }
 }
