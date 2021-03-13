@@ -10,13 +10,15 @@
   height: 100%;
 
   margin-top: $overlap;
+
+  position: fixed;
+  overflow: hidden;
 }
 
 #not-found-page__msg {
 
   margin-bottom: $m-size;
-  padding-top: 30vh;
-
+  padding-top: 20%;
   display: block;
 }
 
