@@ -11,7 +11,7 @@
 - [x] UserDashboard
 - [x] SignUpPage
 - [x] SignInPage
-- [ ] 404 Page
+- [x] 404 Page
 
 ### Other
 
@@ -37,7 +37,7 @@
 - [x] sign_in
 - [x] sign_out
 - [x] get_user_info(uid)
-- [ ] edit_user_info
+- [x] edit_user_info
 
 #### Admin
 
