@@ -1,3 +1,14 @@
+const getBlogNumber = () => {
+
+    const promise = fetch(`/api/blog/count`);
+
+    return promise.then((response) => (
+        response.json()
+    )).then((data) => {
+        return data;
+    });
+};
+
 const getBlogList = (sort, page) => {
 
     const promise = fetch(`/api/blog/list/${sort}/${page}`);
@@ -122,4 +133,4 @@ const addReply = (cid, formData) => {
     });
 };
 
-export { getBlogList, getBlogListByUser, getBlog, getRawBlog, addBlog, editBlog, getCommentList, addComment, getReplyList, addReply };
+export { getBlogNumber, getBlogList, getBlogListByUser, getBlog, getRawBlog, addBlog, editBlog, getCommentList, addComment, getReplyList, addReply };

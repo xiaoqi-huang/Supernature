@@ -11,11 +11,6 @@ export default class HomePage extends React.Component {
                         <div className="home-title">
                             Supernatural Psychology Association
                         </div>
-                        {/*<div className="home-button-container">*/}
-                            {/*<Link to="/blog">*/}
-                                {/*Read Blog*/}
-                            {/*</Link>*/}
-                        {/*</div>*/}
                     </div>
                 </div>
             </div>

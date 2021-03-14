@@ -14,11 +14,23 @@
   overflow-x:hidden;
 }
 
+#blog-list-page button {
+  background-color: $splatoon-green;
+  color: $grey
+;
+  border: 0;
+  border-radius: $xxs-size;
+}
+
+#blog-list-page button:disabled {
+  background-color: darken($splatoon-green, 40);
+  color: $grey;
+}
+
 #blog-list-filter {
   font-size: $s-size;
   padding: 30px 25% 30px 25%;
 }
-
 
 // Search input
 
@@ -30,17 +42,21 @@
   margin-right: $xxs-size;
 }
 
-#search-filter input {
+#blog-list-filter input {
   background-color: $grey;
   color: $light-grey;
 
   height: $s-size;
   border: 1px solid $splatoon-green;
+
+  margin-left: $xs-size;
+  margin-right: $xs-size;
 }
 
 #blog-list-filter input:focus {
   background-color: $splatoon-green;
   color: $grey;
+  outline: none;
 }
 
 
@@ -50,13 +66,9 @@
   margin-left: $m-size;
 }
 
-#sort-label {
-  margin-right: $xxs-size;
-}
-
 #sort-filter select {
-  //background-color: $splatoon-green;
   border: none;
+  margin-left: $xs-size;
 }
 
 
@@ -75,17 +87,17 @@
 // Page selector
 
 #page-selector {
-  font-size: $s-size;
   display: inline-block;
   float: right;
   margin-right: 0;
 }
 
+#page-input {
+  width: $m-size;
+  text-align: center;
+}
 #page-selector button {
-  background-color: $splatoon-green;
-
-  border: 0;
-  border-radius: $xxs-size;
+  margin-left: $xs-size;
 }
 
 .page-label {
@@ -102,11 +114,4 @@
   padding: $m-size 25% $xl-size 25%;
 
   text-align: center;
-}
-
-#bottom-page-selector button {
-  color: $grey;
-  background-color: $splatoon-green;
-  border: 0;
-  border-radius: $s-size / 3;
 }

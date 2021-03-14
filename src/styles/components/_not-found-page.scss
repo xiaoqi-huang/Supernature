@@ -1,9 +1,11 @@
 #not-found-page {
 
-  background-color: darken($grey, 15);
+  background-image: url('../../public/images/十三机兵防卫圈_20200924015731.jpg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  background-attachment: fixed;
 
-  color: white;
-  font-size: $l-size;
   text-align: center;
 
   width: 100%;
@@ -16,19 +18,28 @@
 }
 
 #not-found-page__msg {
+  color: white;
+  font-size: $xl-size;
+  text-transform: uppercase;
 
-  margin-bottom: $m-size;
-  padding-top: 20%;
+  margin-top: 20%;
+  margin-bottom: 5%;
   display: block;
 }
 
 #not-found-page a {
 
-  background-color: $splatoon-green;
+  background-color: #fdbcca;
 
   color: white;
   font-size: $s-size;
   text-transform: uppercase;
 
   padding: $s-size $m-size;
+}
+
+
+#not-found-page a:hover {
+  background-color: white;
+  color: lightskyblue;
 }

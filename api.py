@@ -12,12 +12,22 @@ bp = Blueprint('api', __name__, url_prefix='/api')
 
 ################################################################################
 # Blog APIs
+# 1. get_blog_count
 # 1. get_blog_list
 # 2. get_blog
 # 3. get_raw_blog
 # 4. add_blog
 # 5. edit_blog
 ################################################################################
+
+@bp.route('/blog/count', methods=('GET',))
+def get_blog_count():
+
+    db = get_db()
+    res = db.execute('SELECT COUNT(*) FROM article').fetchone()
+
+    return { 'blog_number': res[0] }
+
 
 @bp.route('/blog/list/<sort>/<int:page>', methods=('GET',))
 def get_blog_list(sort='updatedAt', page=0):
