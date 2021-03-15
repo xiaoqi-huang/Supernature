@@ -3,6 +3,7 @@ import BlogList from './BlogList';
 import {connect} from "react-redux";
 import {getUserInfo} from "../api/user";
 import {getBlogListByUser} from "../api/blog";
+import {Link} from "react-router-dom";
 
 class UserPage extends React.Component {
 
@@ -50,7 +51,7 @@ class UserPage extends React.Component {
                 <div id='user-info'>
                     <div id='user-info__username'>{this.state.username}</div>
                     <div id='user-info__intro'>{this.state.intro}</div>
-                    {(this.props.user.uid === this.state.uid) && <a href="#" id="user-info__edit">Edit profile</a>}
+                    {(this.props.user.uid === this.state.uid) && <Link to="/account" id="user-info__edit">Edit profile</Link>}
                 </div>
                 <BlogList blogList={this.state.blogList} />
             </div>

@@ -30,13 +30,21 @@ class NavBar extends React.Component {
     render = () => (
         <nav>
             <ul>
-                <li><NavLink to="/home" id="nav-title">Supernatural Psychology Association</NavLink></li>
+                <li>
+                    <NavLink to="/home" id="nav-title">
+                        <span>Supernatural</span>
+                        <span>Psychology</span>
+                        <span>Association</span>
+                    </NavLink>
+                </li>
                 <li><NavLink to="/home" activeClassName="active-nav" exact={true}>Home</NavLink></li>
                 <li><NavLink to="/blog" activeClassName="active-nav">Blog</NavLink></li>
                 <li><NavLink to="/members" activeClassName="active-nav" exact={true}>Members</NavLink></li>
                 {this.props.user.signedIn &&
                 <div id="dropdown">
-                    <button id="dropdown-btn">{this.props.user.username}</button>
+                    <button id="dropdown-btn">
+                        <Link to={`/user/${this.props.user.uid}`}>{this.props.user.username}</Link>
+                    </button>
                     <div id="dropdown-content">
                         <Link to="/account">Account</Link>
                         <Link to="#" onClick={this.handleSignOut}>Sign out</Link>

@@ -1,6 +1,14 @@
 #user-page {
   background-color: darken($grey, 10);
-  padding-bottom: $l-size;
+
+  width: 100%;
+  margin-top: $overlap;
+
+  position: fixed;
+  top: 0;
+  bottom:0;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 #user-info {

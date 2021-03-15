@@ -26,12 +26,14 @@ nav li {
 }
 
 nav a {
-  color: $light-grey;
-
   display: block;
   padding: 1rem;
   text-align: center;
   text-decoration: none;
+}
+
+nav a {
+  color: $light-grey;
 }
 
 nav a:hover {
@@ -44,9 +46,33 @@ nav .active-nav {
   box-shadow: 0px -3px 0px $splatoon-green inset;
 }
 
+a#nav-title {
+  color: $light-grey;
+}
+
+a#nav-title span {
+  display: inline-block;
+}
+
+#nav-title:hover {
+  color: white;
+  box-shadow: none;
+}
+
+a#nav-title:hover span::first-letter {
+  color: $splatoon-green;
+}
+
+#nav-title span + span {
+  margin-left: $xs-size;
+}
+
 nav #nav-sign-in {
   float: right;
 }
+
+
+// Dropdown
 
 #dropdown {
   float: right;
@@ -57,14 +83,19 @@ nav #nav-sign-in {
   background-color: $grey;
   color: $light-grey;
   font-size: $s-size;
+
   border: none;
   outline: none;
-  padding: 1rem;
-  font-family: inherit;
+
   margin: 0;
+  padding: 0;
+
   display: inline-block;
 }
 
+#dropdown #dropdown-btn a:hover {
+  box-shadow: none;
+}
 #dropdown-content {
   display: none;
   position: absolute;
