@@ -2,7 +2,7 @@
 
 .blog-list-item {
   width: 100%;
-  border: 1px solid $splatoon-green;
+  border: 1px solid $theme-color;
   border-radius: 5px;
 
   margin-bottom: $m-size;
@@ -14,7 +14,7 @@
 
 .blog-list-item-title {
   color: $grey;
-  background-color: $splatoon-green;
+  background-color: $theme-color;
   margin-top: 0;
   padding-top: $s-size;
   padding-left: $s-size;

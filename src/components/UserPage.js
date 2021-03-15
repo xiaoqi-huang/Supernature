@@ -53,7 +53,9 @@ class UserPage extends React.Component {
                     <div id='user-info__intro'>{this.state.intro}</div>
                     {(this.props.user.uid === this.state.uid) && <Link to="/account" id="user-info__edit">Edit profile</Link>}
                 </div>
-                <BlogList blogList={this.state.blogList} />
+                <div id="blog-page__blog-list">
+                    <BlogList blogList={this.state.blogList} />
+                </div>
             </div>
         );
     }

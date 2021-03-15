@@ -38,12 +38,12 @@ nav a {
 
 nav a:hover {
   color: white;
-  box-shadow: 0px -3px 0px $splatoon-green inset;
+  box-shadow: 0px -3px 0px $theme-color inset;
 }
 
 nav .active-nav {
   color: white;
-  box-shadow: 0px -3px 0px $splatoon-green inset;
+  box-shadow: 0px -3px 0px $theme-color inset;
 }
 
 a#nav-title {
@@ -60,7 +60,7 @@ a#nav-title span {
 }
 
 a#nav-title:hover span::first-letter {
-  color: $splatoon-green;
+  color: $theme-color;
 }
 
 #nav-title span + span {
@@ -123,5 +123,9 @@ nav #nav-sign-in {
 }
 
 #dropdown:hover #dropdown-content {
+  display: block;
+}
+
+#dropdown:active #dropdown-content {
   display: block;
 }

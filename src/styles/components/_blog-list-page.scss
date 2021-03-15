@@ -12,23 +12,31 @@
   bottom:0;
   overflow-y:scroll;
   overflow-x:hidden;
+
+  text-align: center;
+}
+
+#blog-list-page__container {
+  width: 50%;
+  margin: $l-size auto;
 }
 
 #blog-list-page button {
-  background-color: $splatoon-green;
+  background-color: $theme-color;
   color: $grey;
   border: 0;
   border-radius: $xxs-size;
 }
 
 #blog-list-page button:disabled {
-  background-color: darken($splatoon-green, 40);
+  background-color: darken($theme-color, 40);
   color: $grey;
 }
 
 #blog-list-filter {
   font-size: $s-size;
-  padding: 30px 25% 30px 25%;
+  width: 100%;
+  margin-bottom: $l-size;
 }
 
 // Search input
@@ -46,14 +54,14 @@
   color: $light-grey;
 
   height: $s-size;
-  border: 1px solid $splatoon-green;
+  border: 1px solid $theme-color;
 
   margin-left: $xs-size;
   margin-right: $xs-size;
 }
 
 #blog-list-filter input:focus {
-  background-color: $splatoon-green;
+  background-color: $theme-color;
   color: $grey;
   outline: none;
 }
@@ -75,7 +83,7 @@
 
 #add-blog-link {
 
-  color: $splatoon-green;
+  color: $theme-color;
 
   font-size: $s-size;
 
@@ -95,6 +103,7 @@
   width: $m-size;
   text-align: center;
 }
+
 #page-selector button {
   margin-left: $xs-size;
 }
@@ -113,4 +122,50 @@
   padding: $m-size 25% $xl-size 25%;
 
   text-align: center;
+}
+
+
+@media (max-width: $mobile-breakpoint) {
+  #blog-list-page {
+    margin-top: $mobile-overlap;
+  }
+
+  #blog-list-page__container {
+    width: 95%;
+    margin: 0 auto;
+  }
+
+  #blog-list-filter {
+    text-align: left;
+    margin-bottom: $s-size;
+    display: block;
+  }
+
+  #search-filter {
+    width: 100%;
+    padding-top: $s-size;
+    padding-bottom: $s-size;
+    display: block;
+  }
+  #sort-filter {
+    width: 100%;
+    margin: $s-size 0;
+    display: block;
+  }
+  a#add-blog-link {
+    //width: 10%;
+    margin-left: 0;
+    margin-right: $s-size;
+    display: inline-block;
+  }
+  #page-selector {
+    right: 0;
+    display: inline-block;
+    float: none;
+  }
+  #bottom-page-selector {
+    width: 100%;
+    margin: 0 auto;
+    padding: $m-size 0;
+  }
 }

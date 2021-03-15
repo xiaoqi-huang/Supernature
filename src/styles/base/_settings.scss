@@ -1,9 +1,12 @@
 // Colors
 $splatoon-purple: #5F3CDC;
 $splatoon-yellow: #EAFF5D;
-$splatoon-green: #3ff6de;
-$grey: rgb(42, 42, 42);
-$light-grey: #ccc;
+$splatoon-green: 73F6CF;
+$default: #3FF6ED;
+
+$theme-color: $default;
+$grey: #2A2A2A;
+$light-grey: #CCCCCC;
 
 // Spacing
 $xxs-size: 0.1875rem;
@@ -13,5 +16,7 @@ $m-size: 1.5rem;
 $l-size: 3.0rem;
 $xl-size: 4.5rem;
 $xxl-size: 6.0rem;
-$mobile-breakpoint: 45rem;
 $overlap: 2.75rem;
+
+$mobile-breakpoint: 45rem;
+$mobile-overlap: 5.5rem;

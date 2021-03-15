@@ -1,7 +1,7 @@
 const defaultFilters = {
     text: '',
     sortBy: 'updatedAt',
-    page: 0
+    page: 1
 };
 
 export default (state = defaultFilters, action) => {

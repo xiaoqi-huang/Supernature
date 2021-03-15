@@ -38,7 +38,7 @@
 
 #title-field:focus {
   outline: none;
-  box-shadow: 0 0 1px 1px $splatoon-green;
+  box-shadow: 0 0 1px 1px $theme-color;
 }
 
 #content-field {
@@ -58,7 +58,7 @@
 
 #content-field:focus {
   outline: none;
-  box-shadow: 0 0 1px 1px $splatoon-green;
+  box-shadow: 0 0 1px 1px $theme-color;
 }
 
 #add-blog-form__btn-container {
@@ -90,7 +90,7 @@
 }
 
 #add-blog-form .submit-btn {
-  background-color: $splatoon-green;
+  background-color: $theme-color;
   color: $grey;
 
   border: none;
@@ -98,5 +98,5 @@
 
 #add-blog-form .submit-btn:hover {
   background-color: white;
-  color: $splatoon-green;
+  color: $theme-color;
 }

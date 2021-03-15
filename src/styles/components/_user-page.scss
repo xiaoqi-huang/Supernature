@@ -31,10 +31,15 @@
 }
 
 #user-info__edit {
-  color: $splatoon-green;
+  color: $theme-color;
   font-size: $s-size;
 }
 
 #user-page p {
   color: white;
+}
+
+#blog-page__blog-list {
+  width: 50%;
+  margin: 0 auto;
 }

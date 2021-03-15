@@ -58,7 +58,7 @@
 
   color: white;
 
-  box-shadow: -3px 0 0 $splatoon-green;
+  box-shadow: -3px 0 0 $theme-color;
 }
 
 #view {
@@ -148,15 +148,15 @@
 }
 
 #view .submit-btn {
-  background-color: $splatoon-green;
+  background-color: $theme-color;
 }
 
 #view .submit-btn:hover {
   background-color: white;
-  color: $splatoon-green;
+  color: $theme-color;
 }
 
 #view .submit-btn:disabled {
-  background-color: darken($splatoon-green, 40);
+  background-color: darken($theme-color, 40);
   color: $grey;
 }

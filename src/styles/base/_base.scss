@@ -50,12 +50,12 @@ hr {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: $splatoon-green;
+  background-color: $theme-color;
   border-radius: $xxs-size;
 }
 
 .msg {
-  color: $splatoon-green;
+  color: $theme-color;
   font-size: $s-size;
   text-transform: uppercase;
 }

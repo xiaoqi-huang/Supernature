@@ -42,6 +42,9 @@ class BlogPage extends React.Component {
         return (
             <div id="blog-page">
                 <div id="article">
+                    <div>
+                        <Link to="/blog" id="back-link">{"<< back"}</Link>
+                    </div>
                     <div id="article-title">
                         <h1>{this.state.title}</h1>
                         {this.props.user.signedIn && (this.props.user.uid === this.state.uid) && <Link id="article-edit-link" to={`/blog/edit/${this.state.aid}`}>Edit</Link>}

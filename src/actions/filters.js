@@ -12,7 +12,8 @@ const sortByUpdateTime = () => ({
 });
 
 const setPage = (page) => ({
-    type: 'SET_PAGE'
+    type: 'SET_PAGE',
+    page
 });
 
 export { setTextFilter, sortByCreateTime, sortByUpdateTime, setPage }

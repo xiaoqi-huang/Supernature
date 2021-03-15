@@ -31,7 +31,7 @@
 }
 
 #sign-up-form__title span::first-letter {
-    color: $splatoon-green;
+    color: $theme-color;
 }
 
 #sign-up-form__subtitle {
@@ -71,7 +71,7 @@ input#password.invalid {
 
 #sign-up-form button {
 
-    background-color: $splatoon-green;
+    background-color: $theme-color;
 
     color: white;
     font-size: $s-size;

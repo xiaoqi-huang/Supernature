@@ -32,7 +32,7 @@
 }
 
 #sign-in-form__title span::first-letter {
-  color: $splatoon-green;
+  color: $theme-color;
 }
 
 #sign-in-form #sign-in-form__subtitle {
@@ -77,7 +77,7 @@
 
 #sign-in-form button {
 
-  background-color: $splatoon-green;
+  background-color: $theme-color;
 
   color: white;
   font-size: $s-size;

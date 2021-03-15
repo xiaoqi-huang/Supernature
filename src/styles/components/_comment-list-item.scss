@@ -2,14 +2,14 @@
 
   font-size: $s-size;
 
-  border-left: $xxs-size solid lighten($splatoon-green, 20);
+  border-left: $xxs-size solid lighten($theme-color, 20);
   border-radius: $xxs-size;
   margin-bottom: $s-size;
   padding: $xs-size $s-size 0 $s-size;
 }
 
 .comment-list-item a {
-  color: $splatoon-green;
+  color: $theme-color;
 }
 
 .comment-list-item .create-time {
@@ -26,7 +26,7 @@
 .comment-list-item button {
 
   background-color: transparent;
-  color: $splatoon-green;
+  color: $theme-color;
   font-size: $xs-size;
 
   display: inline-block;
@@ -40,5 +40,5 @@
 
 .comment-list-item:hover {
   background-color: lighten($grey, 80);
-  border-left: $xxs-size solid $splatoon-green;
+  border-left: $xxs-size solid $theme-color;
 }

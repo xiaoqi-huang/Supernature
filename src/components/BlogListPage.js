@@ -3,22 +3,24 @@ import BlogList from './BlogList';
 import {getBlogList, getBlogNumber} from "../api/blog";
 import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
-import {sortByUpdateTime} from "../actions/filters";
+import {setPage, sortByUpdateTime} from "../actions/filters";
 
 class BlogListPage extends React.Component {
 
     state = {
         addBlog: false,
-        text: '',
-        sortBy: 'updatedAt',
-        page: 1,
+        text: this.props.filters.text,
+        sortBy: this.props.filters.sortBy,
+        page: this.props.filters.page,
         totalPage: 0,
         blogList: []
     };
 
 
     updateBlog = () => {
-        getBlogList(this.state.sortBy, this.state.page - 1).then((blogList) => {
+        const sortBy = this.state.sortBy;
+        const page = this.state.page;
+        getBlogList(sortBy, page).then((blogList) => {
             this.setState(() => ({
                 blogList: blogList
             }));
@@ -63,6 +65,7 @@ class BlogListPage extends React.Component {
             page: prevState.page - 1
         }), () => {
             this.updateBlog();
+            this.props.dispatch(setPage(this.state.page));
         });
     };
 
@@ -72,11 +75,14 @@ class BlogListPage extends React.Component {
             page: prevState.page + 1
         }), () => {
             this.updateBlog();
+            this.props.dispatch(setPage(this.state.page));
         });
     };
 
     handlePageChange = (e) => {
+
         const targetPage = e.target.value;
+
         if (targetPage === '') {
             this.setState(() => ({
                 page: ''
@@ -86,10 +92,12 @@ class BlogListPage extends React.Component {
         if (targetPage < 1 || targetPage > this.state.totalPage) {
             return;
         }
+
         this.setState(() => ({
             page: targetPage
         }), () => {
-            this.updateBlog()
+            this.updateBlog();
+            this.props.dispatch(setPage(targetPage));
         });
     };
 
@@ -107,7 +115,7 @@ class BlogListPage extends React.Component {
     render() {
         return (
             <div id="blog-list-page">
-                <div>
+                <div id="blog-list-page__container">
                     <div id="blog-list-filter">
                         <span id="search-filter">
                             <label htmlFor="search-input">Search:</label>
