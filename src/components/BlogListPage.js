@@ -19,7 +19,7 @@ class BlogListPage extends React.Component {
 
     updateBlog = () => {
         const sortBy = this.state.sortBy;
-        const page = this.state.page;
+        const page = this.state.page - 1;
         getBlogList(sortBy, page).then((blogList) => {
             this.setState(() => ({
                 blogList: blogList
