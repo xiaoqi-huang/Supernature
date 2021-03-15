@@ -11,8 +11,6 @@
   width: 100%;
   height: 100%;
 
-  margin-top: $overlap;
-
   position: fixed;
   overflow: hidden;
 }
@@ -38,8 +36,15 @@
   padding: $s-size $m-size;
 }
 
-
 #not-found-page a:hover {
   background-color: white;
   color: lightskyblue;
+}
+
+
+@media (max-width: $mobile-breakpoint) {
+  #not-found-page__msg {
+    text-align: left;
+    margin-bottom: $m-size;
+  }
 }

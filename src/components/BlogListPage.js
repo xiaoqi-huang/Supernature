@@ -114,7 +114,7 @@ class BlogListPage extends React.Component {
 
     render() {
         return (
-            <div id="blog-list-page">
+            <div id="blog-list-page" className="page">
                 <div id="blog-list-page__container">
                     <div id="blog-list-filter">
                         <span id="search-filter">

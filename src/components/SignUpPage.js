@@ -48,7 +48,7 @@ export default class SignUpPage extends React.Component {
 
     render() {
         return (
-            <div id="sign-up-form-container">
+            <div id="sign-up-form-container" className="page">
                 <form id="sign-up-form" onSubmit={this.handleSubmit}>
                     <div id="sign-up-form__title">
                         <span>supernatural</span>

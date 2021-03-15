@@ -1,13 +1,6 @@
 #blog-form-page {
   margin-top: $overlap;
-  position: fixed;
   width: 100%;
-
-  position: fixed;
-  top: 0;
-  bottom:0;
-  overflow-y: scroll;
-  overflow-x: hidden;
 }
 
 #add-blog-form {
@@ -17,7 +10,7 @@
   width: 50%;
   height: 70vh;
 
-  border-radius: $s-size;
+  border-radius: $xxs-size;
   margin: $xl-size auto $xl-size auto;
   padding: $l-size $m-size $l-size $m-size;
 
@@ -26,6 +19,8 @@
 
 #title-field {
   font-size: $m-size;
+
+  border-radius: $xxs-size;
 
   display: block;
 
@@ -44,6 +39,8 @@
 #content-field {
 
   font-size: $s-size;
+
+  border-radius: $xxs-size;
 
   width: 95%;
   max-width: 95%;
@@ -99,4 +96,34 @@
 #add-blog-form .submit-btn:hover {
   background-color: white;
   color: $theme-color;
+}
+
+
+@media (max-width: $mobile-breakpoint) {
+  #add-blog-form {
+    width: 90%;
+    height: 100%;
+
+    border: none;
+    margin: 0;
+    padding: 5%;
+
+    position: fixed;
+    top: $overlap;
+    bottom:0;
+    overflow-y: hidden;
+    overflow-x: hidden;
+  }
+  #content-field {
+    height: 50vh;
+    max-height: 50vh;
+  }
+  #add-blog-form button {
+    display: block;
+    width: 100%;
+    border-radius: $xxs-size;
+  }
+  #add-blog-form button + button {
+    margin-top: $s-size;
+  }
 }

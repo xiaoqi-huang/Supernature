@@ -46,7 +46,7 @@ class UserPage extends React.Component {
 
     render() {
         return (
-            <div id="user-page">
+            <div id="user-page" className="page">
                 {this.state.error && <p>{this.state.error}</p>}
                 <div id='user-info'>
                     <div id='user-info__username'>{this.state.username}</div>

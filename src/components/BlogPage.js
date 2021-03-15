@@ -40,7 +40,7 @@ class BlogPage extends React.Component {
 
     render() {
         return (
-            <div id="blog-page">
+            <div id="blog-page" className="page">
                 <div id="article">
                     <div>
                         <Link to="/blog" id="back-link">{"<< back"}</Link>

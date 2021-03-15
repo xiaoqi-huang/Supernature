@@ -61,7 +61,7 @@ class EditBlogPage extends React.Component {
 
     render() {
         return (
-            <div id="blog-form-page">
+            <div id="blog-form-page" className="page">
                 <form id="add-blog-form" onSubmit={this.handleSubmit}>
                     {this.state.error && <p>{this.state.error}</p>}
                     <input id="title-field" type="text" name="title"

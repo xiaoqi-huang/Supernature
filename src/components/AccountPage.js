@@ -34,7 +34,7 @@ class AccountPage extends React.Component {
 
     render() {
         return (
-            <div id="account-page">
+            <div id="account-page" className="page">
                 <div id="account-page-container">
                     <SideBar active={this.state.active} toggleActive={this.toggleActive} />
                     { this.state.active === 'GENERAL' && <GeneralView /> }

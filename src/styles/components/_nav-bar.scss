@@ -129,3 +129,9 @@ nav #nav-sign-in {
 #dropdown:active #dropdown-content {
   display: block;
 }
+
+@media (max-width: $mobile-breakpoint) {
+  #nav-title {
+    display: none;
+  }
+}
