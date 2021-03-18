@@ -25,6 +25,10 @@
   display: block;
 }
 
+#not-found-page__msg span + span {
+  margin-left: $xl-size;
+}
+
 #not-found-page a {
 
   background-color: #fdbcca;
@@ -41,10 +45,21 @@
   color: lightskyblue;
 }
 
-
 @media (max-width: $mobile-breakpoint) {
   #not-found-page__msg {
+    width: 95%;
+    margin: $l-size $s-size;
+  }
+  #not-found-page__msg span {
     text-align: left;
-    margin-bottom: $m-size;
+    display: block;
+  }
+  #not-found-page__msg span + span {
+    font-size: 2.5rem;
+    margin: 0;
+  }
+  #not-found-page a {
+    float: left;
+    margin-left: $s-size;
   }
 }

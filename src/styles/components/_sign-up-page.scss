@@ -1,15 +1,24 @@
-#sign-up-form-container {
-    background-color: darken($grey, 10);
-    height: 100%;
+#sign-up-page {
 
+    background-color: darken($grey, 10);
+
+    width: 100%;
+
+    margin-top: $overlap;
     padding-top: 20vh;
+
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 #sign-up-form {
     background-color: $grey;
 
     width: 15%;
-    height: 40vh;
+    height: auto;
 
     margin-left: auto;
     margin-right: auto;
@@ -101,4 +110,21 @@ input#password.invalid {
     color: white;
     font-size: $xxs-size;
     margin-left: $xs-size;
+}
+
+@media (max-width: $mobile-breakpoint) {
+    #sign-up-page {
+        background-color: $grey;
+        padding: 0;
+    }
+    #sign-up-form {
+        width: 95%;
+        padding: $l-size 2.5%;
+    }
+    #sign-in-container {
+        font-size: $s-size;
+    }
+    #sign-in-container a {
+        font-size: $s-size;
+    }
 }

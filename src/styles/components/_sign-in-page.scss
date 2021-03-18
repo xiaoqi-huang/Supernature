@@ -1,16 +1,24 @@
-#sign-in-form-container {
+#sign-in-page {
+
   background-color: darken($grey, 10);
-  height: 100%;
+
+  width: 100%;
 
   margin-top: $overlap;
   padding-top: 20vh;
+
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 #sign-in-form {
   background-color: $grey;
 
   width: 15%;
-  height: 40vh;
+  height: auto;
 
   margin-left: auto;
   margin-right: auto;
@@ -99,11 +107,31 @@
 
 #sign-up-container {
   color: lighten($grey, 15);
-  font-size: $xxs-size;
+  font-size: $xs-size;
   text-align: center;
 }
 
 #sign-up-container a {
   color: white;
   margin-left: $xs-size;
+}
+
+@media (max-width: $mobile-breakpoint) {
+  #sign-in-page {
+    background-color: $grey;
+    padding: 0;
+  }
+  #sign-in-form {
+    width: 95%;
+    padding: $l-size 2.5%;
+  }
+  #forgot-pwd-container a {
+    font-size: $s-size;
+  }
+  #sign-up-container {
+    font-size: $s-size;
+  }
+  #sign-up-container a {
+    font-size: $s-size;
+  }
 }

@@ -37,7 +37,7 @@ class SignInPage extends React.Component {
 
     render() {
         return (
-            <div id="sign-in-form-container" className="page">
+            <div id="sign-in-page" className="page">
                 <form id="sign-in-form" onSubmit={this.handleSubmit}>
                     <div id="sign-in-form__title">
                         <span>supernatural</span>
