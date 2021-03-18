@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import CommentForm from './CommentForm';
 import { getBlog, getCommentList } from '../api/blog';
 import CommentList from "./CommentList";
-import {connect} from "react-redux";
+import { connect } from 'react-redux';
+import { toLocal } from '../utils/time';
 
 class BlogPage extends React.Component {
 
@@ -51,8 +52,8 @@ class BlogPage extends React.Component {
                         <Link id="article-author" to={`/user/${this.state.uid}`}>{this.state.author}</Link>
                     </div>
                     <div id="article-content" dangerouslySetInnerHTML={{__html: this.state.content}} />
-                    <div id="article-update-time">Updated at {this.state.updateAt}</div>
-                    <div id="article-create-time">Created at {this.state.createAt}</div>
+                    <div id="article-update-time">Edited at {toLocal(this.state.updateAt)}</div>
+                    <div id="article-create-time">Posted at {toLocal(this.state.createAt)}</div>
                     <CommentForm aid={this.state.aid} />
                     <CommentList comments={this.state.comments} />
                 </div>

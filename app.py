@@ -43,14 +43,14 @@ CORS(app, supports_credentials=True, resources={r'/api/*': {'origins': '*'}})
 # app.register_blueprint(admin.bp)
 app.register_blueprint(api.bp)
 
-@app.route('/login')
-def login():
-    session['user_id'] = 0
-    return 'success'
-
-@app.route('/status')
-def status():
-    return 'USER %d' % session.get('user_id')
+# @app.route('/login')
+# def login():
+#     session['user_id'] = 0
+#     return 'success'
+#
+# @app.route('/status')
+# def status():
+#     return 'USER %d' % session.get('user_id')
 
 @app.route('/')
 def index():

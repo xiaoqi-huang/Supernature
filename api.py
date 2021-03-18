@@ -45,8 +45,8 @@ def get_blog_list(sort='updatedAt', page=0):
     for row in res:
         data.append({'aid': row['aid'],
                      'title': row['title'],
-                     'createAt': row['createdAt'].isoformat(),
-                     'updateAt': row['updatedAt'].isoformat(),
+                     'createAt': row['createdAt'].isoformat() + 'Z',
+                     'updateAt': row['updatedAt'].isoformat() + 'Z',
                      'uid': row['uid'],
                      'author': row['author']})
 
@@ -67,8 +67,8 @@ def get_blog_list_by_user(uid):
     for row in res:
         blog_list.append({'aid': row['aid'],
                           'title': row['title'],
-                          'createAt': row['createdAt'].isoformat(),
-                          'updateAt': row['updatedAt'].isoformat(),
+                          'createAt': row['createdAt'].isoformat() + 'Z',
+                          'updateAt': row['updatedAt'].isoformat() + 'Z',
                           'uid': row['uid'],
                           'author': row['author']})
 
@@ -92,8 +92,8 @@ def get_blog(aid):
             'aid': res['aid'],
             'title': res['title'],
             'content': markdown.markdown(res['content']),
-            'createAt': res['createdAt'].isoformat(),
-            'updateAt': res['updatedAt'].isoformat(),
+            'createAt': res['createdAt'].isoformat() + 'Z',
+            'updateAt': res['updatedAt'].isoformat() + 'Z',
             'uid': res['uid'],
             'author': res['author']
         }
@@ -118,8 +118,8 @@ def get_raw_blog(aid):
             'aid': res['aid'],
             'title': res['title'],
             'content': res['content'],
-            'createAt': res['createdAt'].isoformat(),
-            'updateAt': res['updatedAt'].isoformat(),
+            'createAt': res['createdAt'].isoformat() + 'Z',
+            'updateAt': res['updatedAt'].isoformat() + 'Z',
             'uid': res['uid'],
             'author': res['author']
         }
@@ -213,7 +213,7 @@ def get_comments(aid):
     for row in res:
         data.append({'cid': row['cid'],
                      'content': row['content'],
-                     'createAt': row['createdAt'].isoformat(),
+                     'createAt': row['createdAt'].isoformat() + 'Z',
                      'uid': row['uid'],
                      'author': row['author']})
 
@@ -271,7 +271,7 @@ def get_replies(cid):
     for row in res:
         data.append({'rid': row['rid'],
                      'content': row['content'],
-                     'createAt': row['createdAt'].isoformat(),
+                     'createAt': row['createdAt'].isoformat() + 'Z' + 'Z',
                      'uid': row['uid'],
                      'author': row['author']})
 
