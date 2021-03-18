@@ -1,11 +1,11 @@
 import os
-import markdown
 from os import path
-from werkzeug.security import check_password_hash, generate_password_hash
-from flask import Blueprint, flash, g, redirect, render_template, request, session, url_for
-from flask import current_app
+import markdown
+from flask import current_app, Blueprint, flash, g, redirect, render_template, request, session, url_for
 from flask_login import current_user, login_user, logout_user, login_required
-from werkzeug import secure_filename
+from werkzeug.security import check_password_hash, generate_password_hash
+from werkzeug.utils import secure_filename
+
 from db import get_db
 
 

@@ -5,7 +5,12 @@
   border-left: $xxs-size solid lighten($theme-color, 20);
   border-radius: $xxs-size;
   margin-bottom: $s-size;
-  padding: $xs-size $s-size 0 $s-size;
+  padding: $xs-size 0 0 $s-size;
+}
+
+.comment-list-item:hover {
+  background-color: lighten($grey, 80);
+  border-left: $xxs-size solid $theme-color;
 }
 
 .comment-list-item a {
@@ -23,22 +28,33 @@
   margin-bottom: 0;
 }
 
-.comment-list-item button {
-
-  background-color: transparent;
-  color: $theme-color;
-  font-size: $xs-size;
-
-  display: inline-block;
+.comment-list-item .button-container {
   float: right;
-
-  border: none;
-  margin-top: $s-size;
-  margin-left: $s-size;
-  padding: 0;
 }
 
-.comment-list-item:hover {
-  background-color: lighten($grey, 80);
-  border-left: $xxs-size solid $theme-color;
+.comment-list-item button {
+
+  background-color: lighten($grey, 70);
+  color: white;
+  font-size: $xs-size;
+  font-weight: bold;
+
+  display: inline-block;
+
+  border: none;
+  margin-top: $xs-size;
+  padding: $xxs-size $s-size;
+}
+
+.comment-list-item .show-reply-btn {
+  border-radius: $xxs-size 0 0 $xxs-size;
+}
+
+.comment-list-item .reply-form-btn {
+  border-radius: $xxs-size;
+}
+
+.comment-list-item .show-reply-btn + .reply-form-btn {
+  border-radius: 0 $xxs-size $xxs-size 0;
+  margin-left: 1px;
 }

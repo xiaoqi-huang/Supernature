@@ -244,10 +244,26 @@ def add_comment(aid):
 
     query = '''INSERT INTO comment (content, author, refArticle)
                VALUES (?, ?, ?)'''
-    db.execute(query, (content, uid, aid))
+    cursor = db.cursor()
+    cursor.execute(query, (content, uid, aid))
+    cid = cursor.lastrowid
     db.commit()
 
-    return { 'success': True }
+    query = '''SELECT comment.id AS cid, comment.content AS content, comment.createdAt AS createdAt, user.id AS uid, user.name AS author
+               FROM   comment, user
+               WHERE  comment.author=user.id AND comment.id=?'''
+    comment = db.execute(query, (cid,)).fetchone()
+
+    return {
+        'success': True,
+        'comment': {
+            'cid': comment['cid'],
+            'content': comment['content'],
+            'createAt': comment['createdAt'].isoformat() + 'Z',
+            'uid': comment['uid'],
+            'author': comment['author']
+        }
+    }
 
 
 ################################################################################
@@ -301,10 +317,26 @@ def add_reply(cid):
 
     query = '''INSERT INTO reply (content, author, refComment, refUser)
                VALUES (?, ?, ?, ?)'''
-    db.execute(query, (content, uid, cid, uid))
+    cursor = db.cursor()
+    cursor.execute(query, (content, uid, cid, uid))
+    rid = cursor.lastrowid
     db.commit()
 
-    return { 'success': True }
+    query = '''SELECT reply.id AS rid, content, createdAt, user.id AS uid, user.name AS author
+               FROM   reply, user
+               WHERE  reply.author=user.id AND reply.id=?'''
+    reply = db.execute(query, (rid,)).fetchone()
+
+    return {
+        'success': True,
+        'reply': {
+            'rid': reply['rid'],
+            'content': reply['content'],
+            'createAt': reply['createdAt'].isoformat() + 'Z' + 'Z',
+            'uid': reply['uid'],
+            'author': reply['author']
+        }
+    }
 
 
 ################################################################################

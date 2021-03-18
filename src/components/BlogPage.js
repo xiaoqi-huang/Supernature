@@ -19,6 +19,14 @@ class BlogPage extends React.Component {
         comments: []
     };
 
+    addComment = (comment) => {
+        let comments = this.state.comments;
+        comments.unshift(comment);
+        this.setState(() => ({
+            comments: comments
+        }));
+    };
+
     componentDidMount() {
 
         getBlog(this.state.aid).then((blog) => {
@@ -54,7 +62,7 @@ class BlogPage extends React.Component {
                     <div id="article-content" dangerouslySetInnerHTML={{__html: this.state.content}} />
                     <div id="article-update-time">Edited at {toLocal(this.state.updateAt)}</div>
                     <div id="article-create-time">Posted at {toLocal(this.state.createAt)}</div>
-                    <CommentForm aid={this.state.aid} />
+                    <CommentForm aid={this.state.aid} addComment={this.addComment} />
                     <CommentList comments={this.state.comments} />
                 </div>
             </div>

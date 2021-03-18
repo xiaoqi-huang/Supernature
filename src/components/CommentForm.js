@@ -11,12 +11,13 @@ class CommentForm extends React.Component {
     };
 
     handleSubmit = (e) => {
+
         e.preventDefault();
 
         const formData = new FormData(e.target);
         addComment(this.state.aid, formData).then((data) => {
             if (data.success) {
-                location.reload();
+                this.props.addComment(data.comment);
             }
             if (data.error) {
                 this.setState(() => ({

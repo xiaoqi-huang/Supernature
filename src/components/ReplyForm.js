@@ -11,12 +11,13 @@ class ReplyForm extends React.Component {
     };
 
     handleSubmit = (e) => {
+
         e.preventDefault();
 
         const formData = new FormData(e.target);
         addReply(this.state.cid, formData).then((data) => {
             if (data.success) {
-                location.reload();
+                this.props.addReply(data.reply);
             }
             if (data.error) {
                 this.setState(() => ({
