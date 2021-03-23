@@ -122,8 +122,21 @@
   border: none;
 }
 
+#article-content ul {
+  padding-left: 2rem;
+}
+
+#article-content ul.task-list {
+  list-style-type: none;
+  padding-left: $s-size;
+}
+
 #article-content img {
   max-width: 100%;
+}
+
+img.emojione {
+  height: 1rem;
 }
 
 #article-content iframe {

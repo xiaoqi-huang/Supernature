@@ -91,7 +91,7 @@ def get_blog(aid):
         return {
             'aid': res['aid'],
             'title': res['title'],
-            'content': markdown.markdown(res['content']),
+            'content': markdown.markdown(res['content'], extensions=['pymdownx.details', 'pymdownx.emoji', 'pymdownx.mark', 'pymdownx.tasklist']),
             'createAt': res['createdAt'].isoformat() + 'Z',
             'updateAt': res['updatedAt'].isoformat() + 'Z',
             'uid': res['uid'],
