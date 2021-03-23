@@ -35,4 +35,15 @@ const updateUserInfo = (formData) => {
     });
 };
 
-export { getUserInfo, getCurrUserInfo, updateUserInfo };
+const getNotification = () => {
+
+    const promise = fetch('/api/user/notification');
+
+    return promise.then((response) => (
+        response.json()
+    )).then((data) => {
+        return data;
+    });
+};
+
+export { getUserInfo, getCurrUserInfo, updateUserInfo, getNotification };

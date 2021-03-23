@@ -79,16 +79,16 @@ def get_blog_list_by_user(uid):
 def get_blog(aid):
 
     query = '''SELECT article.id AS aid, title, content, createdAt, updatedAt, user.id AS uid, user.name AS author
-               FROM article, user
-               WHERE article.author=user.id AND article.id=%d''' % (aid,)
+                 FROM article, user
+                WHERE article.author=user.id AND article.id=?'''
 
     db = get_db()
-    res = db.execute(query).fetchone()
+    res = db.execute(query, (aid,)).fetchone()
 
     if not res:
         return redirect(url_for('index.u404'))
     else:
-        data = {
+        return {
             'aid': res['aid'],
             'title': res['title'],
             'content': markdown.markdown(res['content']),
@@ -98,18 +98,16 @@ def get_blog(aid):
             'author': res['author']
         }
 
-        return jsonify(data)
-
 
 @bp.route('/blog/raw/<int:aid>', methods=('GET',))
 def get_raw_blog(aid):
 
     query = '''SELECT article.id AS aid, title, content, createdAt, updatedAt, user.id AS uid, user.name AS author
                FROM article, user
-               WHERE article.author=user.id AND article.id=%d''' % (aid,)
+               WHERE article.author=user.id AND article.id=?'''
 
     db = get_db()
-    res = db.execute(query).fetchone()
+    res = db.execute(query, (aid,)).fetchone()
 
     if not res:
         return redirect(url_for('index.u404'))
@@ -276,18 +274,18 @@ def add_comment(aid):
 def get_replies(cid):
 
     query = '''SELECT reply.id AS rid, content, createdAt, user.id AS uid, user.name AS author
-               FROM   reply, user
-               WHERE  reply.author=user.id AND reply.refComment=%d
-               ORDER BY reply.createdAt ASC''' % (cid,)
+                 FROM reply, user
+                WHERE reply.author=user.id AND reply.refComment=?
+             ORDER BY reply.createdAt ASC'''
 
     db = get_db()
-    res = db.execute(query).fetchall()
+    res = db.execute(query, (cid,)).fetchall()
 
     data = []
     for row in res:
         data.append({'rid': row['rid'],
                      'content': row['content'],
-                     'createAt': row['createdAt'].isoformat() + 'Z' + 'Z',
+                     'createAt': row['createdAt'].isoformat() + 'Z',
                      'uid': row['uid'],
                      'author': row['author']})
 
@@ -332,7 +330,7 @@ def add_reply(cid):
         'reply': {
             'rid': reply['rid'],
             'content': reply['content'],
-            'createAt': reply['createdAt'].isoformat() + 'Z' + 'Z',
+            'createAt': reply['createdAt'].isoformat() + 'Z',
             'uid': reply['uid'],
             'author': reply['author']
         }
@@ -343,7 +341,7 @@ def add_reply(cid):
 # User APIs
 # 1. get_curr_user_info
 # 2. get_user_info
-# 3. update_user_info (TODO)
+# 3. update_user_info
 ################################################################################
 
 @bp.route('/user/current', methods=('GET',))
@@ -420,6 +418,70 @@ def update_user_info():
     db.commit()
 
     return { 'success': True }
+
+
+@bp.route('/user/notification', methods=('GET',))
+def get_notification():
+
+    error = None
+
+    uid = session.get('user_id', None)
+    if not uid:
+        error = 'NOT_SIGNED_IN'
+        return { 'error': error }
+
+    data = []
+    db = get_db()
+
+    # Get comments
+    query = '''SELECT comment.id AS cid, comment.content, comment.createdAt,
+                      article.id AS aid, title,
+                      user.id AS uid, user.name AS author
+                 FROM comment, article, user
+                WHERE comment.refArticle=article.id
+                  AND comment.author=user.id
+                  AND article.author=?'''
+    comments = db.execute(query, (uid,)).fetchall()
+    for comment in comments:
+        data.append({
+            'isComment': True,
+            'cid': comment['cid'],
+            'content': comment['content'][:47] + '...' if len(comment['content']) > 27 else comment['content'],
+            'createdAt': comment['createdAt'].isoformat() + 'Z',
+            'aid': comment['aid'],
+            'target': comment['title'],
+            'uid': comment['uid'],
+            'author': comment['author'],
+        })
+
+    # Get replies
+    query = '''SELECT reply.id AS rid, reply.content, reply.createdAt,
+                      comment.id AS cid, comment.content AS commentContent,
+                      article.id AS aid,
+                      user.id AS uid, user.name AS author
+                 FROM reply, comment, article, user
+                WHERE reply.refComment=comment.id
+                  AND comment.refArticle=article.id
+                  AND reply.author=user.id
+                  AND comment.author=?'''
+    replies = db.execute(query, (uid,)).fetchall()
+    for reply in replies:
+        data.append({
+            'isReply': True,
+            'rid': reply['rid'],
+            'content': reply['content'][:47] + '...' if len(reply['content']) > 27 else reply['content'],
+            'createdAt': reply['createdAt'].isoformat() + 'Z',
+            'cid': reply['cid'],
+            'target': reply['commentContent'][:27] + '...' if len(reply['commentContent']) > 27 else reply['commentContent'],
+            'aid': reply['aid'],
+            'uid': reply['uid'],
+            'author': reply['author']
+        })
+
+    return {
+        'succes': True,
+        'data': sorted(data, key = lambda x: x['createdAt'], reverse=True)
+    }
 
 
 ################################################################################

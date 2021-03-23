@@ -1,0 +1,69 @@
+#notification-page {
+
+  color: $light-grey;
+  background-color: darken($grey, 20);
+
+  width: 100%;
+  margin-top: $overlap;
+
+  position: fixed;
+  top: 0;
+  bottom:0;
+  overflow-y:scroll;
+  overflow-x:hidden;
+
+  text-align: left;
+}
+
+#notification-page__container {
+
+  background-color: $grey;
+
+  width: 50%;
+
+  margin: $m-size auto;
+  padding: $m-size $s-size;
+}
+
+#notification-page__container h1 {
+  color: white;
+  text-transform: uppercase;
+  padding-left: $s-size;
+}
+
+div.notification {
+  font-size: $s-size;
+  padding: $s-size;
+}
+
+div.notification + div.notification {
+  box-shadow: 0 1px 0 lighten($grey, 10) inset;
+}
+
+.notification:hover {
+  background-color: lighten($grey, 5);
+}
+
+a.from-user {
+  color: white;
+  margin-right: $s-size;
+}
+
+a.from-user:hover {
+  box-shadow: 0px -3px 0 $theme-color inset;
+}
+
+span.to-content {
+  color: white;
+  margin-left: $s-size;
+}
+
+span.to-content:hover {
+  box-shadow: 0 -3px 0 $theme-color inset;
+}
+
+p.created-time {
+  color: darken($light-grey, 20);
+  font-size: $xs-size;
+  margin: 0;
+}

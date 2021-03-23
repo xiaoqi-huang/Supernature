@@ -8,15 +8,15 @@
 
 .reply-form input {
 
-  width: 85%;
+  width: 87%;
   height: $m-size;
 
   border: none;
-  border-radius: $xxs-size 0 0 $xxs-size;
-  box-shadow: 0px 0px 0px $xxs-size $light-grey inset;
+  border-radius: .2rem 0 0 .2rem;
+  box-shadow: 0 0 0 .1rem $light-grey inset;
 
   margin: 0;
-  padding: 0 2.5% 0 2.5%;
+  padding: 0 1.5% 0 1.5%;
 }
 
 .reply-form input:focus {
@@ -28,13 +28,14 @@
   background-color: $light-grey;
   color: white;
 
+  font-weight: normal;
   float: right;
 
   width: 10%;
   height: $m-size;
 
   border: none;
-  border-radius: 0 $xxs-size $xxs-size 0;
+  border-radius: 0 .2rem .2rem 0;
 
   margin: 0;
   padding: 0;
@@ -42,4 +43,10 @@
 
 .reply-form button:active {
   color: $theme-color;
+}
+
+@media (max-width: $mobile-breakpoint) {
+  .reply-form button {
+    font-size: $xs-size;
+  }
 }

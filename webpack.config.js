@@ -21,7 +21,7 @@ module.exports = {
             { test: /\.(png|jpe?g|gif)$/i, use: 'file-loader' }
         ],
     },
-    // devtool: 'eval-cheap-module-source-map',
+    devtool: 'eval-cheap-module-source-map',
     devServer: {
         contentBase: path.join(__dirname, 'public/'),
         publicPath: '/scripts/',

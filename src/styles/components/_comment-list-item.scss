@@ -34,27 +34,27 @@
 
 .comment-list-item button {
 
-  background-color: lighten($grey, 70);
+  background-color: lighten($grey, 60);
   color: white;
-  font-size: $xs-size;
+  font-size: $s-size;
   font-weight: bold;
 
   display: inline-block;
 
   border: none;
   margin-top: $xs-size;
-  padding: $xxs-size $s-size;
+  padding: 0 $xs-size;
 }
 
 .comment-list-item .show-reply-btn {
-  border-radius: $xxs-size 0 0 $xxs-size;
+  border-radius: .2rem 0 0 .2rem;
 }
 
 .comment-list-item .reply-form-btn {
-  border-radius: $xxs-size;
+  border-radius: .2rem;
 }
 
 .comment-list-item .show-reply-btn + .reply-form-btn {
-  border-radius: 0 $xxs-size $xxs-size 0;
+  border-radius: 0 .2rem .2rem 0;
   margin-left: 1px;
 }

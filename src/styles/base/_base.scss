@@ -1,5 +1,6 @@
 html {
   font-family: 'PT Mono', 'Hiragino Kaku Gothic Pro', serif;
+  font-size: 16px;
   font-weight: lighter;
 }
 
@@ -20,6 +21,7 @@ p {
 }
 
 a {
+  color: white;
   text-decoration: none;
 }
 
@@ -50,9 +52,15 @@ hr {
 }
 
 .msg {
-  color: $theme-color;
+  background-color: $theme-color;
+  color: black;
   font-size: $s-size;
   text-transform: uppercase;
+
+  width: auto;
+  padding: .2rem .3rem;
+
+  display: inline-block;
 }
 
 .page {

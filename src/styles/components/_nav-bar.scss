@@ -96,6 +96,7 @@ nav #nav-sign-in {
 #dropdown #dropdown-btn a:hover {
   box-shadow: none;
 }
+
 #dropdown-content {
   display: none;
   position: absolute;
@@ -113,7 +114,7 @@ nav #nav-sign-in {
   color: $light-grey;
   padding: $s-size;
   display: block;
-  text-align: center;
+  text-align: left;
 }
 
 #dropdown-content a:hover {

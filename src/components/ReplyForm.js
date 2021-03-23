@@ -17,7 +17,11 @@ class ReplyForm extends React.Component {
         const formData = new FormData(e.target);
         addReply(this.state.cid, formData).then((data) => {
             if (data.success) {
+                this.setState(() => ({
+                    error: null
+                }));
                 this.props.addReply(data.reply);
+                e.target.reset();
             }
             if (data.error) {
                 this.setState(() => ({
@@ -30,7 +34,7 @@ class ReplyForm extends React.Component {
     render() {
         return (
             <form className="reply-form" onSubmit={this.handleSubmit}>
-                {this.state.error && <p>{this.state.error}</p>}
+                {this.state.error && <p className="msg">{this.state.error}</p>}
                 <input type="text" name="content"
                     placeholder={this.props.user.signedIn ? "Write your reply" : "Sign in to reply"} />
                 <button type="submit" disabled={!this.props.user.signedIn}>Reply</button>

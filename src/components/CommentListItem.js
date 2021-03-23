@@ -2,6 +2,7 @@ import React from 'react';
 import ReplyList from './ReplyList';
 import ReplyForm from './ReplyForm';
 import { getReplyList } from "../api/blog";
+import {toLocal} from "../utils/time";
 
 export default class CommentListItem extends React.Component {
 
@@ -60,7 +61,7 @@ export default class CommentListItem extends React.Component {
             <div className="comment-list-item">
                 <a href={`/blog/${this.state.cid}`}>{this.state.author}</a>
                 <p>{this.state.content}</p>
-                <p className="create-time">{this.state.createAt}</p>
+                <p className="create-time">{toLocal(this.state.createAt)}</p>
                 <div className="button-container">
                     {this.state.replies && this.state.replies.length !== 0
                     && <button id={`comment-${this.state.cid}-btn`} className="show-reply-btn"

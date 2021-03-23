@@ -56,7 +56,10 @@ class BlogPage extends React.Component {
                     </div>
                     <div id="article-title">
                         <h1>{this.state.title}</h1>
-                        {this.props.user.signedIn && (this.props.user.uid === this.state.uid) && <Link id="article-edit-link" to={`/blog/edit/${this.state.aid}`}>Edit</Link>}
+                        {
+                            this.props.user.signedIn && (this.props.user.uid === this.state.uid) &&
+                            <Link id="article-edit-link" to={`/blog/edit/${this.state.aid}`}>Edit</Link>
+                        }
                         <Link id="article-author" to={`/user/${this.state.uid}`}>{this.state.author}</Link>
                     </div>
                     <div id="article-content" dangerouslySetInnerHTML={{__html: this.state.content}} />

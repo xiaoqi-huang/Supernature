@@ -6,22 +6,25 @@ import { Provider } from 'react-redux';
 import configureStore from "./store/configureStore";
 import { signin } from "./actions/user";
 
-import NavBar from './components/NavBar';
-import HomePage from './components/HomePage';
+import AccountPage from "./components/AccountPage";
+import AddBlogPage from "./components/AddBlogPage";
 import BlogListPage from './components/BlogListPage';
 import BlogPage from './components/BlogPage';
-import AddBlogPage from "./components/AddBlogPage";
 import EditBlogPage from "./components/EditBlogPage";
+import HomePage from './components/HomePage';
+import NavBar from './components/NavBar';
+import NotFoundPage from './components/NotFoundPage';
+import NotificationPage from "./components/NotificationPage";
 import SignInPage from "./components/SignInPage";
 import SignUpPage from "./components/SignUpPage";
 import UserPage from "./components/UserPage";
-import NotFoundPage from './components/NotFoundPage';
 
 import { authCheckUserStatus } from "./api/auth";
 
 import 'normalize.css/normalize.css';
 import './styles/styles.scss';
-import AccountPage from "./components/AccountPage";
+
+
 
 
 // import { ThemeProvider } from '@material-ui/styles';
@@ -52,6 +55,7 @@ const App = () => (
             {/*<Route path="/members" component={MembersPage} />*/}
             <Route path="/user/:id" component={UserPage} />
             <Route path="/account" component={AccountPage} />
+            <Route path="/notification" component={NotificationPage} />
             <Route path="/sign-in" component={SignInPage} />
             <Route path="/sign-up" component={SignUpPage} />
             <Route component={NotFoundPage} />

@@ -47,6 +47,7 @@ class NavBar extends React.Component {
                     </button>
                     <div id="dropdown-content">
                         <Link to="/account">Account</Link>
+                        <Link to="/notification">Notification</Link>
                         <Link to="#" onClick={this.handleSignOut}>Sign out</Link>
                     </div>
                 </div>}

@@ -1,23 +1,35 @@
 #blog-form-page {
-  margin-top: $overlap;
+  background-color: darken($grey, 20);
+
   width: 100%;
+
+  margin-top: $overlap;
+
+  position: fixed;
+  top: 0;
+  bottom:0;
+  overflow-y:scroll;
+  overflow-x:hidden;
 }
 
 #add-blog-form {
 
-  background-color: lighten($light-grey, 15);
+  background-color: $grey;
 
   width: 50%;
-  height: 70vh;
+  height: auto;
 
   border-radius: $xxs-size;
-  margin: $xl-size auto $xl-size auto;
+  margin: $m-size auto;
   padding: $l-size $m-size $l-size $m-size;
 
   text-align: center;
 }
 
 #title-field {
+  background-color: lighten($grey, 5);
+  color: $light-grey;
+
   font-size: $m-size;
 
   border-radius: $xxs-size;
@@ -33,18 +45,24 @@
 
 #title-field:focus {
   outline: none;
-  box-shadow: 0 0 1px 1px $theme-color;
+  background-color: lighten($grey, 10);
+  color: white;
 }
 
 #content-field {
 
+  background-color: lighten($grey, 5);
+  color: $light-grey;
+
   font-size: $s-size;
+  line-height: $m-size;
+  letter-spacing: 1px;
 
   border-radius: $xxs-size;
 
   width: 95%;
   max-width: 95%;
-  height: 65%;
+  height: 60vh;
   max-height: 65%;
 
   display: block;
@@ -55,7 +73,8 @@
 
 #content-field:focus {
   outline: none;
-  box-shadow: 0 0 1px 1px $theme-color;
+  background-color: lighten($grey, 10);
+  color: white;
 }
 
 #add-blog-form__btn-container {

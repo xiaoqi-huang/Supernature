@@ -17,7 +17,11 @@ class CommentForm extends React.Component {
         const formData = new FormData(e.target);
         addComment(this.state.aid, formData).then((data) => {
             if (data.success) {
+                this.setState(() => ({
+                    error: null
+                }));
                 this.props.addComment(data.comment);
+                e.target.reset();
             }
             if (data.error) {
                 this.setState(() => ({
@@ -30,7 +34,7 @@ class CommentForm extends React.Component {
     render() {
         return (
           <form id="comment-form" onSubmit={this.handleSubmit}>
-              {this.state.error && <p>{this.state.error}</p>}
+              {this.state.error && <p className="msg">{this.state.error}</p>}
               <input type="text" name="content"
                      placeholder={this.props.user.signedIn ? "Write your comment" : "Sign in to comment"} />
               <button type="submit" disabled={!this.props.user.signedIn}>Comment</button>
