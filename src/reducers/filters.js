@@ -1,7 +1,8 @@
 const defaultFilters = {
     text: '',
     sortBy: 'updatedAt',
-    page: 1
+    page: 1,
+    blogList: []
 };
 
 export default (state = defaultFilters, action) => {
@@ -9,7 +10,7 @@ export default (state = defaultFilters, action) => {
         case 'SET_TEXT_FILTER':
             return {
                 ...state,
-                text: state.text
+                text: action.text
             };
         case 'SORT_BY_CREATE_TIME':
             return {
@@ -25,6 +26,11 @@ export default (state = defaultFilters, action) => {
             return {
                 ...state,
                 page: action.page
+            };
+        case 'SET_BLOG_LIST':
+            return {
+                ...state,
+                blogList: action.blogList
             };
         default:
             return state;

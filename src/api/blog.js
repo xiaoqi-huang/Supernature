@@ -1,4 +1,4 @@
-const getBlogNumber = () => {
+export const getBlogNumber = () => {
 
     const promise = fetch(`/api/blog/count`);
 
@@ -9,7 +9,18 @@ const getBlogNumber = () => {
     });
 };
 
-const getBlogList = (sort, page) => {
+export const getBlogNumberWithSearch = (text) => {
+
+    const promise = fetch(`/api/blog/count/${text}`);
+
+    return promise.then((response) => (
+        response.json()
+    )).then((data) => {
+        return data;
+    });
+};
+
+export const getBlogList = (sort, page) => {
 
     const promise = fetch(`/api/blog/list/${sort}/${page}`);
 
@@ -20,7 +31,18 @@ const getBlogList = (sort, page) => {
     });
 };
 
-const getBlogListByUser = (uid) => {
+export const getBlogListWithSearch = (text, sort, page) => {
+
+    const promise = fetch(`/api/blog/list/${text}/${sort}/${page}`);
+
+    return promise.then((response) => (
+        response.json()
+    )).then((data) => {
+        return data;
+    });
+};
+
+export const getBlogListByUser = (uid) => {
 
     const promise = fetch(`/api/blog/list/${uid}`);
 
@@ -31,7 +53,7 @@ const getBlogListByUser = (uid) => {
     });
 };
 
-const getBlog = (aid) => {
+export const getBlog = (aid) => {
 
     const promise = fetch(`/api/blog/${aid}`);
 
@@ -42,7 +64,7 @@ const getBlog = (aid) => {
     });
 };
 
-const getRawBlog = (aid) => {
+export const getRawBlog = (aid) => {
 
     const promise = fetch(`/api/blog/raw/${aid}`);
 
@@ -53,7 +75,7 @@ const getRawBlog = (aid) => {
     });
 };
 
-const addBlog = (formData) => {
+export const addBlog = (formData) => {
 
     const promise = fetch('/api/blog/add', {
         method: 'POST',
@@ -68,7 +90,7 @@ const addBlog = (formData) => {
     });
 };
 
-const editBlog = (aid, formData) => {
+export const editBlog = (aid, formData) => {
 
     const promise = fetch(`/api/blog/edit/${aid}`, {
         method: 'POST',
@@ -83,7 +105,7 @@ const editBlog = (aid, formData) => {
     });
 };
 
-const getCommentList = (aid) => {
+export const getCommentList = (aid) => {
 
     const promise = fetch(`/api/blog/comments/${aid}`);
 
@@ -94,7 +116,7 @@ const getCommentList = (aid) => {
     });
 };
 
-const addComment = (aid, formData) => {
+export const addComment = (aid, formData) => {
 
     const promise = fetch(`/api/blog/comment/add/${aid}`, {
         method: 'POST',
@@ -108,7 +130,7 @@ const addComment = (aid, formData) => {
     });
 };
 
-const getReplyList = (cid) => {
+export const getReplyList = (cid) => {
 
     const promise = fetch(`/api/blog/replies/${cid}`);
 
@@ -119,7 +141,7 @@ const getReplyList = (cid) => {
     });
 };
 
-const addReply = (cid, formData) => {
+export const addReply = (cid, formData) => {
 
     const promise = fetch(`/api/blog/reply/add/${cid}`, {
         method: 'POST',
@@ -132,5 +154,3 @@ const addReply = (cid, formData) => {
         return data;
     });
 };
-
-export { getBlogNumber, getBlogList, getBlogListByUser, getBlog, getRawBlog, addBlog, editBlog, getCommentList, addComment, getReplyList, addReply };

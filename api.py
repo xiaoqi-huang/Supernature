@@ -29,14 +29,29 @@ def get_blog_count():
     return { 'blog_number': res[0] }
 
 
+@bp.route('/blog/count/<text>', methods=('GET',))
+def get_blog_count_with_search(text=''):
+
+    regexp = '.*%s.*' % text
+    query = '''SELECT COUNT(*)
+                 FROM article
+                WHERE title REGEXP ?
+                   OR content REGEXP ?'''
+
+    db = get_db()
+    res = db.execute(query, (regexp, regexp)).fetchone()
+
+    return { 'blog_number': res[0] }
+
+
 @bp.route('/blog/list/<sort>/<int:page>', methods=('GET',))
 def get_blog_list(sort='updatedAt', page=0):
 
     query = '''SELECT article.id AS aid, title, createdAt, updatedAt, user.id AS uid, user.name AS author
-               FROM article, user
-               WHERE article.author=user.id
-               ORDER BY %s DESC
-               LIMIT 20 OFFSET %d''' % (sort, page * 20)
+                 FROM article, user
+                WHERE article.author=user.id
+             ORDER BY %s DESC
+                LIMIT 20 OFFSET %d''' % (sort, page * 20)
 
     db = get_db()
     res = db.execute(query).fetchall()
@@ -51,6 +66,33 @@ def get_blog_list(sort='updatedAt', page=0):
                      'author': row['author']})
 
     return jsonify(data)
+
+
+@bp.route('/blog/list/<text>/<sort>/<int:page>', methods=('GET',))
+def search_blog(text='', sort='updatedAt', page=0):
+
+    regexp = '.*%s.*' % text
+    query = '''SELECT article.id AS aid, title, createdAt, updatedAt, user.id AS uid, user.name AS author
+                 FROM article, user
+                WHERE article.author=user.id
+                  AND (title REGEXP ? OR content REGEXP ?)
+             ORDER BY %s DESC
+                LIMIT 20 OFFSET %d''' % (sort, page * 20)
+
+    db = get_db()
+    res = db.execute(query, (regexp, regexp)).fetchall()
+
+    data = []
+    for row in res:
+        data.append({'aid': row['aid'],
+                     'title': row['title'],
+                     'createAt': row['createdAt'].isoformat() + 'Z',
+                     'updateAt': row['updatedAt'].isoformat() + 'Z',
+                     'uid': row['uid'],
+                     'author': row['author']})
+
+    return jsonify(data)
+
 
 @bp.route('/blog/list/<int:uid>', methods=('GET',))
 def get_blog_list_by_user(uid):

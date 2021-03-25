@@ -16,4 +16,9 @@ const setPage = (page) => ({
     page
 });
 
-export { setTextFilter, sortByCreateTime, sortByUpdateTime, setPage }
+const setBlogList = (blogList) => ({
+    type: 'SET_BLOG_LIST',
+    blogList
+});
+
+export { setTextFilter, sortByCreateTime, sortByUpdateTime, setPage, setBlogList }

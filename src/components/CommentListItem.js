@@ -28,7 +28,9 @@ export default class CommentListItem extends React.Component {
         this.setState(() => ({
             replies: replies
         }), () => {
-            document.getElementById(`comment-${this.state.cid}-btn`).click();
+            this.setState(() => ({
+                showReplies: true
+            }));
         });
     };
 

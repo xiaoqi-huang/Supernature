@@ -1,8 +1,12 @@
-import sqlite3
 from flask import current_app, g
 from flask.cli import with_appcontext
 import click
+import re
+import sqlite3
 
+
+def regexp(expr, item):
+    return re.search(expr, item, re.IGNORECASE) is not None
 
 def get_db():
     if 'db' not in g:
@@ -11,6 +15,7 @@ def get_db():
             detect_types=sqlite3.PARSE_DECLTYPES
         )
         g.db.row_factory = sqlite3.Row
+        g.db.create_function('REGEXP', 2, regexp)
 
     return g.db
 
