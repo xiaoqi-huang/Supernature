@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import CommentForm from './CommentForm';
-import { getBlog, getCommentList } from '../api/blog';
+import {deleteBlog, getBlog, getCommentList} from '../api/blog';
 import CommentList from "./CommentList";
 import { connect } from 'react-redux';
 import { toLocal } from '../utils/time';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteRoundedIcon from '@material-ui/icons/DeleteRounded';
 
 class BlogPage extends React.Component {
 
@@ -19,9 +21,25 @@ class BlogPage extends React.Component {
         comments: []
     };
 
+    handleDelete = () => {
+
+        deleteBlog(this.state.aid).then((response) => {
+            if (response.error) {
+                this.setState(() => ({
+                    error: response.error
+                }));
+            }
+            if (response.success) {
+                this.props.history.push('/blog');
+            }
+        });
+    };
+
     addComment = (comment) => {
+
         let comments = this.state.comments;
         comments.unshift(comment);
+
         this.setState(() => ({
             comments: comments
         }));
@@ -55,12 +73,24 @@ class BlogPage extends React.Component {
                         <Link to="/blog" id="back-link">{"<< back"}</Link>
                     </div>
                     <div id="article-title">
+                        { this.state.error && <p className="msg">{this.state.error}</p> }
                         <h1>{this.state.title}</h1>
-                        {
-                            this.props.user.signedIn && (this.props.user.uid === this.state.uid) &&
-                            <Link id="article-edit-link" to={`/blog/edit/${this.state.aid}`}>Edit</Link>
-                        }
-                        <Link id="article-author" to={`/user/${this.state.uid}`}>{this.state.author}</Link>
+                        <div id="article-info-container">
+                            <Link id="article-author" to={`/user/${this.state.uid}`}>{this.state.author}</Link>
+                            {
+                                this.props.user.signedIn && (this.props.user.uid === this.state.uid) &&
+                                <div id="article-edit-delete-container">
+                                    <Link id="article-edit-link" to={`/blog/edit/${this.state.aid}`}>
+                                        Edit
+                                        <EditIcon />
+                                    </Link>
+                                    <button id="article-delete-btn" onClick={this.handleDelete}>
+                                        Delete
+                                        <DeleteRoundedIcon />
+                                    </button>
+                                </div>
+                            }
+                        </div>
                     </div>
                     <div id="article-content" dangerouslySetInnerHTML={{__html: this.state.content}} />
                     <div id="article-update-time">Edited at {toLocal(this.state.updateAt)}</div>

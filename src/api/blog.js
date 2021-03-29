@@ -105,6 +105,20 @@ export const editBlog = (aid, formData) => {
     });
 };
 
+export const deleteBlog = (aid) => {
+
+    const promise = fetch(`/api/blog/delete/${aid}`, {
+        method: 'POST',
+        credentials: 'include'
+    });
+
+    return promise.then((response) => (
+        response.json()
+    )).then((data) => {
+        return data;
+    });
+};
+
 export const getCommentList = (aid) => {
 
     const promise = fetch(`/api/blog/comments/${aid}`);

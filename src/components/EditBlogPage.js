@@ -29,7 +29,7 @@ class EditBlogPage extends React.Component {
 
     handleCancel = (e) => {
         e.preventDefault();
-        this.props.history.push('/blog');
+        this.props.history.push(`/blog/${this.state.aid}`);
     };
 
     handleSubmit = (e) => {

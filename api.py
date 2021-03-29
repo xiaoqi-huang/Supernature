@@ -205,8 +205,8 @@ def add_blog():
 def edit_blog(aid):
 
     error = None
-    uid = session.get('user_id', None)
 
+    uid = session.get('user_id', None)
     if not uid:
         error = 'NOT_SIGNED_IN'
         return { 'error': error }
@@ -216,7 +216,7 @@ def edit_blog(aid):
     if not article:
         error = 'ARTICLE_NOT_FOUND'
     elif article['author'] != uid:
-        error = 'Not the author of this article'
+        error = 'NO_PERMISSION_TO_EDIT'
     if error:
         return { 'error': error }
 
@@ -229,7 +229,41 @@ def edit_blog(aid):
     db.execute(query, (title, content, now, aid))
     db.commit()
 
-    return { 'success': True}
+    return { 'success': True }
+
+
+@bp.route('/blog/delete/<int:aid>', methods=('POST',))
+@cross_origin(supports_credentials=True)
+def delete_blog(aid):
+
+    error = None
+
+    uid = session.get('user_id', None)
+    if not uid:
+        error = 'NOT_SIGNED_IN'
+        return { 'error': error }
+
+    db = get_db()
+    article = db.execute('SELECT author FROM article WHERE id=?', (aid,)).fetchone()
+    if not article:
+        error = 'ARTICLE_NOT_FOUND'
+    elif article['author'] != uid:
+        error = 'NO_PERMISSION_TO_DELETE'
+    if error:
+        return { 'error': error }
+
+    query = '''DELETE FROM reply
+                WHERE reply.id IN (
+                      SELECT reply.id
+                        FROM reply JOIN comment
+                          ON reply.refComment=comment.id
+                       WHERE comment.refArticle=?)'''
+    db.execute(query, (aid,))
+    db.execute('DELETE FROM comment WHERE refArticle=?', (aid,))
+    db.execute('DELETE FROM article WHERE id=?', (aid,))
+    db.commit()
+
+    return { 'success': True }
 
 
 ################################################################################

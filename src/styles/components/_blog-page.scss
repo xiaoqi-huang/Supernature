@@ -28,20 +28,20 @@
 }
 
 #article-title {
+
   color: $grey;
   font-size: $m-size;
 
-  display: inline-block;
   padding: $m-size 0;
 }
 
 #article-title h1 {
-  font-size: $m-size;
-  display: block;
+  font-size: 2rem;
   border: none;
 
   margin-bottom: $s-size;
 
+  display: inline-block;
   transition: all 0.25s linear;
   position: relative;
 }
@@ -65,24 +65,61 @@
   transform: scale(1);
 }
 
+#article-info-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+a#article-author {
+  color: $grey;
+  font-size: $s-size;
+  font-weight: bold;
+}
+
+#article-edit-delete-container {
+  display: flex;
+}
+
+#article-edit-delete-container svg {
+  font-size: $s-size;
+  margin-left: $xxs-size;
+}
+
 #article-edit-link {
   color: $theme-color;
   font-size: $s-size;
   font-weight: normal;
   text-transform: uppercase;
 
-  display: block;
+  display: flex;
+  vertical-align: center;
 }
 
-#article-author {
-  color: $grey;
+#article-edit-link:hover {
+  box-shadow: 0 -7px 0 0 lighten($theme-color, 30) inset;
+}
+
+#article-delete-btn {
+  background-color: transparent;
+  color: darken($light-grey, 10);
+
   font-size: $s-size;
-  font-weight: lighter;
-  display: inline-block;
+  font-weight: normal;
+  text-transform: uppercase;
+
+  border: none;
+  margin-left: $s-size;
+  padding: 0;
+
+  cursor: pointer;
+
+  display: flex;
+  vertical-align: center;
 }
 
-#article-author a {
-  color: $grey;
+#article-delete-btn:hover {
+  color: red;
+  box-shadow: 0 -7px 0 0 lighten(red, 40) inset;
 }
 
 // Article body
@@ -95,21 +132,31 @@
 }
 
 #article-content h1 {
+  background-color: lighten($light-grey, 15);
   font-size: $m-size;
 
-  margin-top: $m-size;
-  margin-bottom: $s-size;
-  padding-left: $s-size;
-  border-left: .5rem solid $theme-color;
+  margin-top: $l-size;
+  margin-bottom: $m-size;
+  padding: 1rem;
+  border-left: $xxs-size solid $theme-color;
 }
 
-#article-content h2, #article-content h3 {
+#article-content h2 {
   font-size: ($m-size + $s-size) / 2;
 
   margin-top: $m-size;
-  margin-bottom: $s-size;
+  margin-bottom: $m-size;
   padding-left: $s-size;
-  border-left: $xs-size solid $theme-color;
+  border-left: $xxs-size solid $theme-color;
+}
+
+#article-content h3 {
+  font-size: $s-size;
+
+  margin-top: $m-size;
+  margin-bottom: $m-size;
+  padding-left: $s-size;
+  border-left: $xxs-size solid $light-grey;
 }
 
 #article-content a {
@@ -123,12 +170,12 @@
 }
 
 #article-content ul {
-  padding-left: 2rem;
+  padding-left: 1.25rem;
 }
 
 #article-content ul.task-list {
   list-style-type: none;
-  padding-left: $s-size;
+  padding-left: 0;
 }
 
 #article-content img {
@@ -148,12 +195,10 @@ img.emojione {
 
 #article-update-time {
   color: lighten($grey, 30);
-  padding-left: $m-size;
 }
 
 #article-create-time {
   color: lighten($grey, 30);
-  padding-left: $m-size;
 }
 
 
