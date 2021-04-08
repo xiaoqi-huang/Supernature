@@ -25,6 +25,10 @@
 
   background-color: $theme-color;
 
+
+  color: white;
+  text-transform: uppercase;
+
   float: right;
 
   width: 15%;
@@ -34,4 +38,11 @@
   border-radius: 0 $xxs-size $xxs-size 0;
 
   padding: 0 ;
+
+  cursor: pointer;
+}
+
+#comment-form button:disabled {
+  color: lighten($theme-color, 30);
+  cursor: default;
 }

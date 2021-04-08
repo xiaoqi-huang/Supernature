@@ -66,7 +66,8 @@ export default class CommentListItem extends React.Component {
                 <p className="create-time">{toLocal(this.state.createAt)}</p>
                 <div className="button-container">
                     {this.state.replies && this.state.replies.length !== 0
-                    && <button id={`comment-${this.state.cid}-btn`} className="show-reply-btn"
+                    && <button id={`comment-${this.state.cid}-btn`}
+                               className={`show-reply-btn ${this.state.showReplies ? 'expanded' : 'collapsed'}`}
                                onClick={this.handleBtnClick}>▲</button>}
                     <button className="reply-form-btn" onClick={this.toggleReplyForm}>+</button>
                 </div>

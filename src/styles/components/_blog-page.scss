@@ -201,6 +201,33 @@ img.emojione {
   color: lighten($grey, 30);
 }
 
+#expand-collapse-buttons {
+  text-align: right;
+  margin: $m-size 0;
+}
+
+#expand-collapse-buttons button {
+  background-color: $theme-color;
+  color: white;
+  font-size: 10px;
+  text-transform: uppercase;
+
+  width: $xxl-size;
+
+  border: none;
+  border-radius: 1px;
+
+  padding: $xxs-size;
+}
+
+#expand-collapse-buttons button:hover {
+  background-color: transparent;
+  color: $theme-color;
+}
+#expand-collapse-buttons button + button {
+  margin-left: $s-size;
+}
+
 
 @media (max-width: $mobile-breakpoint) {
   #article {

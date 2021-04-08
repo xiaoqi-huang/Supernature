@@ -45,6 +45,20 @@ class BlogPage extends React.Component {
         }));
     };
 
+    handleExpand = () => {
+        const showReplyButtons = document.getElementsByClassName('show-reply-btn collapsed');
+        Array.from(showReplyButtons).forEach((button) => {
+            button.click();
+        })
+    };
+
+    handleCollapse = () => {
+        const showReplyButtons = document.getElementsByClassName('show-reply-btn expanded');
+        Array.from(showReplyButtons).forEach((button) => {
+            button.click();
+        })
+    };
+
     componentDidMount() {
 
         getBlog(this.state.aid).then((blog) => {
@@ -96,6 +110,10 @@ class BlogPage extends React.Component {
                     <div id="article-update-time">Edited at {toLocal(this.state.updateAt)}</div>
                     <div id="article-create-time">Posted at {toLocal(this.state.createAt)}</div>
                     <CommentForm aid={this.state.aid} addComment={this.addComment} />
+                    <div id="expand-collapse-buttons">
+                        <button onClick={this.handleExpand}>Expand All</button>
+                        <button onClick={this.handleCollapse}>Collapse All</button>
+                    </div>
                     <CommentList comments={this.state.comments} />
                 </div>
             </div>
